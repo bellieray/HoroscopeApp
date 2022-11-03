@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homeFragment"
+        android:checked="true"
+        android:icon="@drawable/selector_ic_home"
+        android:title="Home"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/horoscopeFragment"
+        android:icon="@drawable/selector_ic_horoscope"
+        android:title="Horoscope"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/matchFragment"
+        android:icon="@drawable/selector_ic_match"
+        android:title="Match"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/selector_ic_profile"
+        android:title="Profile"
+        app:showAsAction="never" />
+</menu>

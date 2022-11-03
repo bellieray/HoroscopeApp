@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.mami.horoscopeapp.R
 import com.mami.horoscopeapp.databinding.FragmentSplashBinding
 import com.mami.horoscopeapp.ui.base.BaseFragment
+import com.mami.horoscopeapp.util.navigateWithPushAnimation
 
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
@@ -24,7 +25,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         countDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
-                findNavController().navigate(R.id.homeFragment)
+                findNavController().navigate(R.id.action_splashFragment_to_dateTimeFragment)
             }
         }.start()
     }
