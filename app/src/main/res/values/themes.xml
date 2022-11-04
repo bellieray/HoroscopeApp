@@ -18,7 +18,6 @@
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:layout_height">64dp</item>
         <item name="itemIconPadding">3dp</item>
-        <item name="background">?android:attr/windowBackground</item>
         <item name="elevation">10dp</item>
         <item name="itemIconSize">28dp</item>
         <item name="labelVisibilityMode">labeled</item>
