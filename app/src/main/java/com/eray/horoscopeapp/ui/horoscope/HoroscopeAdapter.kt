@@ -6,15 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eray.horoscopeapp.databinding.ItemHoroscopeWidgetBinding
+import com.eray.horoscopeapp.model.Horoscope
 
 
-class HoroscopeAdapter : ListAdapter<PagerItem, RecyclerView.ViewHolder>(HoroscopeDiffCallback) {
-    object HoroscopeDiffCallback : DiffUtil.ItemCallback<PagerItem>() {
-        override fun areItemsTheSame(oldItem: PagerItem, newItem: PagerItem): Boolean {
+class HoroscopeAdapter : ListAdapter<Horoscope, RecyclerView.ViewHolder>(HoroscopeDiffCallback) {
+    object HoroscopeDiffCallback : DiffUtil.ItemCallback<Horoscope>() {
+        override fun areItemsTheSame(oldItem: Horoscope, newItem: Horoscope): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: PagerItem, newItem: PagerItem): Boolean {
+        override fun areContentsTheSame(oldItem: Horoscope, newItem: Horoscope): Boolean {
             return oldItem == newItem
         }
 
@@ -22,7 +23,7 @@ class HoroscopeAdapter : ListAdapter<PagerItem, RecyclerView.ViewHolder>(Horosco
 
     inner class HoroscopeViewHolder(val binding: ItemHoroscopeWidgetBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: PagerItem) {
+        fun bind(item: Horoscope) {
             binding.horoscopeItem = item.name
             binding.executePendingBindings()
         }

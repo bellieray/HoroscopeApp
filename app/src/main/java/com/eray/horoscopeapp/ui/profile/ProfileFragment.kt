@@ -5,5 +5,5 @@ import com.eray.horoscopeapp.databinding.FragmentProfileBinding
 import com.eray.horoscopeapp.ui.base.BaseFragment
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
-    override fun getFragmentView() = R.layout.fragment_horoscope
+    override fun getFragmentView() = R.layout.fragment_profile
 }
