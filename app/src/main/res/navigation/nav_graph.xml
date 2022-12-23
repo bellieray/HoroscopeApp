@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.mami.horoscopeapp.ui.login.LoginFragment"
+        android:name="com.eray.horoscopeapp.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.mami.horoscopeapp.ui.home.HomeFragment"
+        android:name="com.eray.horoscopeapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.mami.horoscopeapp.ui.splash.SplashFragment"
+        android:name="com.eray.horoscopeapp.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/dateTimeFragment"
-        android:name="com.mami.horoscopeapp.ui.datetime.DateTimeFragment"
+        android:name="com.eray.horoscopeapp.ui.datetime.DateTimeFragment"
         android:label="fragment_date_time"
         tools:layout="@layout/fragment_user_personal_detail">
         <argument
@@ -60,17 +60,17 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.mami.horoscopeapp.ui.profile.ProfileFragment"
+        android:name="com.eray.horoscopeapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/matchFragment"
-        android:name="com.mami.horoscopeapp.ui.match.MatchFragment"
+        android:name="com.eray.horoscopeapp.ui.match.MatchFragment"
         android:label="fragment_match"
         tools:layout="@layout/fragment_match" />
     <fragment
         android:id="@+id/horoscopeFragment"
-        android:name="com.mami.horoscopeapp.ui.horoscope.HoroscopeFragment"
+        android:name="com.eray.horoscopeapp.ui.horoscope.HoroscopeFragment"
         android:label="fragment_horoscope"
         tools:layout="@layout/fragment_horoscope">
         <action
