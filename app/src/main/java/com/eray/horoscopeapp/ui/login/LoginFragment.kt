@@ -17,7 +17,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun goToHome() {
         binding.goToHome.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            findNavController().navigate(LoginFragmentDirections.toUserPersonalDetailFragment())
         }
     }
 

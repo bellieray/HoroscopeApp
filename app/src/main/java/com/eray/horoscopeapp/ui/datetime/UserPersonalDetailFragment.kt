@@ -24,7 +24,7 @@ import java.util.*
 
 private const val DATE_PATTERN = "dd / MM / yyyy"
 
-class DateTimeFragment : BaseFragment<FragmentUserPersonalDetailBinding>() {
+class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBinding>() {
     private var datePickerDialog: DatePickerDialog? = null
     private val viewModel by viewModels<UserPersonalDetailViewModel>()
 
@@ -55,14 +55,11 @@ class DateTimeFragment : BaseFragment<FragmentUserPersonalDetailBinding>() {
             btnPersonalDetail.setOnClickListener {
                 if (StringUtils.checkInformation(
                         binding.etBirthdateUserBirthday.text.toString(),
-                        binding.etBirthTimeUserBirthday.text.toString(),
-                        binding.etEmailUserBirthday.text.toString(),
                         binding.etNameUserBirthday.text.toString(),
                         binding.etGenderUserBirthday.text.toString(),
-                        binding.etPlaceOfBirthUserBirthday.text.toString(),
                     )
                 ) {
-                    findNavController().navigate(DateTimeFragmentDirections.actionDateTimeFragmentToLoginFragment())
+                    findNavController().navigate(UserPersonalDetailFragmentDirections.toHomeFragment())
                     DeviceUtils.closeKeyboard(requireActivity(), binding.root)
                 } else {
                     showCustomAlert()

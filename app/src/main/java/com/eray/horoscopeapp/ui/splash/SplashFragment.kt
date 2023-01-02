@@ -22,7 +22,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         countDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
-                findNavController().navigate(R.id.action_splashFragment_to_dateTimeFragment)
+                findNavController().navigate(R.id.homeFragment)
+                //findNavController().navigate(R.id.toLoginFragment)
             }
         }.start()
     }
