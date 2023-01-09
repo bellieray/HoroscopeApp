@@ -1,5 +1,8 @@
 package com.eray.horoscopeapp.di
 
+import android.content.Context
+import com.eray.horoscopeapp.data.pref.Prefs
+import com.eray.horoscopeapp.data.pref.PrefsImpl
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.data.repository.HoroscopeRepositoryImpl
 import com.eray.horoscopeapp.util.Constants.HOROSCOPES
@@ -8,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -30,4 +34,8 @@ object AppModule {
         horoscopeRef: CollectionReference
     ): HoroscopeRepository =
         HoroscopeRepositoryImpl(horoscopeRef)
+
+    @Singleton
+    @Provides
+    fun providePreferences(@ApplicationContext appContext: Context): Prefs = PrefsImpl(appContext)
 }

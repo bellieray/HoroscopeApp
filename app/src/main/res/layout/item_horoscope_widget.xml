@@ -15,11 +15,10 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="65dp"
+            android:paddingHorizontal="45dp"
             android:background="@drawable/bg_horoscope_widget"
-            android:paddingHorizontal="65dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -28,7 +27,7 @@
                 android:id="@+id/iv_horoscope_item"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintEnd_toEndOf="parent"

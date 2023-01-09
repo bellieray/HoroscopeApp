@@ -35,154 +35,156 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_header_personal_details" />
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sv_personal_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="20dp"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toTopOf="@+id/btn_personal_detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/v_personal_details">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_name"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_name_user_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:letterSpacing="0.14"
+                    android:text="Name"
+                    android:textAllCaps="true"
+                    android:textColor="#9997FF"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_name_user_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_name_user_birthday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/source_sans_pro_regular"
-                        android:letterSpacing="0.14"
-                        android:text="Name"
-                        android:textAllCaps="true"
-                        android:textColor="#9997FF"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_name_user_birthday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/selector_bg_edit_text"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="text"
-                        android:paddingVertical="20dp"
-                        android:paddingStart="13dp"
-                        android:textColor="@android:color/white"
-                        android:textCursorDrawable="@null"
-                        android:textSize="14sp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name_user_birthday" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_date_of_birth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:paddingHorizontal="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_name">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_birthdate_user_birthday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/source_sans_pro_regular"
-                        android:letterSpacing="0.14"
-                        android:text="Date Of Birth"
-                        android:textAllCaps="true"
-                        android:textColor="#9997FF"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/et_birthdate_user_birthday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/selector_bg_edit_text"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="text"
-                        android:paddingVertical="20dp"
-                        android:paddingStart="13dp"
-                        android:textColor="@android:color/white"
-                        android:textCursorDrawable="@null"
-                        android:textSize="14sp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_birthdate_user_birthday" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:paddingHorizontal="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_date_of_birth">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_gender_user_birthday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/source_sans_pro_regular"
-                        android:letterSpacing="0.14"
-                        android:text="gender"
-                        android:textAllCaps="true"
-                        android:textColor="#9997FF"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_gender_user_birthday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/selector_bg_edit_text"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="text"
-                        android:paddingVertical="20dp"
-                        android:paddingStart="13dp"
-                        android:textColor="@android:color/white"
-                        android:textCursorDrawable="@null"
-                        android:textSize="14sp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_gender_user_birthday" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_personal_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:textAllCaps="false"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="30dp"
-                    android:background="@drawable/bg_personal_detail_button"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/selector_bg_edit_text"
+                    android:digits="@string/string_characters"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Save Changes"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="13dp"
                     android:textColor="@android:color/white"
                     android:textCursorDrawable="@null"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name_user_birthday" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_date_of_birth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingHorizontal="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_name">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_birthdate_user_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:letterSpacing="0.14"
+                    android:text="Date Of Birth"
+                    android:textAllCaps="true"
+                    android:textColor="#9997FF"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/et_birthdate_user_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/selector_bg_edit_text"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="13dp"
+                    android:textColor="@android:color/white"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_birthdate_user_birthday" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingHorizontal="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_date_of_birth">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_gender_user_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:letterSpacing="0.14"
+                    android:text="gender"
+                    android:textAllCaps="true"
+                    android:textColor="#9997FF"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/selector_bg_edit_text"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Gender"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="13dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_gender" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_gender_user_birthday">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/et_gender_user_birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="none"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        tools:text="Happy" />
+                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
 
-
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_personal_detail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="30dp"
+                android:background="@drawable/bg_personal_detail_button"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Save Changes"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_gender" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

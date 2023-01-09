@@ -5,56 +5,96 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.eray.horoscopeapp.R
+import com.eray.horoscopeapp.databinding.FragmentMatchBinding
+import com.eray.horoscopeapp.model.Horoscope
+import com.eray.horoscopeapp.model.Result
+import com.eray.horoscopeapp.ui.SessionViewModel
+import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
+import com.eray.horoscopeapp.ui.match.dialog.OtherHoroscopeDialog
+import com.eray.horoscopeapp.util.setBgWithId
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MatchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MatchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+@AndroidEntryPoint
+class MatchFragment : BaseFragment<FragmentMatchBinding>() {
+    private val matchViewModel by viewModels<MatchViewModel>()
+    private val sessionViewModel by activityViewModels<SessionViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initObservers()
+        matchViewModel.convertDateToHoroscope()
+        initViews()
+    }
+
+    private fun initViews() {
+        binding.clOtherSign.setOnClickListener {
+            matchViewModel.fetchHoroscopes()
+        }
+        binding.clMale.setOnClickListener {
+            it.isSelected = true
+            binding.clFemale.isSelected = !it.isSelected
+        }
+
+        binding.clFemale.setOnClickListener {
+            it.isSelected = true
+            binding.clMale.isSelected = !it.isSelected
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_match, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MatchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MatchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun initObservers() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            lifecycleScope.launch {
+                sessionViewModel.viewState.collect { viewState ->
+                    viewState.personalDetail?.let {
+                        matchViewModel.setUserInfoModel(it)
+                        if (it.gender == "Erkek") binding.ivGender.setBackgroundResource(R.drawable.ic_man) else binding.ivGender.setBackgroundResource(
+                            R.drawable.ic_woman
+                        )
+                    }
                 }
             }
+
+            lifecycleScope.launch {
+                matchViewModel.viewState.collect { matchState ->
+                    matchState.horoscope?.let { horoscope ->
+                        binding.tvYourHoroscope.text = horoscope.first
+                        binding.ivHoroscope.setBackgroundResource(horoscope.second)
+                    }
+                    matchState.horoscopeList?.let {
+                        showDialog(it)
+                        matchViewModel.listConsumed()
+                    }
+
+                    matchState.otherHoroscope?.let {
+                        binding.ivHoroscopePlayer.setBgWithId(it.horoscope.id)
+                        binding.tvHoroscopePlayer.text = it.horoscope.name
+                    }
+                }
+            }
+
+        }
+
     }
+
+    private fun showDialog(list: List<OtherHoroscope>) {
+        val dialog = OtherHoroscopeDialog(list, ::setOtherHoroscopeModelFromSheet)
+        dialog.show(childFragmentManager, OtherHoroscopeDialog::class.java.simpleName)
+    }
+
+    private fun setOtherHoroscopeModelFromSheet(otherHoroscope: OtherHoroscope) {
+        matchViewModel.setBottomSheetModel(otherHoroscope)
+    }
+
+    override fun getFragmentView() = R.layout.fragment_match
+
 }

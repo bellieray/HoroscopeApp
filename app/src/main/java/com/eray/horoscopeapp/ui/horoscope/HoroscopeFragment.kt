@@ -39,7 +39,7 @@ class HoroscopeFragment : BaseFragment<FragmentHoroscopeBinding>() {
         val deviceWidth = binding.root.context.resources.displayMetrics.widthPixels
         val nextItemVisiblePx = deviceWidth * NEXT_ITEM_VISIBLE_RATIO
         val currentItemHorizontalMarginPx =
-            deviceWidth * CURRENT_ITEM_HORIZONTAL_MARGIN_RATIO
+            deviceWidth * CURRENT_ITEM_HORIZONTAL_MARGIN_RATIO + 185
         val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
             page.translationX = -pageTranslationX * position

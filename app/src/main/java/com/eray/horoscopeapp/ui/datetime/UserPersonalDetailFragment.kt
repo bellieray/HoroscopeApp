@@ -4,34 +4,51 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.Toast
+import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
+import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.databinding.FragmentUserPersonalDetailBinding
+import com.eray.horoscopeapp.model.PersonalDetail
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.Constants.LOGIN_STATE_PREF
+import com.eray.horoscopeapp.util.Constants.USER_INFOS
 import com.eray.horoscopeapp.util.DateUtils
 import com.eray.horoscopeapp.util.DeviceUtils
+import com.eray.horoscopeapp.util.DialogUtils
 import com.eray.horoscopeapp.util.StringUtils
+import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 
 private const val DATE_PATTERN = "dd / MM / yyyy"
 
+@AndroidEntryPoint
 class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBinding>() {
     private var datePickerDialog: DatePickerDialog? = null
     private val viewModel by viewModels<UserPersonalDetailViewModel>()
+
+    @Inject
+    lateinit var prefs: Prefs
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
+
+        val feelings = resources.getStringArray(R.array.feelings)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, feelings)
+        binding.etGenderUserBirthday.setAdapter(arrayAdapter)
     }
 
     private fun initObservers() {
@@ -59,10 +76,22 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
                         binding.etGenderUserBirthday.text.toString(),
                     )
                 ) {
+                    lifecycleScope.launch {
+                        prefs.setSharedString(
+                            USER_INFOS, Gson().toJson(
+                                PersonalDetail(
+                                    binding.etNameUserBirthday.text.toString(),
+                                    binding.etGenderUserBirthday.text.toString(),
+                                    binding.etBirthdateUserBirthday.text.toString(),
+                                )
+                            )
+                        )
+                        prefs.setSharedBoolean(LOGIN_STATE_PREF, true)
+                    }
                     findNavController().navigate(UserPersonalDetailFragmentDirections.toHomeFragment())
                     DeviceUtils.closeKeyboard(requireActivity(), binding.root)
                 } else {
-                    showCustomAlert()
+                    DialogUtils.showCustomAlert(layoutInflater, requireActivity())
                 }
 
             }
@@ -118,20 +147,6 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
         datePickerDialog?.show()
     }
 
-    private fun showCustomAlert() {
-        val inflater = layoutInflater
-        val layout: View = inflater.inflate(
-            R.layout.layout_error_toast,
-            requireActivity().findViewById(R.id.toast_layout_root)
-        )
-
-        val toast = Toast(context) // context should be view's Parent
-
-        toast.setGravity(Gravity.TOP or Gravity.FILL_HORIZONTAL, 0, 0)
-        toast.duration = Toast.LENGTH_SHORT
-        toast.view = layout
-        toast.show()
-    }
 
     override fun getFragmentView() = R.layout.fragment_user_personal_detail
 }

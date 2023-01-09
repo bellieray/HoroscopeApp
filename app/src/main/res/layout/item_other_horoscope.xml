@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/bg_item_other_horoscope"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="12dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_other_horoscope"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_gemini" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_other_horoscope_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/iv_other_horoscope"
+            app:layout_constraintTop_toTopOf="@id/iv_other_horoscope"
+            tools:text="Leo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_horoscope_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="#818C99"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_other_horoscope"
+            app:layout_constraintStart_toEndOf="@id/iv_other_horoscope"
+            tools:text="12 july -14 october" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

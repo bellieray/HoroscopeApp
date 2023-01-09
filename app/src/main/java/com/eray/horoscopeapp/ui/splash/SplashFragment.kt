@@ -3,14 +3,18 @@ package com.eray.horoscopeapp.ui.splash
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentSplashBinding
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     private lateinit var countDownTimer: CountDownTimer
+    private val sessionViewModel by activityViewModels<SessionViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,8 +26,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         countDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
-                findNavController().navigate(R.id.homeFragment)
-                //findNavController().navigate(R.id.toLoginFragment)
+                viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+                    sessionViewModel.viewState.collect{
+                        if(it?.isLoggedIn == true) findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+                        else findNavController().navigate(SplashFragmentDirections.toLoginFragment())
+                    }
+                }
+               // findNavController().navigate(R.id.homeFragment)
             }
         }.start()
     }
