@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import com.eray.horoscopeapp.R
+import com.google.firebase.firestore.auth.User
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -80,3 +81,63 @@ fun ImageView.setBgWithId(id: Long?) {
     }
     this.setImageResource(image)
 }
+
+fun String.checkHoroscopeProperties(): UserHoroscopeProperties {
+    return when (this) {
+        "Aries" -> UserHoroscopeProperties(
+            "Fire", "Red", "Tuesday", "7-9"
+        )
+        "Taurus"
+        -> UserHoroscopeProperties(
+            "Earth", "Green", "Friday", "6"
+        )
+        "Gemini"
+        -> UserHoroscopeProperties(
+            "Air", "Yellow", "Wednesday", "5"
+        )
+        "Cancer"
+        -> UserHoroscopeProperties(
+            "Water", "White - Silver", "Monday", "5-6"
+        )
+        "Leo"
+        -> UserHoroscopeProperties(
+            "Fire", "Gold", "Sunday", "7"
+        )
+        "Virgo"
+        -> UserHoroscopeProperties(
+            "Earth", "Green - Brown", "Wednesday", "1-6-7"
+        )
+        "Libra"
+        -> UserHoroscopeProperties(
+            "Air", "Pink - Blue", "Friday", "8-10"
+        )
+        "Scorpio"
+        -> UserHoroscopeProperties(
+            "Water", "Black", "Tuesday", "1-3"
+        )
+        "Sagittarius"
+        -> UserHoroscopeProperties(
+            "Fire", "Purple", "Thursday", "3"
+        )
+        "Capricorn"
+        -> UserHoroscopeProperties(
+            "Earth", "Brown - Gray", "Saturday", "3-4-9"
+        )
+        "Aquarius"
+        -> UserHoroscopeProperties(
+            "Air", "Blue", "Saturday", "22"
+        )
+        "Pisces"
+        -> UserHoroscopeProperties(
+            "Water", "Light Green", "Thursday", "0-9"
+        )
+        else -> throw Exception("")
+    }
+}
+
+data class UserHoroscopeProperties(
+    val element: String,
+    val color: String,
+    val luckyDay: String,
+    val date: String
+)

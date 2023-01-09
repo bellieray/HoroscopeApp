@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+<variable
+    name="personalDetail"
+    type="com.eray.horoscopeapp.model.PersonalDetail" />
 
+        <import type="com.eray.horoscopeapp.util.ExtensionsKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +23,7 @@
             android:layout_width="83dp"
             android:layout_height="83dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/ic_group_ex"
+            tools:src="@drawable/ic_group_ex"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Eray"
+            android:text="@{personalDetail.name}"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/iv_user_horoscope"
@@ -44,7 +48,6 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:fontFamily="@font/poppins_regular"
-            android:text="Cancer"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@id/tv_username"
@@ -88,6 +91,7 @@
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_element"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.4"
@@ -111,6 +115,7 @@
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.4"
@@ -142,11 +147,12 @@
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_lucky_days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.4"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Monday, Thursday"
+                        tools:text="Monday, Thursday"
                         android:textColor="@android:color/white"
                         android:textSize="16sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -165,6 +171,7 @@
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_lucky_dates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.4"
