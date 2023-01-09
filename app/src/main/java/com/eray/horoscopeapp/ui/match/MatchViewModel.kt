@@ -38,18 +38,21 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
     }
 
     fun convertDateToHoroscope() {
+        val birthTime = _viewState.value.personalDetail?.birthTime ?: return
         viewModelScope.launch {
-            _viewState.update { viewState ->
-                viewState.copy(horoscope = "06/02".checkHoroscope())
+                _viewState.update { viewState ->
+                    viewState.copy(horoscope = birthTime.checkHoroscope())
             }
+
         }
     }
 
-    fun setUserInfoModel(personalDetail: PersonalDetail) {
+    fun setUserInfoModel(personalDetail: PersonalDetail?) {
         viewModelScope.launch {
             _viewState.update {
                 it.copy(personalDetail = personalDetail)
             }
+            convertDateToHoroscope()
         }
     }
 

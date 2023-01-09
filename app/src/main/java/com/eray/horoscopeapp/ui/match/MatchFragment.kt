@@ -31,7 +31,6 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
-        matchViewModel.convertDateToHoroscope()
         initViews()
     }
 
@@ -53,10 +52,10 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
     private fun initObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            matchViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
             lifecycleScope.launch {
                 sessionViewModel.viewState.collect { viewState ->
                     viewState.personalDetail?.let {
-                        matchViewModel.setUserInfoModel(it)
                         if (it.gender == "Erkek") binding.ivGender.setBackgroundResource(R.drawable.ic_man) else binding.ivGender.setBackgroundResource(
                             R.drawable.ic_woman
                         )

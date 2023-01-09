@@ -21,28 +21,46 @@ fun NavController.navigateWithPushAnimation(directions: NavDirections) {
 }
 
 fun String.checkHoroscope(): Pair<String, Int> {
-    return when (this.toDate()) {
-        in "03/21".toDate().."04/19".toDate() -> "Aries" to R.drawable.ic_aries
-        in "04/20".toDate().."05/20".toDate() -> "Taurus" to R.drawable.ic_taurus
-        in "05/21".toDate().."06/20".toDate() -> "Gemini" to R.drawable.ic_gemini
-        in "07/23".toDate().."08/22".toDate() -> "Leo" to R.drawable.ic_leo
-        in "06/21".toDate().."07/22".toDate() -> "Cancer" to R.drawable.ic_cancer
-        in "08/23".toDate().."09/22".toDate() -> "Virgo" to R.drawable.ic_virgo
-        in "09/23".toDate().."10/22".toDate() -> "Libra" to R.drawable.ic_libra
-        in "10/23".toDate().."11/21".toDate() -> "Scorpio" to R.drawable.ic_scorpio
-        in "11/22".toDate().."12/21".toDate() -> "Sagittarius" to R.drawable.ic_sagittarius
-        in "12/22".toDate().."01/19".toDate() -> "Capricorn" to R.drawable.ic_capricorn
-        in "01/20".toDate().."02/18".toDate() -> "Aquarius" to R.drawable.ic_aquarius
-        in "02/19".toDate().."03/20".toDate() -> "Pisces" to R.drawable.ic_pisces
-        else -> "" to 0
+    return when {
+        (this.substring(5, 7).toInt() == 3 && this.substring(0, 2)
+            .toInt() >= 21) || (this.substring(5, 7).toInt() == 4 && this.substring(0, 2)
+            .toInt() <= 19) -> "Aries" to R.drawable.ic_aries
+        (this.substring(5, 7).toInt() == 4 && this.substring(0, 2)
+            .toInt() >= 20) || (this.substring(5, 7).toInt() == 5 && this.substring(0, 2)
+            .toInt() <= 20) -> "Taurus" to R.drawable.ic_taurus
+        (this.substring(5, 7).toInt() == 5 && this.substring(0, 2)
+            .toInt() >= 21) || (this.substring(5, 7).toInt() == 6 && this.substring(0, 2)
+            .toInt() <= 20) -> "Gemini" to R.drawable.ic_gemini
+        (this.substring(5, 7).toInt() == 6 && this.substring(0, 2)
+            .toInt() >= 21) || (this.substring(5, 7).toInt() == 7 && this.substring(0, 2)
+            .toInt() <= 22) -> "Cancer" to R.drawable.ic_cancer
+        (this.substring(5, 7).toInt() == 7 && this.substring(0, 2)
+            .toInt() >= 23) || (this.substring(5, 7).toInt() == 8 && this.substring(0, 2)
+            .toInt() <= 22) -> "Leo" to R.drawable.ic_leo
+        (this.substring(5, 7).toInt() == 8 && this.substring(0, 2)
+            .toInt() >= 23) || (this.substring(5, 7).toInt() == 9 && this.substring(0, 2)
+            .toInt() <= 22) -> "Virgo" to R.drawable.ic_virgo
+        (this.substring(5, 7).toInt() == 9 && this.substring(0, 2)
+            .toInt() >= 23) || (this.substring(5, 7).toInt() == 10 && this.substring(0, 2)
+            .toInt() <= 22) -> "Libra" to R.drawable.ic_libra
+        (this.substring(5, 7).toInt() == 10 && this.substring(0, 2)
+            .toInt() >= 23) || (this.substring(5, 7).toInt() == 11 && this.substring(0, 2)
+            .toInt() <= 21) -> "Scorpio" to R.drawable.ic_scorpio
+        (this.substring(5, 7).toInt() == 11 && this.substring(0, 2)
+            .toInt() >= 22) || (this.substring(5, 7).toInt() == 12 && this.substring(0, 2)
+            .toInt() <= 21) -> "Sagittarius" to R.drawable.ic_sagittarius
+        (this.substring(5, 7).toInt() == 12 && this.substring(0, 2)
+            .toInt() >= 22) || (this.substring(5, 7).toInt() == 1 && this.substring(0, 2)
+            .toInt() <= 19) -> "Capricorn" to R.drawable.ic_capricorn
+        (this.substring(5, 7).toInt() == 1 && this.substring(0, 2)
+            .toInt() >= 20) || (this.substring(5, 7).toInt() == 2 && this.substring(0, 2)
+            .toInt() <= 18) -> "Aquarius" to R.drawable.ic_aquarius
+        (this.substring(5, 7).toInt() == 2 && this.substring(0, 2)
+            .toInt() >= 19) || (this.substring(5, 7).toInt() == 3 && this.substring(0, 2)
+            .toInt() <= 20) -> "Pisces" to R.drawable.ic_pisces
+        else -> Pair("", 0)
     }
 }
-
-fun String.toDate(): Long {
-    val x = SimpleDateFormat("dd/mm", Locale.getDefault()).parse(this).time
-    return x
-}
-
 
 fun ImageView.setBgWithId(id: Long?) {
     val image = when (id) {
