@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentSplashBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.core.base.ui.BaseFragment
 
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {

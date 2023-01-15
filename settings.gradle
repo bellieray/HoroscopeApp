@@ -13,4 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "HoroscopeApp"
-include ':app'
+include ':core',':app'
+include ':commonui'
+include ':features'

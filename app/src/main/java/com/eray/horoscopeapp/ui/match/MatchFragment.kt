@@ -1,25 +1,18 @@
 package com.eray.horoscopeapp.ui.match
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentMatchBinding
-import com.eray.horoscopeapp.model.Horoscope
-import com.eray.horoscopeapp.model.Result
 import com.eray.horoscopeapp.ui.SessionViewModel
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.core.base.ui.BaseFragment
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
 import com.eray.horoscopeapp.ui.match.dialog.OtherHoroscopeDialog
 import com.eray.horoscopeapp.util.setBgWithId
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 

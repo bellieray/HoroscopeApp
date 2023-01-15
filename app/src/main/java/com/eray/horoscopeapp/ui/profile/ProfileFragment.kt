@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentProfileBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.core.base.ui.BaseFragment
 import com.eray.horoscopeapp.util.checkHoroscope
 import com.eray.horoscopeapp.util.checkHoroscopeProperties
 

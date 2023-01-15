@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeBinding
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.core.base.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val NEXT_ITEM_VISIBLE_RATIO = 0.186f

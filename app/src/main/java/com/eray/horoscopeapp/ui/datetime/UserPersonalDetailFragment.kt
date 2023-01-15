@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,8 +15,7 @@ import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.databinding.FragmentUserPersonalDetailBinding
 import com.eray.horoscopeapp.model.PersonalDetail
-import com.eray.horoscopeapp.ui.SessionViewModel
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.core.base.ui.BaseFragment
 import com.eray.horoscopeapp.util.Constants.LOGIN_STATE_PREF
 import com.eray.horoscopeapp.util.Constants.USER_INFOS
 import com.eray.horoscopeapp.util.DateUtils

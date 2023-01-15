@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHomeBinding
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.core.base.ui.BaseFragment
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {

@@ -12,7 +12,6 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.eray.horoscopeapp"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -40,6 +39,9 @@ android {
 }
 
 dependencies {
+
+    implementation project(":commonui")
+    implementation project(":core")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

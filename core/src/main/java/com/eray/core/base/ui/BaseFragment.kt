@@ -1,4 +1,4 @@
-package com.eray.horoscopeapp.ui.base
+package com.eray.core.base.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
