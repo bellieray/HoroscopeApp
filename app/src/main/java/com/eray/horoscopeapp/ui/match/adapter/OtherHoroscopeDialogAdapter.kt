@@ -56,9 +56,7 @@ class OtherHoroscopeDialogAdapter(val callback: (OtherHoroscope) -> Unit) :
     inner class OtherHoroscopeViewHolder(val binding: ItemOtherHoroscopeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(otherHoroscope: OtherHoroscope) {
-            binding.tvOtherHoroscopeName.text = otherHoroscope.horoscope.name
-            binding.tvHoroscopeDay.text = otherHoroscope.horoscope.day
-            binding.ivOtherHoroscope.setBgWithId(otherHoroscope.horoscope.id)
+            binding.otherHoroscope = otherHoroscope
             binding.clContainer.isSelected = otherHoroscope.isChecked
             binding.root.setOnClickListener {
                 changeBadgeChecked(otherHoroscope.horoscope.id)

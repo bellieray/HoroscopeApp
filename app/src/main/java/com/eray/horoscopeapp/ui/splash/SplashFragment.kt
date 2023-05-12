@@ -22,17 +22,15 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     private fun splashScreen() {
-
         countDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
                 viewLifecycleOwner.lifecycleScope.launchWhenResumed {
                     sessionViewModel.viewState.collect{
-                        if(it?.isLoggedIn == true) findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+                        if(it.isLoggedIn == true) findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
                         else findNavController().navigate(SplashFragmentDirections.toLoginFragment())
                     }
                 }
-               // findNavController().navigate(R.id.homeFragment)
             }
         }.start()
     }

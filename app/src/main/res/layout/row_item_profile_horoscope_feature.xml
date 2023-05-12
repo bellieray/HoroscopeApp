@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_horoscope_feature"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/siv_item_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="3dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/ic_aquarius"
+                app:layout_constraintBottom_toTopOf="@id/feature_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                app:strokeColor="@color/white"
+                app:strokeWidth="3dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feature_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:textColor="#FFFCFC"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/feature_property"
+                app:layout_constraintEnd_toEndOf="@id/siv_item_icon"
+                app:layout_constraintStart_toStartOf="@id/siv_item_icon"
+                app:layout_constraintTop_toBottomOf="@id/siv_item_icon"
+                tools:text="Şanslı Günler" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feature_property"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/feature_title"
+                app:layout_constraintStart_toStartOf="@id/feature_title"
+                app:layout_constraintTop_toBottomOf="@id/feature_title"
+                tools:text="Neptun" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -3,7 +3,6 @@ package com.eray.horoscopeapp.ui.match
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
-import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.model.PersonalDetail
 import com.eray.horoscopeapp.model.Result
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
@@ -43,7 +42,6 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
                 _viewState.update { viewState ->
                     viewState.copy(horoscope = birthTime.checkHoroscope())
             }
-
         }
     }
 

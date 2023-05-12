@@ -5,6 +5,8 @@
     <string name="cancel">cancel</string>
     <string name="ok">ok</string>
     <string name="string_characters">ABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ abcçdefgğhiıjklmnoöpqrsştuüvwxyz</string>
+    <string name="login_header_first_part">Hello, this is your personal\n astrologer</string>
+    <string name="login_header_second">AstroScope</string>
 
     <string-array name="feelings">
         <item>Erkek</item>

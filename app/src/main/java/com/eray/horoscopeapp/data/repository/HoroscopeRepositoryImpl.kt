@@ -22,4 +22,14 @@ class HoroscopeRepositoryImpl @Inject constructor(
                         cont.resume(Result.Failed(error.localizedMessage.toString()))
                 }
         }
+
+    override suspend fun getHoroscopeById(id: Long): Result<List<Horoscope>?>  = suspendCoroutine { cont ->
+        horoscopeRef.orderBy("id", Query.Direction.ASCENDING).whereEqualTo("id",id)
+            .addSnapshotListener { value, error ->
+                if (error == null)
+                    cont.resume(Result.Success(Horoscope.Mapper.toList(value)))
+                else
+                    cont.resume(Result.Failed(error.localizedMessage.toString()))
+            }
+    }
 }

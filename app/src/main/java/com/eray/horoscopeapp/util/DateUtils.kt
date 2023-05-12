@@ -24,8 +24,4 @@ object DateUtils {
         return SimpleDateFormat(pattern).format(date)
     }
 
-    fun formatStringToDate(dateString: String, pattern: String): Date {
-        val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
-        return dateFormat.parse(dateString)
-    }
 }

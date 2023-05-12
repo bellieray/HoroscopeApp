@@ -24,7 +24,7 @@ class HoroscopeAdapter : ListAdapter<Horoscope, RecyclerView.ViewHolder>(Horosco
     inner class HoroscopeViewHolder(val binding: ItemHoroscopeWidgetBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Horoscope) {
-            binding.horoscopeItem = item.name
+            binding.horoscopeItem = item
             binding.executePendingBindings()
         }
     }

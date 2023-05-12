@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_color"
+        tools:context=".ui.match_detail.MatchDetailFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_arrow_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_arrow_left">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_matching_score_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="40dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/bg_match_detail"
+                    android:paddingVertical="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ic_first_horoscope"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_gemini" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="@id/ic_first_horoscope"
+                        app:layout_constraintStart_toStartOf="@id/ic_first_horoscope"
+                        app:layout_constraintTop_toBottomOf="@id/ic_first_horoscope"
+                        tools:text="İkizler" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ic_second_horoscope"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_gemini" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="@id/ic_second_horoscope"
+                        app:layout_constraintStart_toStartOf="@id/ic_second_horoscope"
+                        app:layout_constraintTop_toBottomOf="@id/ic_second_horoscope"
+                        tools:text="İkizler" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="#FFFFFF"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/ic_second_horoscope"
+                        app:layout_constraintStart_toEndOf="@id/ic_first_horoscope"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="%58" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="5dp"
+                    android:textColor="#99FFFFFF"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_matching_score_container"
+                    tools:text="Capricorn, the Sea-Goat, is focused on logic, on being down-to-earth and real; Cancer brings a charge of emotional intensity to the relationship. Both hold one another to high standards tempered by abiding mutual respect. Capricorn, the Sea-Goat, is focused on logic, on being down-to-earth and real; Cancer brings a charge of emotional intensity to the relationship. Both hold one another to high standards tempered by abiding mutual respect.  " />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_progress_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description_text">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_first_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Love -58%" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_credit_detail_challenge"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:progress="40"
+                        android:progressDrawable="@drawable/bg_match_progress"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_first_item"
+                        tools:progress="58" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_progress_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_progress_first">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_second_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Sex -58%" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_seoond"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:progress="40"
+                        android:progressDrawable="@drawable/bg_match_progress"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_second_item"
+                        tools:progress="58" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_progress_second">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_third_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Friendship -58%" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_third"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:progress="40"
+                        android:progressDrawable="@drawable/bg_match_progress"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_third_item"
+                        tools:progress="58" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="otherHoroscope"
+            type="com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +25,7 @@
             android:layout_height="66dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{otherHoroscope.horoscope.imageUrl}"
             tools:src="@drawable/ic_gemini" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -32,6 +36,7 @@
             android:fontFamily="@font/poppins_regular"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:text="@{otherHoroscope.horoscope.name}"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@id/iv_other_horoscope"
             app:layout_constraintTop_toTopOf="@id/iv_other_horoscope"
@@ -43,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_regular"
+            android:text="@{otherHoroscope.horoscope.day}"
             android:textColor="#818C99"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_other_horoscope"

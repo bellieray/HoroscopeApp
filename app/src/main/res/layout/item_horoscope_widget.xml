@@ -7,7 +7,7 @@
 
         <variable
             name="horoscopeItem"
-            type="String" />
+            type="com.eray.horoscopeapp.model.Horoscope" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,11 +25,13 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_horoscope_item"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                app:layout_constraintDimensionRatio="1:1"
                 android:layout_marginTop="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_profile"
+                tools:src="@tools:sample/avatars"
+                android:scaleType="centerCrop"
+                app:loadImage="@{horoscopeItem.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@{horoscopeItem}"
+                android:text="@{horoscopeItem.name}"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/iv_horoscope_item"

@@ -1,25 +1,17 @@
 package com.eray.horoscopeapp.ui.match
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentMatchBinding
-import com.eray.horoscopeapp.model.Horoscope
-import com.eray.horoscopeapp.model.Result
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
 import com.eray.horoscopeapp.ui.match.dialog.OtherHoroscopeDialog
-import com.eray.horoscopeapp.util.setBgWithId
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 
@@ -35,9 +27,6 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     }
 
     private fun initViews() {
-        binding.clOtherSign.setOnClickListener {
-            matchViewModel.fetchHoroscopes()
-        }
         binding.clMale.setOnClickListener {
             it.isSelected = true
             binding.clFemale.isSelected = !it.isSelected
@@ -52,6 +41,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
     private fun initObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            matchViewModel.fetchHoroscopes()
             matchViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
             lifecycleScope.launch {
                 sessionViewModel.viewState.collect { viewState ->
@@ -65,18 +55,13 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
             lifecycleScope.launch {
                 matchViewModel.viewState.collect { matchState ->
-                    matchState.horoscope?.let { horoscope ->
-                        binding.tvYourHoroscope.text = horoscope.first
-                        binding.ivHoroscope.setBackgroundResource(horoscope.second)
-                    }
                     matchState.horoscopeList?.let {
                         showDialog(it)
                         matchViewModel.listConsumed()
                     }
 
                     matchState.otherHoroscope?.let {
-                        binding.ivHoroscopePlayer.setBgWithId(it.horoscope.id)
-                        binding.tvHoroscopePlayer.text = it.horoscope.name
+                        binding.otherPlayer = it
                     }
                 }
             }
