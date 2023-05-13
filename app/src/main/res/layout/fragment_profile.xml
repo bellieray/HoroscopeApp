@@ -9,6 +9,10 @@
             name="personalDetail"
             type="com.eray.horoscopeapp.model.PersonalDetail" />
 
+        <variable
+            name="player"
+            type="com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope" />
+
         <import type="com.eray.horoscopeapp.util.ExtensionsKt" />
     </data>
 
@@ -33,6 +37,7 @@
                     android:id="@+id/iv_user_horoscope"
                     android:layout_width="83dp"
                     android:layout_height="83dp"
+                    loadImage="@{player.horoscope.imageUrl}"
                     android:layout_marginTop="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +66,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
+                    android:text="@{player.horoscope.name}"
                     app:layout_constraintEnd_toEndOf="@id/tv_username"
                     app:layout_constraintStart_toStartOf="@id/tv_username"
                     app:layout_constraintTop_toBottomOf="@id/tv_username" />

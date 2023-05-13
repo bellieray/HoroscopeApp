@@ -6,7 +6,7 @@ import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.model.PersonalDetail
 import com.eray.horoscopeapp.model.Result
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
-import com.eray.horoscopeapp.util.checkHoroscope
+import com.eray.horoscopeapp.util.getHoroscopeIdFromDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,7 +21,12 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
     private val _viewState = MutableStateFlow(MatchViewState())
     val viewState = _viewState.asStateFlow()
 
+
+    init {
+        fetchHoroscopes()
+    }
     fun fetchHoroscopes() {
+        if (_viewState.value.horoscopeList != null) return
         viewModelScope.launch {
             when (val response = horoscopeRepository.getHoroscopes()) {
                 is Result.Success -> {
@@ -29,6 +34,9 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
                         state.copy(horoscopeList = response.data?.map {
                             OtherHoroscope.from(it)
                         })
+                    }
+                    _viewState.value.horoscopeId?.let {
+                        filterHoroscopeListById(it)
                     }
                 }
                 else -> {}
@@ -39,8 +47,8 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
     fun convertDateToHoroscope() {
         val birthTime = _viewState.value.personalDetail?.birthTime ?: return
         viewModelScope.launch {
-                _viewState.update { viewState ->
-                    viewState.copy(horoscope = birthTime.checkHoroscope())
+            _viewState.update { viewState ->
+                viewState.copy(horoscopeId = birthTime.getHoroscopeIdFromDate())
             }
         }
     }
@@ -66,11 +74,22 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
         }
     }
 
+    fun filterHoroscopeListById(horoscopeId: Int) {
+        _viewState.value.horoscopeList?.let {
+            it.find { it.horoscope.id == horoscopeId.toLong() }.apply {
+                _viewState.update { state ->
+                    state.copy(horoscopeFromId = this)
+                }
+            }
+        }
+    }
+
 }
 
 data class MatchViewState(
-    val horoscope: Pair<String, Int>? = null,
+    val horoscopeId: Int? = null,
     val personalDetail: PersonalDetail? = null,
     val horoscopeList: List<OtherHoroscope>? = null,
-    val otherHoroscope: OtherHoroscope? = null
+    val otherHoroscope: OtherHoroscope? = null,
+    val horoscopeFromId: OtherHoroscope? = null
 )

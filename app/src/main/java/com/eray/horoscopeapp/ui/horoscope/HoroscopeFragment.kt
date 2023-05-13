@@ -21,6 +21,7 @@ class HoroscopeFragment : BaseFragment<FragmentHoroscopeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
+        horoscopeViewModel.fetchHoroscopes()
     }
 
     private fun initObservers() {

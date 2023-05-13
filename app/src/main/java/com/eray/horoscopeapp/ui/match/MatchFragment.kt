@@ -36,12 +36,18 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
             it.isSelected = true
             binding.clMale.isSelected = !it.isSelected
         }
+
+        binding.clOtherSign.setOnClickListener{
+            matchViewModel.viewState.value.horoscopeList?.let {
+                showDialog(it)
+            }
+            matchViewModel.listConsumed()
+        }
     }
 
 
     private fun initObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            matchViewModel.fetchHoroscopes()
             matchViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
             lifecycleScope.launch {
                 sessionViewModel.viewState.collect { viewState ->
@@ -55,13 +61,12 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
             lifecycleScope.launch {
                 matchViewModel.viewState.collect { matchState ->
-                    matchState.horoscopeList?.let {
-                        showDialog(it)
-                        matchViewModel.listConsumed()
-                    }
-
                     matchState.otherHoroscope?.let {
                         binding.otherPlayer = it
+                    }
+
+                    matchState.horoscopeFromId?.let {
+                        binding.player = it
                     }
                 }
             }

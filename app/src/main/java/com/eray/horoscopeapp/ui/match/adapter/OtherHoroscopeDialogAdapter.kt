@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eray.horoscopeapp.databinding.ItemOtherHoroscopeBinding
 import com.eray.horoscopeapp.model.Horoscope
-import com.eray.horoscopeapp.util.setBgWithId
 
 class OtherHoroscopeDialogAdapter(val callback: (OtherHoroscope) -> Unit) :
     ListAdapter<OtherHoroscope, RecyclerView.ViewHolder>(DiffCallback) {
@@ -17,14 +16,14 @@ class OtherHoroscopeDialogAdapter(val callback: (OtherHoroscope) -> Unit) :
             oldItem: OtherHoroscope,
             newItem: OtherHoroscope
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.isChecked == newItem.isChecked && oldItem.horoscope.id == newItem.horoscope.id
         }
 
         override fun areContentsTheSame(
             oldItem: OtherHoroscope,
             newItem: OtherHoroscope
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.horoscope.id== newItem.horoscope.id && oldItem.horoscope.imageUrl == newItem.horoscope.imageUrl
         }
 
     }
@@ -62,6 +61,7 @@ class OtherHoroscopeDialogAdapter(val callback: (OtherHoroscope) -> Unit) :
                 changeBadgeChecked(otherHoroscope.horoscope.id)
                 callback.invoke(otherHoroscope)
             }
+            binding.executePendingBindings()
         }
     }
 }
