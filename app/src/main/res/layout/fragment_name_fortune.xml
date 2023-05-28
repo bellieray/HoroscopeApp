@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isMultipleName"
+            type="Boolean" />
+
+        <variable
+            name="fortuneResult"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/general_app_color"
+        android:padding="15dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_name_fortune"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            app:tabIndicatorGravity="stretch"
+            app:tabIndicatorColor="#9A49EC"
+            android:background="@drawable/bg_bottom_nav_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@color/selector_dark_to_white">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="kendi" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="uyum" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_name_fortune_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tl_name_fortune">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_name_fortune_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_name_fortune"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:letterSpacing="0.14"
+                    android:text="Your Name"
+                    android:textAllCaps="true"
+                    android:textColor="#9997FF"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_name_fortune"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/selector_bg_edit_text"
+                    android:digits="@string/string_characters"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="13dp"
+                    android:textColor="@android:color/white"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name_fortune" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_match_name_fortune_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_match_name_fortune"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:letterSpacing="0.14"
+                    android:text="Partner Name"
+                    android:textAllCaps="true"
+                    android:textColor="#9997FF"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_match_name_fortune"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/selector_bg_edit_text"
+                    android:digits="@string/string_characters"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="13dp"
+                    android:textColor="@android:color/white"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_match_name_fortune" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_name_fortune_calculate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="30dp"
+            android:background="@drawable/bg_personal_detail_button"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="5dp"
+            android:text="Calculate"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_name_fortune_container"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

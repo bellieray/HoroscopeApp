@@ -30,6 +30,15 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment2"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tarotFragment"
+            app:destination="@id/tarotFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_nameFortuneFragment"
+            app:destination="@id/nameFortuneFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_calculateRisingSignFragment"
+            app:destination="@id/calculateRisingSignFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -45,7 +54,9 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/splashFragment"/>
     </fragment>
     <fragment
         android:id="@+id/userPersonalDetailFragment"
@@ -79,4 +90,16 @@
             android:id="@+id/action_horoscopeFragment2_to_profileFragment2"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tarotFragment"
+        android:name="com.eray.horoscopeapp.ui.tarot.TarotFragment"
+        android:label="TarotFragment" />
+    <fragment
+        android:id="@+id/nameFortuneFragment"
+        android:name="com.eray.horoscopeapp.ui.fortune.NameFortuneFragment"
+        android:label="NameFortuneFragment" />
+    <fragment
+        android:id="@+id/calculateRisingSignFragment"
+        android:name="com.eray.horoscopeapp.ui.risingsign.CalculateRisingSignFragment"
+        android:label="CalculateRisingSignFragment" />
 </navigation>

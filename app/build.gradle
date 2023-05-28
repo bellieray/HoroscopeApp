@@ -80,6 +80,7 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.9.0'
 
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     //indicator
     implementation 'com.tbuonomo:dotsindicator:4.3'
 
