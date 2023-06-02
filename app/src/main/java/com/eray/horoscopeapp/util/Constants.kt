@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.util
 
 object Constants {
     const val HOROSCOPES = "horoscopesEn"
+    const val MATCHING_HOROSCOPES_EN="HoroscopeMatchingEn"
     const val LOGIN_STATE_PREF = "login"
     const val USER_INFOS = "user_info"
 }

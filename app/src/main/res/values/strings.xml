@@ -12,6 +12,9 @@
     <string name="name_fortune">İsim Falı</string>
     <string name="login_header_first_part">Hello, this is your personal\n astrologer</string>
     <string name="login_header_second">AstroScope</string>
+    <string name="business">Business</string>
+    <string name="love">Love</string>
+    <string name="numbers_of_the_day">Numbers of the day</string>
 
     <string-array name="feelings">
         <item>Erkek</item>

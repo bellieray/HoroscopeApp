@@ -6,6 +6,9 @@ import com.eray.horoscopeapp.data.pref.PrefsImpl
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.data.repository.HoroscopeRepositoryImpl
 import com.eray.horoscopeapp.util.Constants.HOROSCOPES
+import com.eray.horoscopeapp.util.Constants.MATCHING_HOROSCOPES_EN
+import com.eray.horoscopeapp.util.HoroscopeReference
+import com.eray.horoscopeapp.util.MatchingHoroscopeReference
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -24,16 +27,24 @@ object AppModule {
 
     @Singleton
     @Provides
+    @HoroscopeReference
     fun provideHoroscopeRef(
         db: FirebaseFirestore
     ): CollectionReference = db.collection(HOROSCOPES)
 
     @Singleton
     @Provides
+    @MatchingHoroscopeReference
+    fun provideMatchingHoroscopeRef(
+        db: FirebaseFirestore
+    ): CollectionReference = db.collection(MATCHING_HOROSCOPES_EN)
+
+    @Singleton
+    @Provides
     fun provideHoroscopeRepository(
-        horoscopeRef: CollectionReference
-    ): HoroscopeRepository =
-        HoroscopeRepositoryImpl(horoscopeRef)
+        @HoroscopeReference horoscopeReference: CollectionReference,
+        @MatchingHoroscopeReference matchingHoroscopeReference: CollectionReference
+    ): HoroscopeRepository = HoroscopeRepositoryImpl(horoscopeReference, matchingHoroscopeReference)
 
     @Singleton
     @Provides

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentMatchBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
@@ -22,6 +23,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        matchViewModel.fetchHoroscopes()
         initObservers()
         initViews()
     }
@@ -37,11 +39,20 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
             binding.clMale.isSelected = !it.isSelected
         }
 
-        binding.clOtherSign.setOnClickListener{
+        binding.clOtherSign.setOnClickListener {
             matchViewModel.viewState.value.horoscopeList?.let {
                 showDialog(it)
             }
-            matchViewModel.listConsumed()
+        }
+
+        binding.btnCheckCompability.setOnClickListener {
+            if (binding.tvHoroscopePlayer.text.isNullOrEmpty()
+                    .not() && binding.tvYourHoroscope.text.isNullOrEmpty().not()
+            ) {
+                val firstId = matchViewModel.viewState.value.horoscopeFromId?.horoscope?.id?.toInt() ?: 0
+                val secondId = matchViewModel.viewState.value.otherHoroscope?.horoscope?.id?.toInt() ?: 0
+                findNavController().navigate(MatchFragmentDirections.actionMatchFragmentToMatchDetailFragment(firstId, secondId))
+            }
         }
     }
 
@@ -79,6 +90,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         val dialog = OtherHoroscopeDialog(list, ::setOtherHoroscopeModelFromSheet)
         dialog.show(childFragmentManager, OtherHoroscopeDialog::class.java.simpleName)
     }
+
 
     private fun setOtherHoroscopeModelFromSheet(otherHoroscope: OtherHoroscope) {
         matchViewModel.setBottomSheetModel(otherHoroscope)

@@ -3,6 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="matchingHoroscopeItem"
+            type="com.eray.horoscopeapp.ui.match_detail.HoroscopeMatchItem" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,9 +50,9 @@
                     android:id="@+id/cl_matching_score_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="40dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/bg_match_detail"
+                    android:paddingHorizontal="40dp"
                     android:paddingVertical="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -49,13 +63,14 @@
                         android:layout_height="85dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/ic_gemini" />
+                        app:loadImage="@{matchingHoroscopeItem.firstUrl}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_regular"
+                        android:text="@{matchingHoroscopeItem.firstHoroscope}"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="@id/ic_first_horoscope"
@@ -69,13 +84,14 @@
                         android:layout_height="85dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/ic_gemini" />
+                        app:loadImage="@{matchingHoroscopeItem.secondUrl}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_regular"
+                        android:text="@{matchingHoroscopeItem.secondHoroscope}"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="@id/ic_second_horoscope"
@@ -87,6 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
+                        android:text="@{matchingHoroscopeItem.generalOverall}"
                         android:textColor="#FFFFFF"
                         android:textSize="36sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +120,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="5dp"
+                    android:text="@{matchingHoroscopeItem.relationText}"
                     android:textColor="#99FFFFFF"
                     android:textSize="18sp"
                     app:layout_constraintTop_toBottomOf="@id/cl_matching_score_container"
@@ -206,6 +224,25 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/app_color"
+            android:visibility="@{isLoading ? View.VISIBLE: View.GONE, default= gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_bar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -19,7 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 private const val SHEET_RATIO = 0.8F
 
 class OtherHoroscopeDialog(
-    private val list: List<OtherHoroscope>,
+    private val list: List<OtherHoroscope>?,
     val callback: (OtherHoroscope) -> Unit
 ) : BottomSheetDialogFragment() {
     private var _binding: DialogOtherHoroscopeBinding? = null

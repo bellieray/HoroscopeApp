@@ -47,6 +47,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
+                    android:textAllCaps="true"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_regular"

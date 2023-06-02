@@ -21,10 +21,6 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
     private val _viewState = MutableStateFlow(MatchViewState())
     val viewState = _viewState.asStateFlow()
 
-
-    init {
-        fetchHoroscopes()
-    }
     fun fetchHoroscopes() {
         if (_viewState.value.horoscopeList != null) return
         viewModelScope.launch {
@@ -39,7 +35,9 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
                         filterHoroscopeListById(it)
                     }
                 }
-                else -> {}
+                else -> {
+
+                }
             }
         }
     }
@@ -65,12 +63,6 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
     fun setBottomSheetModel(otherHoroscope: OtherHoroscope) {
         _viewState.update {
             it.copy(otherHoroscope = otherHoroscope)
-        }
-    }
-
-    fun listConsumed() {
-        _viewState.update {
-            it.copy(horoscopeList = null)
         }
     }
 

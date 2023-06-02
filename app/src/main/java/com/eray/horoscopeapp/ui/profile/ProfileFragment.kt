@@ -43,7 +43,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
             launch {
                 sessionViewModel.viewState.collect {
-                    binding.tvUsername.text = it.personalDetail?.name?.capitalize()
+                    binding.tvUsername.text = it.personalDetail?.name
                 }
             }
         }
@@ -78,7 +78,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
         return list
     }
-
     override fun getFragmentView() = R.layout.fragment_profile
 }
 
