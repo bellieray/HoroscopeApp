@@ -89,13 +89,13 @@ class NameFortuneFragment : BaseFragment<FragmentNameFortuneBinding>(), Animator
                                     null, null
                                 )
                             } else {
-                                DialogUtils.showCustomAlert(layoutInflater, requireActivity())
+                                DialogUtils.showCustomAlert(requireActivity(), textRes = R.string.please_fill_the_all_blanks)
                             }
                         }
                     }
                     DeviceUtils.closeKeyboard(requireActivity(), requireView())
                 } else {
-                    DialogUtils.showCustomAlert(layoutInflater, requireActivity())
+                    DialogUtils.showCustomAlert(requireActivity(), R.string.please_fill_the_all_blanks)
                 }
             }
             executePendingBindings()

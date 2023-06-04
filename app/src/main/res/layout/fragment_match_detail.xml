@@ -35,7 +35,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
+            android:padding="20dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/bg_match_detail"
-                    android:paddingHorizontal="40dp"
+                    android:paddingHorizontal="20dp"
                     android:paddingVertical="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -66,15 +66,16 @@
                         app:loadImage="@{matchingHoroscopeItem.firstUrl}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_regular"
                         android:text="@{matchingHoroscopeItem.firstHoroscope}"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="@id/ic_first_horoscope"
-                        app:layout_constraintStart_toStartOf="@id/ic_first_horoscope"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_compability_ratio"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ic_first_horoscope"
                         tools:text="İkizler" />
 
@@ -87,19 +88,21 @@
                         app:loadImage="@{matchingHoroscopeItem.secondUrl}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_regular"
                         android:text="@{matchingHoroscopeItem.secondHoroscope}"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="@id/ic_second_horoscope"
-                        app:layout_constraintStart_toStartOf="@id/ic_second_horoscope"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_compability_ratio"
                         app:layout_constraintTop_toBottomOf="@id/ic_second_horoscope"
                         tools:text="İkizler" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_compability_ratio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
@@ -113,13 +116,16 @@
                         tools:text="%58" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_description_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:ellipsize="end"
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="5dp"
+                    android:maxLines="6"
                     android:text="@{matchingHoroscopeItem.relationText}"
                     android:textColor="#99FFFFFF"
                     android:textSize="18sp"
@@ -130,7 +136,7 @@
                     android:id="@+id/cl_progress_first"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="35dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_description_text">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -138,6 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
+                        android:text="@{@string/love_with_ratio(matchingHoroscopeItem.loveOverall)}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +158,8 @@
                         android:layout_height="2dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:progress="40"
+                        android:max="100"
+                        android:progress="@{matchingHoroscopeItem.loveOverall != null ? Integer.valueOf(matchingHoroscopeItem.loveOverall) : 0}"
                         android:progressDrawable="@drawable/bg_match_progress"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_first_item"
@@ -170,6 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
+                        android:text="@{@string/sex_with_ratio(matchingHoroscopeItem.sexOverall)}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +192,8 @@
                         android:layout_height="2dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:progress="40"
+                        android:max="100"
+                        android:progress="@{matchingHoroscopeItem.loveOverall != null ? Integer.valueOf(matchingHoroscopeItem.sexOverall) : 0}"
                         android:progressDrawable="@drawable/bg_match_progress"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_second_item"
@@ -201,6 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
+                        android:text="@{@string/friendship_with_ratio(matchingHoroscopeItem.relationshipOverall)}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -214,7 +225,8 @@
                         android:layout_height="2dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:progress="40"
+                        android:max="100"
+                        android:progress="@{matchingHoroscopeItem.loveOverall != null ? Integer.valueOf(matchingHoroscopeItem.relationshipOverall) : 0}"
                         android:progressDrawable="@drawable/bg_match_progress"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_third_item"

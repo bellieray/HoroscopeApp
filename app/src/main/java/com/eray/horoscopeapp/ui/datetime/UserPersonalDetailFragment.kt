@@ -91,7 +91,7 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
                     findNavController().navigate(UserPersonalDetailFragmentDirections.toHomeFragment())
                     DeviceUtils.closeKeyboard(requireActivity(), binding.root)
                 } else {
-                    DialogUtils.showCustomAlert(layoutInflater, requireActivity())
+                    DialogUtils.showCustomAlert(requireActivity(), textRes = R.string.please_fill_the_all_blanks)
                 }
 
             }

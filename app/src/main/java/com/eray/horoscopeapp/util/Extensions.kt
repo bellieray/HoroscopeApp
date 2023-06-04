@@ -72,6 +72,7 @@ fun String.getHoroscopeIdFromDate(): Int {
 
 @BindingAdapter("loadImage")
 fun ImageView.loadImage(url: String?) {
+
     val imageLoader = ImageLoader.Builder(this.context)
         .componentRegistry { add(SvgDecoder(this@loadImage.context)) }
         .build()

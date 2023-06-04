@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentMatchDetailBinding
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,13 +25,27 @@ class MatchDetailFragment : BaseFragment<FragmentMatchDetailBinding>() {
         binding.icArrowLeft.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.tvDescriptionText.setOnClickListener {
+            matchDetailViewModel.viewState.value.horoscopeMatchItem?.relationText?.let { it1 ->
+                DialogUtils.showMatchingDescriptionTextDetailDialog(
+                    requireContext(),
+                    it1
+                )
+            }
+        }
     }
 
     private fun initObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
-            matchDetailViewModel.viewState.collect {
+            matchDetailViewModel.viewState.collect { it ->
                 it.horoscopeMatchItem?.let { horoscopeItem ->
                     binding.matchingHoroscopeItem = horoscopeItem
+                }
+
+                it.consumableErrors?.firstOrNull()?.let { error ->
+                    handleError(error.exception, requireActivity())
+                    matchDetailViewModel.errorConsumed(error.id)
                 }
 
                 binding.isLoading = it.isLoading

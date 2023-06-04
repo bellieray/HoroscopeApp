@@ -14,7 +14,13 @@
     <string name="login_header_second">AstroScope</string>
     <string name="business">Business</string>
     <string name="love">Love</string>
+    <string name="love_with_ratio">Love-%s</string>
+    <string name="sex_with_ratio">Sex-%s</string>
+    <string name="friendship_with_ratio">Friendship-%s</string>
     <string name="numbers_of_the_day">Numbers of the day</string>
+    <string name="please_fill_the_all_blanks">Please fill the all blanks</string>
+    <string name="please_check_internet_connection">Please check internet connection</string>
+    <string name="request_time_out">Request time out</string>
 
     <string-array name="feelings">
         <item>Erkek</item>

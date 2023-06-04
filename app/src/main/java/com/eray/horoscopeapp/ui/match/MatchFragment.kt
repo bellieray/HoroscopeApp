@@ -12,8 +12,10 @@ import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
 import com.eray.horoscopeapp.ui.match.dialog.OtherHoroscopeDialog
+import com.eray.horoscopeapp.util.ConnectionUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 
 @AndroidEntryPoint
@@ -47,12 +49,21 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
         binding.btnCheckCompability.setOnClickListener {
             if (binding.tvHoroscopePlayer.text.isNullOrEmpty()
-                    .not() && binding.tvYourHoroscope.text.isNullOrEmpty().not()
+                    .not() && binding.tvYourHoroscope.text.isNullOrEmpty()
+                    .not() && ConnectionUtils.checkInternetConnection(requireContext())
             ) {
-                val firstId = matchViewModel.viewState.value.horoscopeFromId?.horoscope?.id?.toInt() ?: 0
-                val secondId = matchViewModel.viewState.value.otherHoroscope?.horoscope?.id?.toInt() ?: 0
-                findNavController().navigate(MatchFragmentDirections.actionMatchFragmentToMatchDetailFragment(firstId, secondId))
+                val firstId =
+                    matchViewModel.viewState.value.horoscopeFromId?.horoscope?.id?.toInt() ?: 0
+                val secondId =
+                    matchViewModel.viewState.value.otherHoroscope?.horoscope?.id?.toInt() ?: 0
+                findNavController().navigate(
+                    MatchFragmentDirections.actionMatchFragmentToMatchDetailFragment(
+                        firstId,
+                        secondId
+                    )
+                )
             }
+            handleError(IOException(), requireActivity())
         }
     }
 

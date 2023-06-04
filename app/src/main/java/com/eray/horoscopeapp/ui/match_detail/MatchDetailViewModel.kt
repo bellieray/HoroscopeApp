@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -63,9 +64,24 @@ class MatchDetailViewModel @Inject constructor(
                     _viewState.update {
                         it.copy(isLoading = false)
                     }
+                    addErrorToList(response.exception)
                 }
-
             }
+        }
+    }
+
+    private fun addErrorToList(exception: Exception?) {
+        exception?.let {
+            val errorList = viewState.value.consumableErrors?.toMutableList() ?: mutableListOf()
+            errorList.add(ConsumableError(exception = it))
+            _viewState.value = viewState.value.copy(consumableErrors = errorList, isLoading = false)
+        }
+    }
+
+    fun errorConsumed(errorId: Long) {
+        _viewState.update { currentUiState ->
+            val newConsumableError = currentUiState.consumableErrors?.filterNot { it.id == errorId }
+            currentUiState.copy(consumableErrors = newConsumableError)
         }
     }
 }
@@ -74,7 +90,8 @@ data class MatchDetailViewState(
     val horoscopeMatchItem: HoroscopeMatchItem? = null,
     val firstId: String? = null,
     val secondId: String? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val consumableErrors: List<ConsumableError>? = null,
 )
 
 data class HoroscopeMatchItem(
@@ -107,3 +124,8 @@ data class HoroscopeMatchItem(
             }
     }
 }
+
+data class ConsumableError(
+    val id: Long = UUID.randomUUID().mostSignificantBits,
+    val exception: Exception
+)
