@@ -11,6 +11,8 @@ import androidx.navigation.NavOptions
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.ui.profile.adapter.UserHoroscopeProperties
@@ -83,6 +85,13 @@ fun ImageView.loadImage(url: String?) {
         .build()
 
     imageLoader.enqueue(request)
+}
+
+@BindingAdapter("load")
+fun load(imageView: ImageView, url: String){
+    Glide.with(imageView.context)
+        .load(url)
+        .into(imageView)
 }
 
 fun String.checkHoroscopeProperties(): UserHoroscopeProperties {

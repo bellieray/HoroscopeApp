@@ -62,8 +62,9 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                         secondId
                     )
                 )
+            } else {
+                handleError(IOException(), requireActivity())
             }
-            handleError(IOException(), requireActivity())
         }
     }
 

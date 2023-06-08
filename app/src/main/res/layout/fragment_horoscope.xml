@@ -3,20 +3,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="firstImageUrl"
+            type="String" />
+
+        <variable
+            name="secondImageUrl"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
         android:background="@color/general_app_color"
         tools:context=".ui.horoscope.HoroscopeFragment">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_horoscope"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cl_first"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:orientation="horizontal"
+            android:layout_height="300dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:alpha="0.6"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:load="@{firstImageUrl}"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded20Dp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:lineSpacingExtra="5dp"
+            android:shadowColor="@color/white"
+            android:shadowDx="6"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="EXPLORE THE HOROSCOPES"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="42sp"
+            app:fontFamily="@font/poppins_regular"
+            app:layout_constraintBottom_toBottomOf="@id/cl_first"
+            app:layout_constraintEnd_toEndOf="@id/cl_first"
+            app:layout_constraintStart_toStartOf="@id/cl_first"
+            app:layout_constraintTop_toTopOf="@id/cl_first" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cl_second"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
+            android:alpha="0.6"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="1:1"
+            android:elevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_first"
+            app:load="@{secondImageUrl}"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded20Dp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:lineSpacingExtra="5dp"
+            android:shadowColor="@color/white"
+            android:shadowDx="3"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="EXPLORE THE CHINESE HOROSCOPES"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="42sp"
+            app:fontFamily="@font/poppins_regular"
+            app:layout_constraintBottom_toBottomOf="@id/cl_second"
+            app:layout_constraintEnd_toEndOf="@id/cl_second"
+            app:layout_constraintStart_toStartOf="@id/cl_second"
+            app:layout_constraintTop_toTopOf="@id/cl_second" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,7 +1,10 @@
 package com.eray.horoscopeapp.model
 
+import android.os.Parcelable
 import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Horoscope(
     val id: Long?,
     val name: String?,
@@ -11,7 +14,7 @@ data class Horoscope(
     val description: String? = null,
     val loveOverall: String? = null,
     val luckyNumbers: String? = null
-) {
+) : Parcelable {
     object Mapper {
         fun toList(qs: QuerySnapshot?) =
             qs?.documents?.map {

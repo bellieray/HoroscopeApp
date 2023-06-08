@@ -1,6 +1,5 @@
 package com.eray.horoscopeapp.ui.match.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -38,12 +37,14 @@ class OtherHoroscopeDialogAdapter(val callback: (OtherHoroscope) -> Unit) :
         )
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun changeBadgeChecked(id: Long?) {
-        this.currentList.map { item ->
-            item.isChecked = item.horoscope.id == id
+        this.currentList.forEachIndexed { index, item ->
+            val newState = item.horoscope.id == id
+            if (newState != item.isChecked) {
+                item.isChecked = newState
+                notifyItemChanged(index)
+            }
         }
-        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

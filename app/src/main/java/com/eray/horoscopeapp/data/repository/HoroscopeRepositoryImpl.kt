@@ -21,12 +21,18 @@ class HoroscopeRepositoryImpl @Inject constructor(
 
     override suspend fun getHoroscopes(): Result<List<Horoscope>?> =
         suspendCoroutine { cont ->
+            var isResumed = false // Flag to track if the coroutine has been resumed
+
             horoscopeRef.orderBy("id", Query.Direction.ASCENDING)
                 .addSnapshotListener { value, error ->
-                    if (error == null)
-                        cont.resume(Result.Success(Horoscope.Mapper.toList(value)))
-                    else
-                        cont.resume(Result.Failed(error))
+                    if (!isResumed) { // Check if the coroutine has already been resumed
+                        if (error == null)
+                            cont.resume(Result.Success(Horoscope.Mapper.toList(value)))
+                        else
+                            cont.resume(Result.Failed(error))
+
+                        isResumed = true // Set the flag to true after resuming the coroutine
+                    }
                 }
         }
 
