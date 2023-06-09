@@ -39,6 +39,12 @@
         <action
             android:id="@+id/action_homeFragment_to_calculateRisingSignFragment"
             app:destination="@id/calculateRisingSignFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_calculateMoonSignFragment"
+            app:destination="@id/calculateMoonSignFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_calculateSunSignFragment"
+            app:destination="@id/calculateSunSignFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -123,8 +129,12 @@
         android:label="NameFortuneFragment" />
     <fragment
         android:id="@+id/calculateRisingSignFragment"
-        android:name="com.eray.horoscopeapp.ui.risingsign.CalculateRisingSignFragment"
-        android:label="CalculateRisingSignFragment" />
+        android:name="com.eray.horoscopeapp.ui.calculatesign.CalculateRisingSignFragment"
+        android:label="CalculateRisingSignFragment">
+        <action
+            android:id="@+id/action_calculateRisingSignFragment_to_horoscopeDetailFragment"
+            app:destination="@id/horoscopeDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/horoscopeList"
         android:name="com.eray.horoscopeapp.ui.base_horoscope_list.HoroscopeList"
@@ -143,11 +153,27 @@
         android:label="HoroscopeDetailFragment">
         <argument
             android:name="horoscope"
-            app:nullable="true"
-            app:argType="com.eray.horoscopeapp.model.Horoscope" />
+            app:argType="com.eray.horoscopeapp.model.Horoscope"
+            app:nullable="true" />
         <argument
             android:name="hideBottomNav"
             android:defaultValue="true"
             app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculateMoonSignFragment"
+        android:name="com.eray.horoscopeapp.ui.calculatesign.CalculateMoonSignFragment"
+        android:label="CalculateMoonSignFragment">
+        <action
+            android:id="@+id/action_calculateMoonSignFragment_to_horoscopeDetailFragment"
+            app:destination="@id/horoscopeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculateSunSignFragment"
+        android:name="com.eray.horoscopeapp.ui.calculatesign.CalculateSunSignFragment"
+        android:label="CalculateSunSignFragment" >
+        <action
+            android:id="@+id/action_calculateSunSignFragment_to_horoscopeDetailFragment"
+            app:destination="@id/horoscopeDetailFragment" />
     </fragment>
 </navigation>

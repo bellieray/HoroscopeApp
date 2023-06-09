@@ -1,10 +1,9 @@
-package com.eray.horoscopeapp.ui.risingsign
+package com.eray.horoscopeapp.ui.base
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
@@ -13,19 +12,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentCalculateRisingSignBinding
-import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.ui.calculatesign.CalculateSignViewModel
 import com.eray.horoscopeapp.util.*
-import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.material.R
 import kotlinx.coroutines.launch
 import java.util.*
 
-@AndroidEntryPoint
-class CalculateRisingSignFragment : BaseFragment<FragmentCalculateRisingSignBinding>(), OnTimeSetListener {
+abstract class BaseCalculateSignFragment :BaseFragment<FragmentCalculateRisingSignBinding>(),
+    TimePickerDialog.OnTimeSetListener {
 
-    private val calculateSignViewModel by viewModels<CalculateSignViewModel>()
+    protected val calculateSignViewModel by viewModels<CalculateSignViewModel>()
 
     private var datePickerDialog: DatePickerDialog? = null
     private var timePickerDialog: TimePickerDialog? = null
@@ -67,20 +64,18 @@ class CalculateRisingSignFragment : BaseFragment<FragmentCalculateRisingSignBind
                 showTimePickerDialog()
             }
             btnCalculate.setOnClickListener {
-                val birthTime = etUserBirthTime.text.toString()
-                calculateSignViewModel.convertDateToHoroscope()
-                horoscopeList.find {
-                    it.id?.toInt() == calculateSignViewModel.viewState.value.userHoroscopeId
-                    //it.name == etBirthdateUserBirthday.text.toString().checkHoroscope().first
+                if (StringUtils.checkInformation(
+                        etBirthdateUserBirthday.text.toString(),
+                        etUserBirthTime.text.toString()
+                    )
+                ) {
+                    doOnCalculateClicked()
+                } else {
+                    DialogUtils.showCustomAlert(
+                        requireActivity(),
+                        textRes = com.eray.horoscopeapp.R.string.please_fill_the_all_blanks
+                    )
                 }
-                    ?.let { horoscope ->
-                        DialogUtils.showResultDialog(
-                            requireActivity(),
-                            null,
-                            birthTime.checkRisingHoroscope(horoscope).name,
-                            "See Detail"
-                        ) { findNavController().popBackStack() }
-                    }
             }
         }
     }
@@ -93,7 +88,7 @@ class CalculateRisingSignFragment : BaseFragment<FragmentCalculateRisingSignBind
         }
         datePickerDialog = DatePickerDialog(
             requireContext(),
-            com.google.android.material.R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Picker_Date_Spinner,
+            R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Picker_Date_Spinner,
             null,
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -144,7 +139,7 @@ class CalculateRisingSignFragment : BaseFragment<FragmentCalculateRisingSignBind
         timePickerDialog?.show()
     }
 
-    override fun getFragmentView(): Int = R.layout.fragment_calculate_rising_sign
+    override fun getFragmentView(): Int = com.eray.horoscopeapp.R.layout.fragment_calculate_rising_sign
     override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
         calendar.apply {
             set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -152,4 +147,6 @@ class CalculateRisingSignFragment : BaseFragment<FragmentCalculateRisingSignBind
         }
         calculateSignViewModel.onBirthTimeSelected(calendar.timeInMillis)
     }
+
+    abstract fun doOnCalculateClicked()
 }

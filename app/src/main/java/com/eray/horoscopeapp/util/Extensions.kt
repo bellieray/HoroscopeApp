@@ -1,8 +1,5 @@
 package com.eray.horoscopeapp.util
 
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.navigation.NavController
@@ -11,11 +8,10 @@ import androidx.navigation.NavOptions
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.ui.profile.adapter.UserHoroscopeProperties
+import com.eray.horoscopeapp.util.StringUtils.horoscopesWithId
 import java.util.*
 
 private const val PATTERN = "MMM/dd"
@@ -87,13 +83,6 @@ fun ImageView.loadImage(url: String?) {
     imageLoader.enqueue(request)
 }
 
-@BindingAdapter("load")
-fun load(imageView: ImageView, url: String){
-    Glide.with(imageView.context)
-        .load(url)
-        .into(imageView)
-}
-
 fun String.checkHoroscopeProperties(): UserHoroscopeProperties {
     return when (this) {
         "Aries" -> UserHoroscopeProperties(
@@ -148,84 +137,78 @@ fun String.checkHoroscopeProperties(): UserHoroscopeProperties {
 }
 
 val horoscopeList = mutableListOf(
-    Horoscope(1, "Aries", "", ""),
-    Horoscope(2, "Taurus", "", ""),
-    Horoscope(3, "Gemini", "", ""),
-    Horoscope(4, "Cancer", "", ""),
-    Horoscope(5, "Leo", "", ""),
-    Horoscope(6, "Virgo", "", ""),
-    Horoscope(7, "Libra", "", ""),
-    Horoscope(8, "Scorpio", "", ""),
-    Horoscope(9, "Sagittarius", "", ""),
-    Horoscope(10, "Capricorn", "", ""),
-    Horoscope(11, "Aquarius", "", ""),
-    Horoscope(12, "Pisces", "", "")
+    Horoscope(7, "Aries", "", ""),
+    Horoscope(5, "Taurus", "", ""),
+    Horoscope(6, "Gemini", "", ""),
+    Horoscope(12, "Cancer", "", ""),
+    Horoscope(1, "Leo", "", ""),
+    Horoscope(4, "Virgo", "", ""),
+    Horoscope(10, "Libra", "", ""),
+    Horoscope(2, "Scorpio", "", ""),
+    Horoscope(11, "Sagittarius", "", ""),
+    Horoscope(9, "Capricorn", "", ""),
+    Horoscope(8, "Aquarius", "", ""),
+    Horoscope(3, "Pisces", "", "")
 )
 
-fun String.checkRisingHoroscope(horoscope: Horoscope): Horoscope {
+fun String.checkRisingHoroscope(horoscope: Horoscope): Int? {
     return when {
-        this.substring(0, 2) == "05" || this.substring(0, 2) == "06" -> horoscope
+        this.substring(0, 2) == "05" || this.substring(0, 2) == "06" -> horoscopesWithId[horoscope.name]
         this.substring(0, 2) == "07" || this.substring(0, 2) == "08" -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[0]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 1]
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 1].name]
+            else horoscopesWithId[horoscopeList[0].name]
         }
         this.substring(0, 2) == "09" || this.substring(0, 2) == "10" -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[1]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 2]
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 2].name]
+            else horoscopesWithId[horoscopeList[1].name]
         }
-        this.substring(0, 2)
-            .toInt() in 11..12 -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[3]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 3]
+        this.substring(0, 2).toInt() in 11..12 -> {
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 3].name]
+            else horoscopesWithId[horoscopeList[2].name]
         }
-        this.substring(0, 2)
-            .toInt() in 13..14 -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[4]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 4]
+        this.substring(0, 2).toInt() in 13..14 -> {
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 4].name]
+            else horoscopesWithId[horoscopeList[3].name]
         }
-        this.substring(0, 2)
-            .toInt() in 15..16 -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[5]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 5]
+        this.substring(0, 2).toInt() in 15..16 -> {
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 5].name]
+            else horoscopesWithId[horoscopeList[4].name]
         }
-        this.substring(0, 2)
-            .toInt() in 17..18 -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[6]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 6]
+        this.substring(0, 2).toInt() in 17..18 -> {
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 6].name]
+            else horoscopesWithId[horoscopeList[5].name]
         }
-        this.substring(0, 2)
-            .toInt() in 19..20 -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[7]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 7]
+        this.substring(0, 2).toInt() in 19..20 -> {
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 7].name]
+            else horoscopesWithId[horoscopeList[6].name]
         }
-        this.substring(0, 2)
-            .toInt() in 21..22 -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[8]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 8]
+        this.substring(0, 2).toInt() in 21..22 -> {
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 8].name]
+            else horoscopesWithId[horoscopeList[7].name]
         }
         this.substring(0, 2).toInt() == 23 || this.substring(0, 2) == "00" -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[9]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 9]
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 9].name]
+            else horoscopesWithId[horoscopeList[8].name]
         }
         this.substring(0, 2) == "01" || this.substring(0, 2) == "02" -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[10]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 10]
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 10].name]
+            else horoscopesWithId[horoscopeList[9].name]
         }
         this.substring(0, 2) == "03" || this.substring(0, 2) == "04" -> {
-            if (horoscopeList.indexOf(horoscope) != horoscopeList.size - 1) horoscopeList[11]
-            else horoscopeList[horoscopeList.indexOf(horoscope) + 11]
+            if (horoscopeList.indexOf(horoscope) == horoscopeList.size - 1)
+                horoscopesWithId[horoscopeList[horoscopeList.indexOf(horoscope) + 11].name]
+            else horoscopesWithId[horoscopeList[10].name]
         }
         else -> throw Exception("")
     }
-}
-
-fun View.expandAnimation() {
-    val anim = ScaleAnimation(
-        0.0f, 1.0f,
-        0.0f, 1.0f,
-        Animation.RELATIVE_TO_SELF, 0.5f,
-        Animation.RELATIVE_TO_SELF, 0.5f
-    )
-    anim.duration = 500
-    startAnimation(anim)
 }

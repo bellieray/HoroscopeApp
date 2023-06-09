@@ -21,14 +21,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val homeItemList = mutableListOf(
-            HomeItem(HomeItemTitle.TAROT.ordinal, BG_TAROT, getString(R.string.tarot)),
-            HomeItem(HomeItemTitle.SUN_SIGN.ordinal, BG_SUN_SIGN, getString(R.string.sun_sign)),
-            HomeItem(HomeItemTitle.MOON_SIGN.ordinal, BG_MOON_SIGN, getString(R.string.moon_sing)),
+            //HomeItem(HomeItemTitle.TAROT.ordinal, BG_TAROT, getString(R.string.tarot)),
             HomeItem(
                 HomeItemTitle.RISING_SIGN.ordinal,
                 BG_RISING_SIGN,
                 getString(R.string.rising_sign)
             ),
+            HomeItem(HomeItemTitle.MOON_SIGN.ordinal, BG_MOON_SIGN, getString(R.string.moon_sing)),
+            HomeItem(HomeItemTitle.SUN_SIGN.ordinal, BG_SUN_SIGN, getString(R.string.sun_sign)),
             HomeItem(
                 HomeItemTitle.NAME_FORTUNE.ordinal,
                 BG_NAME_FORTUNE,
@@ -53,14 +53,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
     override fun onItemClicked(homeItem: HomeItem) {
         findNavController().navigate(
             when (homeItem.id) {
-                HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
-                HomeItemTitle.MOON_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
-                HomeItemTitle.SUN_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
+                //HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
+                HomeItemTitle.MOON_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateMoonSignFragment()
+                HomeItemTitle.SUN_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateSunSignFragment()
                 HomeItemTitle.RISING_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateRisingSignFragment()
                 HomeItemTitle.NAME_FORTUNE.ordinal -> HomeFragmentDirections.actionHomeFragmentToNameFortuneFragment()
                 else -> HomeFragmentDirections.actionHomeFragmentToProfileFragment2()
             }
         )
-        Toast.makeText(requireContext(), homeItem.title, Toast.LENGTH_SHORT).show()
     }
 }

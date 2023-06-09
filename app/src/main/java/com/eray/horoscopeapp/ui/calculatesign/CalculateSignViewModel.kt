@@ -1,11 +1,10 @@
-package com.eray.horoscopeapp.ui.risingsign
+package com.eray.horoscopeapp.ui.calculatesign
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.model.Result
-import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
 import com.eray.horoscopeapp.util.getHoroscopeIdFromDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +32,6 @@ class CalculateSignViewModel @Inject constructor(private val horoscopeRepository
                     _viewState.update { state ->
                         state.copy(horoscopeList = response.data)
                     }
-                    //_viewState.value.userHoroscopeId?.let { filterHoroscopeListById(it) }
                 }
                 else -> {}
             }
@@ -44,7 +42,7 @@ class CalculateSignViewModel @Inject constructor(private val horoscopeRepository
         _viewState.value.horoscopeList?.let {
             it.find { it.id == horoscopeId.toLong() }.apply {
                 _viewState.update { state ->
-                    state.copy(userHoroscopeId = this?.id?.toInt())
+                    state.copy(userHoroscopeId = this?.id?.toInt(), userHoroscope = this)
                 }
             }
         }
@@ -78,5 +76,6 @@ data class CalculateSignViewState(
     val userBirthDateString: String? = null,
     val userBirthTime: Long? = null,
     val userHoroscopeId: Int? = null,
-    val horoscopeList: List<Horoscope>? = null,
+    val userHoroscope: Horoscope? = null,
+    val horoscopeList: List<Horoscope>? = null
 )

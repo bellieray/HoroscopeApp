@@ -28,24 +28,24 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="30dp"
-            app:tabIndicatorGravity="stretch"
-            app:tabIndicatorColor="#9A49EC"
             android:background="@drawable/bg_bottom_nav_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="#9A49EC"
+            app:tabIndicatorGravity="stretch"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@color/selector_dark_to_white">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="kendi" />
+                android:text="@string/single" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="uyum" />
+                android:text="@string/match" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_regular"
                     android:letterSpacing="0.14"
-                    android:text="Your Name"
+                    android:text="@string/your_name"
                     android:textAllCaps="true"
                     android:textColor="#9997FF"
                     android:textSize="14sp"
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_regular"
                     android:letterSpacing="0.14"
-                    android:text="Partner Name"
+                    android:text="@string/partner_name"
                     android:textAllCaps="true"
                     android:textColor="#9997FF"
                     android:textSize="14sp"
@@ -153,7 +153,7 @@
             android:background="@drawable/bg_personal_detail_button"
             android:fontFamily="@font/poppins_regular"
             android:padding="5dp"
-            android:text="Calculate"
+            android:text="@string/calculate"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textCursorDrawable="@null"

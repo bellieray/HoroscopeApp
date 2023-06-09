@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#1C1A35"
-        tools:context=".ui.risingsign.CalculateRisingSignFragment">
+        android:paddingVertical="20dp"
+        tools:context=".ui.calculatesign.CalculateRisingSignFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_date_of_birth"
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_regular"
                 android:letterSpacing="0.14"
-                android:text="Date Of Birth"
+                android:text="@string/date_of_birth"
                 android:textAllCaps="true"
                 android:textColor="#9997FF"
                 android:textSize="14sp"
@@ -61,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_regular"
                 android:letterSpacing="0.14"
-                android:text="Time Of Birth"
+                android:text="@string/time_of_birth"
                 android:textAllCaps="true"
                 android:textColor="#9997FF"
                 android:textSize="14sp"
@@ -93,7 +94,7 @@
             android:background="@drawable/bg_personal_detail_button"
             android:fontFamily="@font/poppins_regular"
             android:padding="5dp"
-            android:text="Calculate"
+            android:text="@string/calculate"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textCursorDrawable="@null"

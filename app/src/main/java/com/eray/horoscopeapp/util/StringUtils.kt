@@ -1,5 +1,9 @@
 package com.eray.horoscopeapp.util
 
+import android.annotation.SuppressLint
+import java.text.SimpleDateFormat
+import java.util.*
+
 object StringUtils {
     fun checkInformation(vararg texts: String): Boolean {
         return texts.all { it.isBlank().not() && it.isNotEmpty() }
@@ -118,6 +122,74 @@ object StringUtils {
         } else {
             if (newCharCount.size == 1) newCharCount[0].toString()
             else newCharCount[0].toString() + newCharCount[1].toString()
+        }
+    }
+
+    private val signWithDegrees = mapOf(
+        30 to 7, 60 to 5, 90 to 6, 120 to 12, 150 to 1, 180 to 4,
+        210 to 10, 240 to 2, 270 to 11, 300 to 9, 330 to 8, 360 to 3
+    )
+
+    @SuppressLint("SimpleDateFormat")
+    fun calculateMoonSign(birthDate: String, birthTime: String): Int {
+        val format = SimpleDateFormat("dd / mm / yyyy HH : mm")
+        val date = format.parse("$birthDate $birthTime")
+        val calendar = Calendar.getInstance()
+        date?.let {
+            calendar.time = it
+        }
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val a = (14 - month) / 12
+        val y = year + 4800 - a
+        val m = month + 12 * a - 3
+        val jd = day + ((153 * m + 2) / 5) + (365 * y) + (y / 4) - 32083
+        val daysSinceJ2000 = jd - 2451550.1
+        val moonLongitude = (218.316 + 13.176396 * daysSinceJ2000) % 360
+        var moonSign: Int? = null
+        for(i in signWithDegrees.entries){
+            if (moonLongitude < i.key) {
+                moonSign = i.value
+                break
+            }
+        }
+        return moonSign ?: signWithDegrees.values.last()
+    }
+
+    val horoscopesWithId = mapOf(
+        "Aries" to 7, "Taurus" to 5, "Gemini" to 6, "Cancer" to 12, "Leo" to 1, "Virgo" to 4,
+        "Libra" to 10, "Scorpio" to 2, "Sagittarius" to 11, "Capricorn" to 9, "Aquarius" to 8, "Pisces" to 3
+    )
+    private val zodiacSigns = listOf(
+        "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+        "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+    )
+    val cutoffDates = listOf(
+        "03-21", "04-20", "05-21", "06-21", "07-23", "08-23",
+        "09-23", "10-23", "11-22", "12-22", "01-20", "02-19"
+    )
+
+    @SuppressLint("SimpleDateFormat")
+    fun calculateSunSign(birthDate: String, birthTime: String): Int? {
+        val format = SimpleDateFormat("dd / mm / yyyy HH : mm")
+        val dateTime = format.parse("$birthDate $birthTime")
+        val calendar = Calendar.getInstance()
+        dateTime?.let {
+            calendar.time = it
+        }
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val cutoffDate = "${cutoffDates[month - 1]}-${calendar.get(Calendar.YEAR)}"
+        val cutoffFormat = SimpleDateFormat("MM-dd-yyyy")
+        val cutoff = cutoffFormat.parse(cutoffDate)
+        return if (dateTime.before(cutoff)) {
+            // Use the zodiac sign of the previous month
+            val previousMonth = if (month == 1) 12 else month - 1
+            horoscopesWithId[zodiacSigns[previousMonth - 1]]
+        } else {
+            // Use the zodiac sign of the current month
+            horoscopesWithId[zodiacSigns[month - 1]]
         }
     }
 }

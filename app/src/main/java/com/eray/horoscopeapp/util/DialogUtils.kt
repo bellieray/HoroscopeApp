@@ -36,6 +36,7 @@ object DialogUtils {
     @SuppressLint("MissingInflatedId")
     fun showResultDialog(
         activity: Activity?,
+        iconUrl: String?,
         title: String?,
         message: String?,
         buttonText: String?,
@@ -48,6 +49,8 @@ object DialogUtils {
                 val binding = DialogResultBinding.bind(dialogView)
                 dialogBuilder.setView(dialogView)
                 with(binding) {
+                    if(iconUrl.isNullOrEmpty()) ivResult.visibility = View.GONE
+                    else imageUrl = iconUrl
                     if (title.isNullOrEmpty()) tvResultTitle.visibility = View.GONE
                     else tvResultTitle.text = title
                     tvResult.text = message
