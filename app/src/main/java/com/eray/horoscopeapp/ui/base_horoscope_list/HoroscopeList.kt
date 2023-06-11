@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeListBinding
 import com.eray.horoscopeapp.model.Horoscope
@@ -19,11 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class HoroscopeList : BaseFragment<FragmentHoroscopeListBinding>(), HoroscopeListener {
     val adapter = HoroscopeAdapter(this)
     private val horoscopeViewModel by activityViewModels<HoroscopeViewModel>()
+    private val horoscopeArgs: HoroscopeListArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
-        horoscopeViewModel.fetchHoroscopes()
+        if (horoscopeArgs.isChinese) horoscopeViewModel.fetchChineseHoroscopes() else horoscopeViewModel.fetchHoroscopes()
     }
 
     private fun initObservers() {
@@ -41,13 +43,14 @@ class HoroscopeList : BaseFragment<FragmentHoroscopeListBinding>(), HoroscopeLis
         binding.btnHoroscopeList.setOnClickListener {
             findNavController().navigateWithPushAnimation(
                 HoroscopeListDirections.actionHoroscopeListToHoroscopeDetailFragment(
-                    horoscope = horoscopeViewModel.viewState.value.currentHoroscope
+                    horoscope = horoscopeViewModel.viewState.value.horoscopeList?.get(binding.vpHoroscopeList.currentItem)
                 )
             )
         }
         binding.icArrowBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
     }
 
 
@@ -60,7 +63,7 @@ class HoroscopeList : BaseFragment<FragmentHoroscopeListBinding>(), HoroscopeLis
         binding.vpHoroscopeList.currentItem = position - 1
     }
 
-    override fun keepCurrentPosition(horoscope: Horoscope) {
-        horoscopeViewModel.setCurrentPosition(horoscope)
+    override fun keepCurrentPosition(position: Int) {
+        horoscopeViewModel.setCurrentPosition(position)
     }
 }

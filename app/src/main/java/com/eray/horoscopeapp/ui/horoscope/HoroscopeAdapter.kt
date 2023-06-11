@@ -25,7 +25,6 @@ class HoroscopeAdapter(val listener: HoroscopeListener) :
     inner class HoroscopeViewHolder(val binding: ItemHoroscopeWidgetBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Horoscope) {
-            listener.keepCurrentPosition(item)
             binding.horoscope = item
             binding.ivLeft.setOnClickListener {
                 listener.onGoesPreviousItem(adapterPosition)
@@ -58,5 +57,5 @@ class HoroscopeAdapter(val listener: HoroscopeListener) :
 interface HoroscopeListener {
     fun onGoesNextItem(position: Int)
     fun onGoesPreviousItem(position: Int)
-    fun keepCurrentPosition(horoscope: Horoscope)
+    fun keepCurrentPosition(position: Int)
 }

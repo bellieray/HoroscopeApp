@@ -19,7 +19,6 @@ class HoroscopeViewModel @Inject constructor(private val horoscopeRepository: Ho
     val viewState get() = _viewState.asStateFlow()
 
     fun fetchHoroscopes() {
-        if (_viewState.value.horoscopeList != null) return
         viewModelScope.launch {
             when (val response = horoscopeRepository.getHoroscopes()) {
                 is Result.Success -> {
@@ -32,9 +31,22 @@ class HoroscopeViewModel @Inject constructor(private val horoscopeRepository: Ho
         }
     }
 
-    fun setCurrentPosition(horoscope: Horoscope){
+    fun fetchChineseHoroscopes() {
+        viewModelScope.launch {
+            when (val response = horoscopeRepository.getChineseHoroscopes()) {
+                is Result.Success -> {
+                    _viewState.update {
+                        it.copy(horoscopeList = response.data)
+                    }
+                }
+                else -> {}
+            }
+        }
+    }
+
+    fun setCurrentPosition(position: Int) {
         _viewState.update {
-            it.copy(currentHoroscope = horoscope)
+            it.copy(position = position)
         }
     }
 }
@@ -42,5 +54,6 @@ class HoroscopeViewModel @Inject constructor(private val horoscopeRepository: Ho
 data class HoroscopeViewState(
     val horoscopeList: List<Horoscope>? = null,
     val isLoading: Boolean = true,
-    val currentHoroscope: Horoscope? = null
+    val currentHoroscope: Horoscope? = null,
+    val position: Int? = null
 )

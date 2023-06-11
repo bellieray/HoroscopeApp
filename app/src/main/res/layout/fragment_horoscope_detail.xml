@@ -8,6 +8,8 @@
         <variable
             name="horoscope"
             type="com.eray.horoscopeapp.model.Horoscope" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,6 +72,7 @@
             android:text="@{horoscope.day}"
             android:textColor="@android:color/white"
             android:textSize="16sp"
+            android:visibility="@{horoscope.day == null ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_horoscope_name"
@@ -81,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Daily Horoscope"
+            android:text="Monthly Horoscope"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,13 +95,21 @@
             android:id="@+id/tv_horoscope_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_regular"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="6"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="10dp"
             android:text="@{horoscope.description}"
-            android:textColor="@color/white"
+            android:textColor="#99FFFFFF"
+            android:textSize="18sp"
+            app:fontFamily="@font/poppins_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title_daily_horoscope" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title_daily_horoscope"
+            tools:text="@tools:sample/lorem/random" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_business"

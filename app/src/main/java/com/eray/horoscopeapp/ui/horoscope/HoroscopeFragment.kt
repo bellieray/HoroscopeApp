@@ -7,9 +7,11 @@ import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeBinding
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.BackgroundImageConstants.HOROSCOPE_FIRST_BG
+import com.eray.horoscopeapp.util.BackgroundImageConstants.HOROSCOPE_SECOND_BG
 import com.eray.horoscopeapp.util.navigateWithPushAnimation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class HoroscopeFragment : BaseFragment<FragmentHoroscopeBinding>() {
@@ -21,14 +23,21 @@ class HoroscopeFragment : BaseFragment<FragmentHoroscopeBinding>() {
     }
 
     private fun initViews() {
-        binding.firstImageUrl =
-            "https://images.pexels.com/photos/16922371/pexels-photo-16922371/free-photo-of-art-vintage-architecture-travel.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        binding.secondImageUrl =
-            "https://images.pexels.com/photos/6160299/pexels-photo-6160299.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        binding.firstImageUrl = HOROSCOPE_FIRST_BG
+        binding.secondImageUrl = HOROSCOPE_SECOND_BG
         binding.clFirst.setOnClickListener {
-            findNavController().navigateWithPushAnimation(HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeList())
+            findNavController().navigateWithPushAnimation(
+                HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeList(
+                    false
+                )
+            )
         }
         binding.clSecond.setOnClickListener {
+            findNavController().navigateWithPushAnimation(
+                HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeList(
+                    true
+                )
+            )
         }
         binding.executePendingBindings()
     }

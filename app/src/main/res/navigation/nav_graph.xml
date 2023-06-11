@@ -143,6 +143,11 @@
             android:name="hideBottomNav"
             android:defaultValue="true"
             app:argType="boolean" />
+
+        <argument
+            android:name="isChinese"
+            app:argType="boolean" />
+
         <action
             android:id="@+id/action_horoscopeList_to_horoscopeDetailFragment"
             app:destination="@id/horoscopeDetailFragment" />
@@ -171,7 +176,7 @@
     <fragment
         android:id="@+id/calculateSunSignFragment"
         android:name="com.eray.horoscopeapp.ui.calculatesign.CalculateSunSignFragment"
-        android:label="CalculateSunSignFragment" >
+        android:label="CalculateSunSignFragment">
         <action
             android:id="@+id/action_calculateSunSignFragment_to_horoscopeDetailFragment"
             app:destination="@id/horoscopeDetailFragment" />

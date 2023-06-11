@@ -19,14 +19,14 @@ data class Horoscope(
         fun toList(qs: QuerySnapshot?) =
             qs?.documents?.map {
                 Horoscope(
-                    it.get("id") as? Long,
-                    it.get("isim") as? String,
-                    it.get("day") as? String,
-                    it.get("imageUrl") as? String,
-                    it.get("businessOverall") as? String,
-                    it.get("description") as? String,
-                    it.get("loveOverall") as? String,
-                    it.get("luckyNumbers") as? String
+                    id = it.get("id") as? Long,
+                    name = it.get("isim") as? String,
+                    day = it.get("day") as? String,
+                    imageUrl = it.get("imageUrl") as? String,
+                    businessOverall = it.get("businessOverall") as? String,
+                    description = it.get("description") as? String,
+                    loveOverall = it.get("loveOverall") as? String,
+                    luckyNumbers = it.get("luckyNumbers") as? String
                 )
             }
     }

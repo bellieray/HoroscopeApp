@@ -7,6 +7,8 @@ import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.data.repository.HoroscopeRepositoryImpl
 import com.eray.horoscopeapp.data.repository.fortune.FortuneRepository
 import com.eray.horoscopeapp.data.repository.fortune.FortuneRepositoryImpl
+import com.eray.horoscopeapp.util.ChineseHoroscopeReference
+import com.eray.horoscopeapp.util.Constants.CHINESE_HOROSCOPE_EN
 import com.eray.horoscopeapp.util.Constants.HOROSCOPES
 import com.eray.horoscopeapp.util.Constants.MATCHING_HOROSCOPES_EN
 import com.eray.horoscopeapp.util.Constants.NAME_FORTUNE_EN
@@ -45,6 +47,13 @@ object AppModule {
 
     @Singleton
     @Provides
+    @ChineseHoroscopeReference
+    fun provideChineseHoroscopeRef(
+        db: FirebaseFirestore
+    ): CollectionReference = db.collection(CHINESE_HOROSCOPE_EN)
+
+    @Singleton
+    @Provides
     @NameFortuneReference
     fun provideNameFortuneRef(
         db: FirebaseFirestore
@@ -54,8 +63,14 @@ object AppModule {
     @Provides
     fun provideHoroscopeRepository(
         @HoroscopeReference horoscopeReference: CollectionReference,
-        @MatchingHoroscopeReference matchingHoroscopeReference: CollectionReference
-    ): HoroscopeRepository = HoroscopeRepositoryImpl(horoscopeReference, matchingHoroscopeReference)
+        @MatchingHoroscopeReference matchingHoroscopeReference: CollectionReference,
+        @ChineseHoroscopeReference chineseHoroscopeReference: CollectionReference
+    ): HoroscopeRepository =
+        HoroscopeRepositoryImpl(
+            horoscopeReference,
+            matchingHoroscopeReference,
+            chineseHoroscopeReference
+        )
 
     @Singleton
     @Provides

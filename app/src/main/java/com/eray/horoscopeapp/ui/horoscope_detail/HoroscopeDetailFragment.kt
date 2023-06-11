@@ -12,10 +12,13 @@ import com.eray.horoscopeapp.BuildConfig
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeDetailBinding
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.DialogUtils
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
+@AndroidEntryPoint
 class HoroscopeDetailFragment : BaseFragment<FragmentHoroscopeDetailBinding>() {
     private val detailArgs: HoroscopeDetailFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,8 +31,13 @@ class HoroscopeDetailFragment : BaseFragment<FragmentHoroscopeDetailBinding>() {
             sharePage()
         }
 
-        binding.icArrowBack.setOnClickListener {
-            findNavController().popBackStack()
+        binding.tvHoroscopeDescription.setOnClickListener {
+            detailArgs.horoscope?.description?.let { it1 ->
+                DialogUtils.showMatchingDescriptionTextDetailDialog(
+                    requireContext(),
+                    it1
+                )
+            }
         }
     }
 
