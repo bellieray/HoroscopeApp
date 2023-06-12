@@ -76,12 +76,20 @@
         <action
             android:id="@+id/toHomeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="personalDetail"
+            app:argType="com.eray.horoscopeapp.model.PersonalDetail"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.eray.horoscopeapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_userPersonalDetailFragment"
+            app:destination="@id/userPersonalDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/matchFragment"
         android:name="com.eray.horoscopeapp.ui.match.MatchFragment"

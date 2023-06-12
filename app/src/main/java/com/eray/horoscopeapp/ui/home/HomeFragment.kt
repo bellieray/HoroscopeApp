@@ -13,6 +13,7 @@ import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_NAME_FORTUNE
 import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_RISING_SIGN
 import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_SUN_SIGN
 import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_TAROT
+import com.eray.horoscopeapp.util.navigateWithPushAnimation
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
 
@@ -51,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
     override fun getFragmentView(): Int = R.layout.fragment_home
 
     override fun onItemClicked(homeItem: HomeItem) {
-        findNavController().navigate(
+        findNavController().navigateWithPushAnimation(
             when (homeItem.id) {
                 //HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
                 HomeItemTitle.MOON_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateMoonSignFragment()

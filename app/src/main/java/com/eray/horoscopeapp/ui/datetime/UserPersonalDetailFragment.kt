@@ -12,18 +12,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.databinding.FragmentUserPersonalDetailBinding
 import com.eray.horoscopeapp.model.PersonalDetail
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.*
 import com.eray.horoscopeapp.util.Constants.LOGIN_STATE_PREF
 import com.eray.horoscopeapp.util.Constants.USER_INFOS
-import com.eray.horoscopeapp.util.DateUtils
-import com.eray.horoscopeapp.util.DeviceUtils
-import com.eray.horoscopeapp.util.DialogUtils
-import com.eray.horoscopeapp.util.StringUtils
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -37,6 +35,7 @@ private const val DATE_PATTERN = "dd / MM / yyyy"
 class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBinding>() {
     private var datePickerDialog: DatePickerDialog? = null
     private val viewModel by viewModels<UserPersonalDetailViewModel>()
+    private val navArgs: UserPersonalDetailFragmentArgs by navArgs()
 
     @Inject
     lateinit var prefs: Prefs
@@ -49,6 +48,7 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
         val feelings = resources.getStringArray(R.array.feelings)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, feelings)
         binding.etGenderUserBirthday.setAdapter(arrayAdapter)
+        binding.etGenderUserBirthday.setTextWatcher { arrayAdapter.filter.filter(null) }
     }
 
     private fun initObservers() {
@@ -66,6 +66,10 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
 
     private fun initViews() {
         with(binding) {
+            navArgs.personalDetail?.let {
+                personalDetail = it
+            }
+            ivArrowBack.setOnClickListener { findNavController().popBackStack() }
             etBirthdateUserBirthday.setOnClickListener {
                 showBirthDateSelector()
             }
@@ -88,7 +92,11 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
                         )
                         prefs.setSharedBoolean(LOGIN_STATE_PREF, true)
                     }
-                    findNavController().navigate(UserPersonalDetailFragmentDirections.toHomeFragment())
+                    if (navArgs.personalDetail != null) {
+                        findNavController().popBackStack()
+                    } else {
+                        findNavController().navigate(UserPersonalDetailFragmentDirections.toHomeFragment())
+                    }
                     DeviceUtils.closeKeyboard(requireActivity(), binding.root)
                 } else {
                     DialogUtils.showCustomAlert(requireActivity(), textRes = R.string.please_fill_the_all_blanks)

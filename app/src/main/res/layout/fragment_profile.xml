@@ -113,7 +113,7 @@
                     android:background="@drawable/selector_bg_edit_text">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_first_feature"
+                        android:id="@+id/tv_personal_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_settings_white"
@@ -140,7 +140,7 @@
                         android:text="Privacy"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_first_feature" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_personal_details" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_third_feature"

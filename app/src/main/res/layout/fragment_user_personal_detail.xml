@@ -5,6 +5,11 @@
 
     <data>
 
+        <variable
+            name="personalDetail"
+            type="com.eray.horoscopeapp.model.PersonalDetail" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +17,17 @@
         android:layout_height="match_parent"
         android:background="#1C1A35"
         tools:context=".ui.datetime.UserPersonalDetailFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/arrow_left"
+            android:visibility="@{personalDetail != null ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_header_personal_details"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_header_personal_details" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_header_personal_details"
@@ -76,6 +92,7 @@
                     android:maxLines="1"
                     android:paddingVertical="20dp"
                     android:paddingStart="13dp"
+                    android:text="@{personalDetail.name}"
                     android:textColor="@android:color/white"
                     android:textCursorDrawable="@null"
                     android:textSize="14sp"
@@ -114,6 +131,7 @@
                     android:inputType="text"
                     android:paddingVertical="20dp"
                     android:paddingStart="13dp"
+                    android:text="@{personalDetail.birthTime}"
                     android:textColor="@android:color/white"
                     android:textCursorDrawable="@null"
                     android:textSize="14sp"
@@ -143,13 +161,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
+                    app:boxBackgroundColor="#17152C"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
                     android:background="@drawable/selector_bg_edit_text"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Gender"
+                    android:focusable="false"
                     android:paddingVertical="20dp"
                     android:paddingStart="13dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -162,6 +183,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:inputType="none"
+                        android:background="@drawable/selector_bg_edit_text"
+                        android:text="@{personalDetail.gender}"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         tools:text="Happy" />

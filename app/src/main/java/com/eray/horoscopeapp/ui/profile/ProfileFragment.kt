@@ -5,11 +5,13 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentProfileBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.profile.adapter.ProfileAdapter
+import com.eray.horoscopeapp.util.navigateWithPushAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,7 +22,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private val profileViewModel by viewModels<ProfileViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
+        //profileViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
         initViews()
         initObservers()
     }
@@ -29,6 +31,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.vpProfile.adapter = this.adapter
         adapter.submitList(preparePagerList())
         binding.diProfile.attachTo(binding.vpProfile)
+        binding.tvPersonalDetails.setOnClickListener {
+            findNavController().navigateWithPushAnimation(
+                ProfileFragmentDirections.actionProfileFragmentToUserPersonalDetailFragment(
+                    personalDetail = profileViewModel.viewState.value.personalDetail
+                )
+            )
+        }
     }
 
     private fun initObservers() {
@@ -44,6 +53,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             launch {
                 sessionViewModel.viewState.collect {
                     binding.tvUsername.text = it.personalDetail?.name
+                    profileViewModel.setUserInfoModel(it.personalDetail)
                 }
             }
         }

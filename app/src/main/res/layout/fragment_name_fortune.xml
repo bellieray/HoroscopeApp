@@ -19,8 +19,39 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/general_app_color"
-        android:padding="15dp">
+        android:background="@color/general_app_color">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/arrow_left"
+            app:layout_constraintBottom_toBottomOf="@id/tv_header_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_header_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@string/name_fortune"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v_personal_details"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:alpha="0.3"
+            android:background="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_header_title" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_name_fortune"
@@ -31,9 +62,10 @@
             android:background="@drawable/bg_bottom_nav_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="#9A49EC"
-            app:tabIndicatorGravity="stretch"
+            app:layout_constraintTop_toBottomOf="@id/v_personal_details"
+            app:tabIndicatorHeight="0dp"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabBackground="@drawable/selector_name_fortune_tab"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@color/selector_dark_to_white">
 
@@ -149,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="30dp"
+            android:layout_marginVertical="35dp"
             android:background="@drawable/bg_personal_detail_button"
             android:fontFamily="@font/poppins_regular"
             android:padding="5dp"

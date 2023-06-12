@@ -22,11 +22,13 @@ class CalculateMoonSignFragment : BaseCalculateSignFragment() {
             message = null,
             buttonText = requireContext().getString(R.string.show_sign_detail)
         ) {
-            findNavController().navigate(
+            findNavController().navigateWithPushAnimation(
                 CalculateMoonSignFragmentDirections.actionCalculateMoonSignFragmentToHoroscopeDetailFragment(
                     calculateSignViewModel.viewState.value.userHoroscope
                 )
             )
         }
     }
+
+    override fun setPageTitle(): String = getString(R.string.moon_sing)
 }

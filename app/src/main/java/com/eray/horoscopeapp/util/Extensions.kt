@@ -1,5 +1,9 @@
 package com.eray.horoscopeapp.util
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.navigation.NavController
@@ -211,4 +215,15 @@ fun String.checkRisingHoroscope(horoscope: Horoscope): Int? {
         }
         else -> throw Exception("")
     }
+}
+
+fun AutoCompleteTextView.setTextWatcher(doAfterTextChanged: () -> Unit) {
+    val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun afterTextChanged(p0: Editable?) {
+            doAfterTextChanged.invoke()
+        }
+    }
+    addTextChangedListener(textWatcher)
 }

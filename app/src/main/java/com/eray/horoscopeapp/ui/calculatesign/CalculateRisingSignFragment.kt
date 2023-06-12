@@ -23,7 +23,7 @@ class CalculateRisingSignFragment : BaseCalculateSignFragment() {
                     message = null,
                     buttonText = requireContext().getString(R.string.show_sign_detail)
                 ) {
-                    findNavController().navigate(
+                    findNavController().navigateWithPushAnimation(
                         CalculateRisingSignFragmentDirections.actionCalculateRisingSignFragmentToHoroscopeDetailFragment(
                             calculateSignViewModel.viewState.value.userHoroscope
                         )
@@ -31,4 +31,6 @@ class CalculateRisingSignFragment : BaseCalculateSignFragment() {
                 }
             }
     }
+
+    override fun setPageTitle(): String = getString(R.string.rising_sign)
 }

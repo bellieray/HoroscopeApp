@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.databinding.FragmentCalculateRisingSignBinding
 import com.eray.horoscopeapp.ui.calculatesign.CalculateSignViewModel
 import com.eray.horoscopeapp.util.*
@@ -19,7 +20,7 @@ import com.google.android.material.R
 import kotlinx.coroutines.launch
 import java.util.*
 
-abstract class BaseCalculateSignFragment :BaseFragment<FragmentCalculateRisingSignBinding>(),
+abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingSignBinding>(),
     TimePickerDialog.OnTimeSetListener {
 
     protected val calculateSignViewModel by viewModels<CalculateSignViewModel>()
@@ -57,6 +58,7 @@ abstract class BaseCalculateSignFragment :BaseFragment<FragmentCalculateRisingSi
 
     private fun initViews() {
         with(binding) {
+            title = setPageTitle()
             etBirthdateUserBirthday.setOnClickListener {
                 showBirthDateSelector()
             }
@@ -76,6 +78,9 @@ abstract class BaseCalculateSignFragment :BaseFragment<FragmentCalculateRisingSi
                         textRes = com.eray.horoscopeapp.R.string.please_fill_the_all_blanks
                     )
                 }
+            }
+            ivArrowBack.setOnClickListener{
+                findNavController().popBackStack()
             }
         }
     }
@@ -139,7 +144,9 @@ abstract class BaseCalculateSignFragment :BaseFragment<FragmentCalculateRisingSi
         timePickerDialog?.show()
     }
 
-    override fun getFragmentView(): Int = com.eray.horoscopeapp.R.layout.fragment_calculate_rising_sign
+    override fun getFragmentView(): Int =
+        com.eray.horoscopeapp.R.layout.fragment_calculate_rising_sign
+
     override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
         calendar.apply {
             set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -149,4 +156,5 @@ abstract class BaseCalculateSignFragment :BaseFragment<FragmentCalculateRisingSi
     }
 
     abstract fun doOnCalculateClicked()
+    abstract fun setPageTitle(): String
 }
