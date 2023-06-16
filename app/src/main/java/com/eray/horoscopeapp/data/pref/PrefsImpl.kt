@@ -56,4 +56,10 @@ class PrefsImpl @Inject constructor(val context: Context) : Prefs {
             it[booleanPreferencesKey(prefKey)] = prefValue
         }
     }
+
+    override suspend fun clearAll(){
+        context.dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
 }

@@ -10,6 +10,7 @@ import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentSplashBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.navigateWithPushAnimationAndPop
 
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
@@ -26,9 +27,17 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
                 viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-                    sessionViewModel.viewState.collect{
-                        if(it.isLoggedIn == true) findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
-                        else findNavController().navigate(SplashFragmentDirections.toLoginFragment())
+                    sessionViewModel.viewState.collect {
+                        if (it.isLoggedIn == true) findNavController().navigateWithPushAnimationAndPop(
+                            SplashFragmentDirections.actionSplashFragmentToHomeFragment(),
+                            R.id.splashFragment,
+                            isInclusive = true
+                        )
+                        else findNavController().navigateWithPushAnimationAndPop(
+                            SplashFragmentDirections.toLoginFragment(),
+                            R.id.splashFragment,
+                            isInclusive = true
+                        )
                     }
                 }
             }

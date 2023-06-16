@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeListBinding
-import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.horoscope.HoroscopeAdapter
 import com.eray.horoscopeapp.ui.horoscope.HoroscopeListener
@@ -34,6 +33,7 @@ class HoroscopeList : BaseFragment<FragmentHoroscopeListBinding>(), HoroscopeLis
                 viewState.horoscopeList?.let {
                     adapter.submitList(it)
                 }
+                binding.isLoading = viewState.isLoading
             }
         }
     }

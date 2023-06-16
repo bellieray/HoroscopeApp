@@ -8,4 +8,6 @@ interface Prefs {
 
     fun getSharedBoolean(prefKey: String): Flow<Boolean>
     suspend fun setSharedBoolean(prefKey: String, prefValue: Boolean)
+
+    suspend fun clearAll()
 }

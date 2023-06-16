@@ -13,6 +13,7 @@ import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
 import com.eray.horoscopeapp.ui.match.dialog.OtherHoroscopeDialog
 import com.eray.horoscopeapp.util.ConnectionUtils
+import com.eray.horoscopeapp.util.navigateWithPushAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -56,7 +57,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                     matchViewModel.viewState.value.horoscopeFromId?.horoscope?.id?.toInt() ?: 0
                 val secondId =
                     matchViewModel.viewState.value.otherHoroscope?.horoscope?.id?.toInt() ?: 0
-                findNavController().navigate(
+                findNavController().navigateWithPushAnimation(
                     MatchFragmentDirections.actionMatchFragmentToMatchDetailFragment(
                         firstId,
                         secondId

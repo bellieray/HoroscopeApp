@@ -12,11 +12,11 @@ class ProfileInnerAdapter :
     ListAdapter<PageContent, RecyclerView.ViewHolder>(ProfileInnerDiffutil) {
     object ProfileInnerDiffutil : DiffUtil.ItemCallback<PageContent>() {
         override fun areItemsTheSame(oldItem: PageContent, newItem: PageContent): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.title === newItem.title && oldItem.content === newItem.content && oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: PageContent, newItem: PageContent): Boolean {
-            return oldItem.title == newItem.title && oldItem.content == newItem.content
+            return oldItem.title == newItem.title && oldItem.content == newItem.content && oldItem.id == newItem.id
         }
 
     }
@@ -24,8 +24,7 @@ class ProfileInnerAdapter :
     inner class ProfileInnerViewHolder(val binding: RowItemProfileHoroscopeFeatureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: PageContent) {
-            binding.featureProperty.text = model.content
-            binding.featureTitle.text = model.title
+            binding.pageContent = model
             binding.executePendingBindings()
         }
     }

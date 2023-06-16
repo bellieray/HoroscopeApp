@@ -11,6 +11,8 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import coil.ImageLoader
 import coil.decode.SvgDecoder
+import coil.imageLoader
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.model.Horoscope
@@ -26,6 +28,22 @@ fun NavController.navigateWithPushAnimation(directions: NavDirections) {
         .setExitAnim(R.anim.slide_out_left)
         .setPopEnterAnim(R.anim.slide_in_left)
         .setPopExitAnim(R.anim.slide_out_right)
+        .build()
+    navigate(directions, navOptions)
+}
+
+fun NavController.navigateWithPushAnimationAndPop(
+    directions: NavDirections,
+    destinationId: Int,
+    isInclusive: Boolean = false,
+) {
+    val navOptions = NavOptions
+        .Builder()
+        .setEnterAnim(R.anim.slide_in_right)
+        .setExitAnim(R.anim.slide_out_left)
+        .setPopEnterAnim(R.anim.slide_in_left)
+        .setPopExitAnim(R.anim.slide_out_right)
+        .setPopUpTo(destinationId, isInclusive)
         .build()
     navigate(directions, navOptions)
 }
@@ -76,8 +94,14 @@ fun String.getHoroscopeIdFromDate(): Int {
 fun ImageView.loadImage(url: String?) {
 
     val imageLoader = ImageLoader.Builder(this.context)
+        .allowHardware(false) // Disable hardware bitmaps if needed
+        .diskCachePolicy(CachePolicy.DISABLED) // Disable disk cache
+        .memoryCachePolicy(CachePolicy.DISABLED)
         .componentRegistry { add(SvgDecoder(this@loadImage.context)) }
         .build()
+
+    val newLoader = this.context.imageLoader
+    newLoader.memoryCache.clear()
 
     val request = ImageRequest.Builder(this.context)
         .data(url)

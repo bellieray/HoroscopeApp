@@ -7,6 +7,8 @@
         <variable
             name="horoscope"
             type="com.eray.horoscopeapp.model.Horoscope" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,76 +16,84 @@
         android:layout_height="match_parent"
         android:background="@color/app_color">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_horoscope_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Select zodiac sign"
-            android:textColor="@android:color/white"
-            android:textSize="23sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_horoscope_widget"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:paddingHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"
-            app:loadImage="@{horoscope.imageUrl}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_horoscope_title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_horoscope_name"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@{horoscope.name}"
-            android:textColor="@android:color/white"
-            android:textSize="23sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_horoscope_widget" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:alpha="0.6"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@{horoscope.day}"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_horoscope_name" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_horoscope_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Select zodiac sign"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_right"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/ic_arrow_right_white"
-            app:layout_constraintBottom_toBottomOf="@id/tv_horoscope_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_horoscope_name" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_horoscope_widget"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="20dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_horoscope_title"
+                app:loadImage="@{horoscope.imageUrl}" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_left"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:rotation="180"
-            android:src="@drawable/ic_arrow_right_white"
-            app:layout_constraintBottom_toBottomOf="@id/tv_horoscope_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_horoscope_name" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_horoscope_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@{horoscope.name}"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_horoscope_widget" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.6"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@{horoscope.day}"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:visibility="@{horoscope.day == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_horoscope_name" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_arrow_right_white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_horoscope_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_horoscope_name" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_left"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:rotation="180"
+                android:src="@drawable/ic_arrow_right_white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_horoscope_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_horoscope_name" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

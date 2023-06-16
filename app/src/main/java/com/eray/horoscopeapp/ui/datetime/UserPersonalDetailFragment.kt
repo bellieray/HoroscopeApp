@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,6 @@ import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.databinding.FragmentUserPersonalDetailBinding
 import com.eray.horoscopeapp.model.PersonalDetail
-import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.util.*
 import com.eray.horoscopeapp.util.Constants.LOGIN_STATE_PREF
@@ -92,14 +90,18 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
                         )
                         prefs.setSharedBoolean(LOGIN_STATE_PREF, true)
                     }
-                    if (navArgs.personalDetail != null) {
-                        findNavController().popBackStack()
-                    } else {
-                        findNavController().navigate(UserPersonalDetailFragmentDirections.toHomeFragment())
-                    }
+
+                    findNavController().navigateWithPushAnimationAndPop(
+                        UserPersonalDetailFragmentDirections.toHomeFragment(),
+                        R.id.userPersonalDetailFragment,
+                        isInclusive = true
+                    )
                     DeviceUtils.closeKeyboard(requireActivity(), binding.root)
                 } else {
-                    DialogUtils.showCustomAlert(requireActivity(), textRes = R.string.please_fill_the_all_blanks)
+                    DialogUtils.showCustomAlert(
+                        requireActivity(),
+                        textRes = R.string.please_fill_the_all_blanks
+                    )
                 }
 
             }

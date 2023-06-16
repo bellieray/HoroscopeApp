@@ -64,6 +64,7 @@ class MatchDetailViewModel @Inject constructor(
                     _viewState.update {
                         it.copy(isLoading = false)
                     }
+
                     addErrorToList(response.exception)
                 }
             }

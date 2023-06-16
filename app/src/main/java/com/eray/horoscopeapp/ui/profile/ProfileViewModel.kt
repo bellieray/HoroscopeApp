@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.model.PersonalDetail
 import com.eray.horoscopeapp.model.Result
@@ -15,13 +16,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val horoscopeRepository: HoroscopeRepository) : ViewModel() {
+class ProfileViewModel @Inject constructor(private val horoscopeRepository: HoroscopeRepository) :
+    ViewModel() {
 
     private val _viewState = MutableStateFlow(ProfileViewState())
     val viewState = _viewState.asStateFlow()
+
+    @Inject
+    lateinit var prefs: Prefs
+
     init {
         fetchHoroscopes()
     }
+
     fun fetchHoroscopes() {
         if (_viewState.value.horoscopeList != null) return
         viewModelScope.launch {
@@ -38,6 +45,12 @@ class ProfileViewModel @Inject constructor(private val horoscopeRepository: Horo
                 }
                 else -> {}
             }
+        }
+    }
+
+    fun clearAllValues() {
+        viewModelScope.launch {
+            prefs.clearAll()
         }
     }
 
@@ -68,11 +81,20 @@ class ProfileViewModel @Inject constructor(private val horoscopeRepository: Horo
             }
         }
     }
+
+    fun setPagerItemList(pagerItems: List<PagerItem>) {
+        _viewState.update {
+            it.copy(
+                pagerItems = pagerItems
+            )
+        }
+    }
 }
 
 data class ProfileViewState(
     val horoscopeId: Int? = null,
     val personalDetail: PersonalDetail? = null,
     val horoscopeList: List<OtherHoroscope>? = null,
-    val horoscopeFromId: OtherHoroscope? = null
+    val horoscopeFromId: OtherHoroscope? = null,
+    val pagerItems: List<PagerItem>? = null
 )
