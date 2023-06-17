@@ -36,8 +36,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.tvLogout.setOnClickListener {
             profileViewModel.clearAllValues()
             findNavController().navigateWithPushAnimationAndPop(
-                ProfileFragmentDirections.actionProfileFragmentToLoginFragment(),
-                R.id.loginFragment,
+                ProfileFragmentDirections.actionProfileFragmentToLanguageFragment(),
+                R.id.languageFragment,
                 isInclusive = true
             )
         }

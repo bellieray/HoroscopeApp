@@ -10,6 +10,7 @@ import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentSplashBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.navigateWithPushAnimation
 import com.eray.horoscopeapp.util.navigateWithPushAnimationAndPop
 
 
@@ -33,10 +34,19 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                             R.id.splashFragment,
                             isInclusive = true
                         )
-                        else findNavController().navigateWithPushAnimationAndPop(
-                            SplashFragmentDirections.toLoginFragment(),
-                            R.id.splashFragment,
-                            isInclusive = true
+                        else {
+                            if (it.isAppRecreated == false) {
+                                findNavController().navigateWithPushAnimationAndPop(
+                                    SplashFragmentDirections.actionSplashFragmentToLanguageFragment(),
+                                    R.id.splashFragment,
+                                    isInclusive = true
+                                )
+                            }
+
+                        }
+
+                        if (it.isAppRecreated == true && it.isLoggedIn == false) findNavController().navigateWithPushAnimation(
+                            SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                         )
                     }
                 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HoroscopeApp</string>
+    <string name="ok">Tamam</string>
+    <string name="moon_sing">Ay Burcu</string>
+    <string name="sun_sign">Güneş Burcu</string>
+    <string name="rising_sign">Yükselen Burcu</string>
+    <string name="name_fortune">İsim Falı</string>
+    <string name="result">Sonuç</string>
+    <string name="own">Own</string>
+    <string name="single">Tek</string>
+    <string name="calculate">Hesapla</string>
+    <string name="match">Eşleştir</string>
+    <string name="your_name">Adın</string>
+    <string name="cancel">İptal Et</string>
+    <string name="partner_name">Eşinin Adı</string>
+    <string name="show_sign_detail">Burç Detayına Git</string>
+    <string name="date_of_birth">Doğum Tarihin</string>
+    <string name="time_of_birth">Doğum Saatin</string>
+    <string name="login_header_first_part">Hello, this is your personal\n astrologer</string>
+    <string name="login_header_second">AstroScope</string>
+    <string name="business">Kişisel</string>
+    <string name="love">Aşk</string>
+    <string name="love_with_ratio">Aşk-%s</string>
+    <string name="sex_with_ratio">Cinsellik-%s</string>
+    <string name="friendship_with_ratio">Arkadaşlık-%s</string>
+    <string name="numbers_of_the_day">Numbers of the day</string>
+    <string name="please_fill_the_all_blanks">Lütfen Tüm Boşlukları Doldurun</string>
+    <string name="please_check_internet_connection">Internet bağlantınızı kontrol edin</string>
+    <string name="request_time_out">Request time out</string>
+    <string name="explore_the_horoscopes">Burçları Keşfet</string>
+    <string name="save_changes">Kaydet</string>
+</resources>

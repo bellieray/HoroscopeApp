@@ -56,13 +56,16 @@
             android:defaultValue="true"
             app:argType="boolean" />
         <action
-            android:id="@+id/toLoginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/userPersonalDetailFragment"
@@ -90,8 +93,8 @@
             android:id="@+id/action_profileFragment_to_userPersonalDetailFragment"
             app:destination="@id/userPersonalDetailFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_profileFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchFragment"
@@ -191,5 +194,17 @@
         <action
             android:id="@+id/action_calculateSunSignFragment_to_horoscopeDetailFragment"
             app:destination="@id/horoscopeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.eray.horoscopeapp.ui.language.LanguageFragment"
+        android:label="LanguageFragment">
+        <argument
+            android:name="hideBottomNav"
+            android:defaultValue="true"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_languageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

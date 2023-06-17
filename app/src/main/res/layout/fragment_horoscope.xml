@@ -67,7 +67,7 @@
                         android:shadowDx="6"
                         android:shadowDy="5"
                         android:shadowRadius="5"
-                        android:text="EXPLORE THE HOROSCOPES"
+                        android:text="@string/explore_the_horoscopes"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="42sp"

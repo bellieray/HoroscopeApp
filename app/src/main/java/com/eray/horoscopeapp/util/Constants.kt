@@ -7,6 +7,7 @@ object Constants {
     const val NAME_FORTUNE_EN = "NameFortuneEn"
     const val LOGIN_STATE_PREF = "login"
     const val USER_INFOS = "user_info"
+    const val IS_LANGUAGE_ENGLISH = "language_type"
 }
 
 object BackgroundImageConstants {

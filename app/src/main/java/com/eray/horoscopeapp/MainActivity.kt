@@ -1,5 +1,6 @@
 package com.eray.horoscopeapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.eray.horoscopeapp.util.DialogUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
         sessionViewModel.setLoginState()
         sessionViewModel.setUserDetails()
+        sessionViewModel.setLanguage()
+        sessionViewModel.setAppRecreatedFlag()
         if (ConnectionUtils.checkInternetConnection(this).not()) {
             sessionViewModel.setConnectionError(true)
         }
@@ -39,12 +43,36 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sessionViewModel.viewState.collect {
                     if (it.isThereConnectionError) {
-                        DialogUtils.showCustomAlert(this@MainActivity, textRes = R.string.please_check_internet_connection)
+                        DialogUtils.showCustomAlert(
+                            this@MainActivity,
+                            textRes = R.string.please_check_internet_connection
+                        )
                     }
+                    if (it.isEnglish == true) {
+                        updateResources(this@MainActivity, "en")
+                    } else {
+                        if(it.isEnglish == false) updateResources(this@MainActivity, "tr-rT")
+                    }
+
                 }
             }
         }
     }
+
+    private fun updateResources(context: Context, language: String) {
+        val locale = Locale(language)
+    //    Locale.setDefault(locale)
+        val res = this.resources
+        // val config = res.configuration
+        res.configuration.setLocale(locale)
+        resources.updateConfiguration(
+            resources.configuration,
+            resources.displayMetrics
+        )
+        //  config.setLocale(locale)
+       // recreateActivity()
+    }
+
 
     private fun setupNavigation() {
         navHostFragment =
