@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                     if (it.isEnglish == true) {
                         updateResources(this@MainActivity, "en")
                     } else {
-                        if(it.isEnglish == false) updateResources(this@MainActivity, "tr-rT")
+                        if(it.isEnglish == false) updateResources(this@MainActivity, "tr")
                     }
 
                 }
@@ -61,16 +61,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateResources(context: Context, language: String) {
         val locale = Locale(language)
-    //    Locale.setDefault(locale)
-        val res = this.resources
-        // val config = res.configuration
-        res.configuration.setLocale(locale)
+        resources.configuration.setLocale(locale)
         resources.updateConfiguration(
             resources.configuration,
             resources.displayMetrics
         )
-        //  config.setLocale(locale)
-       // recreateActivity()
     }
 
 

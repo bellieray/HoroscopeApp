@@ -52,7 +52,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
                             IS_LANGUAGE_ENGLISH,
                             false
                         )
-                        updateResources("tr-rT")
+                        updateResources("tr")
                     }
 
                     else -> {
@@ -70,15 +70,11 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
 
     private fun updateResources(language: String) {
         val locale = Locale(language)
-  //      Locale.setDefault(locale)
-        val res = this.resources
-       // val config = res.configuration
-        res.configuration.setLocale(locale)
+        resources.configuration.setLocale(locale)
         resources.updateConfiguration(
             resources.configuration,
             resources.displayMetrics
         )
-      //  config.setLocale(locale)
         recreateActivity()
     }
 
