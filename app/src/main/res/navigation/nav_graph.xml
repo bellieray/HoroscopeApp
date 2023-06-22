@@ -136,7 +136,7 @@
     <fragment
         android:id="@+id/tarotFragment"
         android:name="com.eray.horoscopeapp.ui.tarot.TarotFragment"
-        android:label="TarotFragment" >
+        android:label="TarotFragment">
         <action
             android:id="@+id/action_tarotFragment_to_tarotListFragment"
             app:destination="@id/tarotListFragment" />
@@ -214,5 +214,10 @@
     <fragment
         android:id="@+id/tarotListFragment"
         android:name="com.eray.horoscopeapp.ui.tarot.TarotListFragment"
-        android:label="TarotListFragment" />
+        android:label="TarotListFragment">
+        <argument
+            android:name="hideBottomNav"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

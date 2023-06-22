@@ -12,7 +12,18 @@ class TarotListAdapter : RecyclerView.Adapter<TarotListAdapter.TarotViewHolder>(
     inner class TarotViewHolder(val binding: ItemTarotBackBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(tarot: Tarot) {
-
+            binding.root.isSelected = tarot.isSelected
+            binding.root.setOnClickListener {
+                if (!tarot.isSelected && getSelectedItemCount() < 3) {
+                    // Select the item
+                    tarot.isSelected = true
+                    notifyItemChanged(adapterPosition)
+                } else if (tarot.isSelected) {
+                    // Unselect the item and replace it with a new value
+                    tarot.isSelected = false
+                    notifyItemChanged(adapterPosition)
+                }
+            }
         }
     }
 
@@ -23,6 +34,10 @@ class TarotListAdapter : RecyclerView.Adapter<TarotListAdapter.TarotViewHolder>(
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    private fun getSelectedItemCount(): Int {
+        return list.count { it.isSelected }
     }
 
     fun setList(list: List<Tarot>) {
