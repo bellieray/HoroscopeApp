@@ -113,7 +113,7 @@
                         android:shadowDx="3"
                         android:shadowDy="5"
                         android:shadowRadius="5"
-                        android:text="EXPLORE THE CHINESE HOROSCOPES"
+                        android:text="@string/explore_the_chinese_horoscopes"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="42sp"

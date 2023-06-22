@@ -5,24 +5,24 @@
         android:id="@+id/homeFragment"
         android:checked="true"
         android:icon="@drawable/selector_ic_home"
-        android:title="Home"
+        android:title="@string/home"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/horoscopeFragment"
         android:icon="@drawable/selector_ic_horoscope"
-        android:title="Horoscope"
+        android:title="@string/horoscope"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/matchFragment"
         android:icon="@drawable/selector_ic_match"
-        android:title="Match"
+        android:title="@string/match"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/selector_ic_profile"
-        android:title="Profile"
+        android:title="@string/profile"
         app:showAsAction="never" />
 </menu>

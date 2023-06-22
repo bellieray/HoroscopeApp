@@ -2,7 +2,6 @@ package com.eray.horoscopeapp.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHomeBinding
@@ -12,7 +11,6 @@ import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_MOON_SIGN
 import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_NAME_FORTUNE
 import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_RISING_SIGN
 import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_SUN_SIGN
-import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_TAROT
 import com.eray.horoscopeapp.util.navigateWithPushAnimation
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
@@ -34,6 +32,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
                 HomeItemTitle.NAME_FORTUNE.ordinal,
                 BG_NAME_FORTUNE,
                 getString(R.string.name_fortune)
+            ),
+            HomeItem(
+                HomeItemTitle.TAROT.ordinal,
+                BG_NAME_FORTUNE,
+                getString(R.string.tarot)
             )
         )
         binding.rvHome.addItemDecoration(
@@ -59,6 +62,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
                 HomeItemTitle.SUN_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateSunSignFragment()
                 HomeItemTitle.RISING_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateRisingSignFragment()
                 HomeItemTitle.NAME_FORTUNE.ordinal -> HomeFragmentDirections.actionHomeFragmentToNameFortuneFragment()
+                HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
                 else -> HomeFragmentDirections.actionHomeFragmentToProfileFragment2()
             }
         )

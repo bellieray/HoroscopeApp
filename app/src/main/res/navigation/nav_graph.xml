@@ -136,7 +136,11 @@
     <fragment
         android:id="@+id/tarotFragment"
         android:name="com.eray.horoscopeapp.ui.tarot.TarotFragment"
-        android:label="TarotFragment" />
+        android:label="TarotFragment" >
+        <action
+            android:id="@+id/action_tarotFragment_to_tarotListFragment"
+            app:destination="@id/tarotListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nameFortuneFragment"
         android:name="com.eray.horoscopeapp.ui.fortune.NameFortuneFragment"
@@ -207,4 +211,8 @@
             android:id="@+id/action_languageFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tarotListFragment"
+        android:name="com.eray.horoscopeapp.ui.tarot.TarotListFragment"
+        android:label="TarotListFragment" />
 </navigation>

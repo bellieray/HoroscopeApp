@@ -17,3 +17,7 @@ annotation class NameFortuneReference
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ChineseHoroscopeReference
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class TarotReference

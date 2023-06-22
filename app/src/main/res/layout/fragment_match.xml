@@ -2,11 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <variable
             name="player"
             type="com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope" />
+
         <variable
             name="otherPlayer"
             type="com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope" />
@@ -31,9 +33,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_horoscope"
+                loadImage="@{player.horoscope.imageUrl}"
                 android:layout_width="66dp"
                 android:layout_height="66dp"
-                loadImage="@{player.horoscope.imageUrl}"
                 android:layout_marginStart="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Your sign and gender"
+                android:text="@string/your_sign_and_gender"
                 android:textColor="#818C99"
                 android:textSize="13sp"
                 app:fontFamily="@font/poppins_regular"
@@ -91,10 +93,10 @@
                 android:layout_width="66dp"
                 android:layout_height="66dp"
                 android:layout_marginStart="14dp"
-                app:loadImage="@{otherPlayer.horoscope.imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{otherPlayer.horoscope.imageUrl}"
                 tools:src="@tools:sample/avatars" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -102,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Your sign and gender"
+                android:text="@string/partner_sign"
                 android:textColor="#818C99"
                 android:textSize="13sp"
                 app:fontFamily="@font/poppins_regular"
@@ -114,8 +116,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="@android:color/white"
                 android:text="@{otherPlayer.horoscope.name}"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
                 app:fontFamily="@font/poppins_regular"
                 app:layout_constraintStart_toEndOf="@id/iv_horoscope_player"
@@ -146,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="26dp"
-                android:text="Partner Gender"
+                android:text="@string/partner_gender"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:fontFamily="@font/poppins_regular"
@@ -179,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Female"
+                    android:text="@string/woman"
                     android:textColor="@android:color/white"
                     android:textSize="10sp"
                     app:fontFamily="@font/poppins_regular"
@@ -214,7 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Male"
+                    android:text="@string/man"
                     android:textColor="@android:color/white"
                     android:textSize="10sp"
                     app:fontFamily="@font/poppins_regular"
@@ -234,7 +236,7 @@
             android:layout_marginTop="55dp"
             android:background="@drawable/bg_personal_detail_button"
             android:fontFamily="@font/poppins_regular"
-            android:text="Check compatibility "
+            android:text="@string/check_compatibility"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp"

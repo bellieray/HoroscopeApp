@@ -2,10 +2,12 @@ package com.eray.horoscopeapp.data.repository
 
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.model.Result
+import com.eray.horoscopeapp.model.Tarot
 import com.eray.horoscopeapp.ui.match_detail.HoroscopeMatchItem
 import com.eray.horoscopeapp.util.ChineseHoroscopeReference
 import com.eray.horoscopeapp.util.HoroscopeReference
 import com.eray.horoscopeapp.util.MatchingHoroscopeReference
+import com.eray.horoscopeapp.util.TarotReference
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import java.io.IOException
@@ -16,7 +18,8 @@ import kotlin.coroutines.suspendCoroutine
 class HoroscopeRepositoryImpl @Inject constructor(
     @HoroscopeReference val horoscopeRef: CollectionReference,
     @MatchingHoroscopeReference val matchingHoroscopeReference: CollectionReference,
-    @ChineseHoroscopeReference val chineseHoroscopeReference: CollectionReference
+    @ChineseHoroscopeReference val chineseHoroscopeReference: CollectionReference,
+    @TarotReference val tarotReference: CollectionReference
 ) :
     HoroscopeRepository {
 
@@ -79,6 +82,22 @@ class HoroscopeRepositoryImpl @Inject constructor(
                     if (!isResumed) { // Check if the coroutine has already been resumed
                         if (error == null)
                             cont.resume(Result.Success(Horoscope.Mapper.toList(value)))
+                        else
+                            cont.resume(Result.Failed(error))
+
+                        isResumed = true // Set the flag to true after resuming the coroutine
+                    }
+                }
+        }
+
+    override suspend fun getTarots(): Result<List<Tarot>?> =
+        suspendCoroutine { cont ->
+            var isResumed = false // Flag to track if the coroutine has been resumed
+            tarotReference.orderBy("id", Query.Direction.ASCENDING)
+                .addSnapshotListener { value, error ->
+                    if (!isResumed) { // Check if the coroutine has already been resumed
+                        if (error == null)
+                            cont.resume(Result.Success(Tarot.Mapper.toTarot(value)))
                         else
                             cont.resume(Result.Failed(error))
 

@@ -6,6 +6,7 @@ object Constants {
     const val CHINESE_HOROSCOPE_EN = "chineseHoroscopesEn"
     const val NAME_FORTUNE_EN = "NameFortuneEn"
     const val LOGIN_STATE_PREF = "login"
+    const val TAROT_TR = "TarotCardsTr"
     const val USER_INFOS = "user_info"
     const val IS_LANGUAGE_ENGLISH = "language_type"
 }

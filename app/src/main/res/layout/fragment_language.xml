@@ -97,7 +97,7 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/bg_personal_detail_button"
             android:fontFamily="@font/poppins_regular"
-            android:text="Choose"
+            android:text="@string/choose"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="14sp"

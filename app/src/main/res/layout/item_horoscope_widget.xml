@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Select zodiac sign"
+                android:text="@string/select_zodiac_sign"
                 android:textColor="@android:color/white"
                 android:textSize="23sp"
                 app:layout_constraintEnd_toEndOf="parent"

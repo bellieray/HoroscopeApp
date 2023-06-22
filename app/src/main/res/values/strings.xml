@@ -33,9 +33,27 @@
     <string name="request_time_out">Request time out</string>
     <string name="explore_the_horoscopes">EXPLORE THE HOROSCOPES</string>
     <string name="save_changes">Save Changes</string>
+    <string name="man">Male</string>
+    <string name="woman">Female</string>
+    <string name="choose">Choose</string>
+    <string name="explore_the_chinese_horoscopes">EXPLORE THE CHINESE HOROSCOPES</string>
+    <string name="monthly_horoscope">Monthly Horoscope</string>
+    <string name="sign_in">Sign In</string>
+    <string name="your_sign_and_gender">Your sign and gender</string>
+    <string name="partner_gender">Partner Gender</string>
+    <string name="select_zodiac_sign">Select zodiac sign</string>
+    <string name="check_compatibility">Check compatibility</string>
+    <string name="name">Name</string>
+    <string name="gender">gender</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="home">Home</string>
+    <string name="horoscope">Horoscope</string>
+    <string name="profile">Profile</string>
+    <string name="partner_sign">Partner Sign</string>
 
     <string-array name="feelings">
-        <item>Erkek</item>
-        <item>Kadın</item>
+        <item>@string/man</item>
+        <item>@string/woman</item>
     </string-array>
 </resources>

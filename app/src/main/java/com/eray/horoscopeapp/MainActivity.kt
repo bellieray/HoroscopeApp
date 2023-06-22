@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.util.ConnectionUtils
 import com.eray.horoscopeapp.util.DialogUtils
+import com.eray.horoscopeapp.util.setStatusBarColor
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setStatusBarColor(R.color.app_color)
         setupNavigation()
         sessionViewModel.setLoginState()
         sessionViewModel.setUserDetails()

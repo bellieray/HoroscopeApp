@@ -1,10 +1,13 @@
 package com.eray.horoscopeapp.util
 
+import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
@@ -14,20 +17,19 @@ import coil.decode.SvgDecoder
 import coil.imageLoader
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.ui.profile.adapter.UserHoroscopeProperties
 import com.eray.horoscopeapp.util.StringUtils.horoscopesWithId
 import java.util.*
 
-private const val PATTERN = "MMM/dd"
+
 fun NavController.navigateWithPushAnimation(directions: NavDirections) {
     val navOptions = NavOptions
         .Builder()
-        .setEnterAnim(R.anim.slide_in_right)
-        .setExitAnim(R.anim.slide_out_left)
-        .setPopEnterAnim(R.anim.slide_in_left)
-        .setPopExitAnim(R.anim.slide_out_right)
+        .setEnterAnim(com.eray.horoscopeapp.R.anim.slide_in_right)
+        .setExitAnim(com.eray.horoscopeapp.R.anim.slide_out_left)
+        .setPopEnterAnim(com.eray.horoscopeapp.R.anim.slide_in_left)
+        .setPopExitAnim(com.eray.horoscopeapp.R.anim.slide_out_right)
         .build()
     navigate(directions, navOptions)
 }
@@ -39,10 +41,10 @@ fun NavController.navigateWithPushAnimationAndPop(
 ) {
     val navOptions = NavOptions
         .Builder()
-        .setEnterAnim(R.anim.slide_in_right)
-        .setExitAnim(R.anim.slide_out_left)
-        .setPopEnterAnim(R.anim.slide_in_left)
-        .setPopExitAnim(R.anim.slide_out_right)
+        .setEnterAnim(com.eray.horoscopeapp.R.anim.slide_in_right)
+        .setExitAnim(com.eray.horoscopeapp.R.anim.slide_out_left)
+        .setPopEnterAnim(com.eray.horoscopeapp.R.anim.slide_in_left)
+        .setPopExitAnim(com.eray.horoscopeapp.R.anim.slide_out_right)
         .setPopUpTo(destinationId, isInclusive)
         .build()
     navigate(directions, navOptions)
@@ -250,4 +252,10 @@ fun AutoCompleteTextView.setTextWatcher(doAfterTextChanged: () -> Unit) {
         }
     }
     addTextChangedListener(textWatcher)
+}
+
+fun Activity.setStatusBarColor(color:Int){
+    val window: Window = this.window
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = ContextCompat.getColor(this, color)
 }

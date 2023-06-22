@@ -27,7 +27,25 @@
     <string name="numbers_of_the_day">Numbers of the day</string>
     <string name="please_fill_the_all_blanks">Lütfen Tüm Boşlukları Doldurun</string>
     <string name="please_check_internet_connection">Internet bağlantınızı kontrol edin</string>
-    <string name="request_time_out">Request time out</string>
+    <string name="request_time_out">Zanman Aşımı</string>
     <string name="explore_the_horoscopes">Burçları Keşfet</string>
     <string name="save_changes">Kaydet</string>
+    <string name="man">Erkek</string>
+    <string name="woman">Kadın</string>
+    <string name="choose">SEÇ</string>
+    <string name="explore_the_chinese_horoscopes">Çin burçlarını keşfet</string>
+    <string name="monthly_horoscope">Aylık burç</string>
+    <string name="sign_in">Giriş Yap</string>
+    <string name="your_sign_and_gender">Burç ve cinsiyetin</string>
+    <string name="partner_gender">Eşinin cinsiyeti</string>
+    <string name="select_zodiac_sign">Görüntülemek istediğin burcu seç</string>
+    <string name="check_compatibility">Uyum Oranını Göster</string>
+    <string name="name">İsim</string>
+    <string name="gender">Cinsiyet</string>
+    <string name="personal_details">Kişisel Bilgiler</string>
+    <string name="log_out">Çıkış Yap</string>
+    <string name="home">Anasayfa</string>
+    <string name="horoscope">Burç</string>
+    <string name="profile">Profil</string>
+    <string name="partner_sign">Eşinin burcu</string>
 </resources>
