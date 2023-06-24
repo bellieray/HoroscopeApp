@@ -48,6 +48,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 )
             )
         }
+
+        binding.tvLanguage.setOnClickListener {
+            findNavController().navigateWithPushAnimation(ProfileFragmentDirections.actionProfileFragmentToLanguageFragment())
+        }
     }
 
     private fun initObservers() {
@@ -101,8 +105,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             add(PageContent(7, "Incompatible Horoscope", horoscope.incompatibleHoroscopes))
             add(
                 PageContent(
-                    8, "Which celebrities has same horoscope",
-                    horoscope.foreignCelebrities
+                    8, "Which celebrities has same horoscope", horoscope.foreignCelebrities
                 )
             )
             // add(PageContent(9, "Renk", horoscope.color))

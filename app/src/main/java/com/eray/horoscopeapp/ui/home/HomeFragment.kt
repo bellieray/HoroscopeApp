@@ -57,12 +57,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
     override fun onItemClicked(homeItem: HomeItem) {
         findNavController().navigateWithPushAnimation(
             when (homeItem.id) {
-                //HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
                 HomeItemTitle.MOON_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateMoonSignFragment()
                 HomeItemTitle.SUN_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateSunSignFragment()
                 HomeItemTitle.RISING_SIGN.ordinal -> HomeFragmentDirections.actionHomeFragmentToCalculateRisingSignFragment()
                 HomeItemTitle.NAME_FORTUNE.ordinal -> HomeFragmentDirections.actionHomeFragmentToNameFortuneFragment()
-                HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotFragment()
+                HomeItemTitle.TAROT.ordinal -> HomeFragmentDirections.actionHomeFragmentToTarotListFragment()
                 else -> HomeFragmentDirections.actionHomeFragmentToProfileFragment2()
             }
         )

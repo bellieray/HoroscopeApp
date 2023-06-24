@@ -31,9 +31,6 @@
             android:id="@+id/action_homeFragment_to_profileFragment2"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_tarotFragment"
-            app:destination="@id/tarotFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_nameFortuneFragment"
             app:destination="@id/nameFortuneFragment" />
         <action
@@ -45,6 +42,9 @@
         <action
             android:id="@+id/action_homeFragment_to_calculateSunSignFragment"
             app:destination="@id/calculateSunSignFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tarotListFragment"
+            app:destination="@id/tarotListFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -137,9 +137,15 @@
         android:id="@+id/tarotFragment"
         android:name="com.eray.horoscopeapp.ui.tarot.TarotFragment"
         android:label="TarotFragment">
-        <action
-            android:id="@+id/action_tarotFragment_to_tarotListFragment"
-            app:destination="@id/tarotListFragment" />
+        <argument
+            android:name="tarotListItem"
+            app:argType="com.eray.horoscopeapp.ui.tarot.TarotList"
+            app:nullable="true" />
+
+        <argument
+            android:name="hideBottomNav"
+            android:defaultValue="true"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/nameFortuneFragment"
@@ -219,5 +225,8 @@
             android:name="hideBottomNav"
             android:defaultValue="true"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_tarotListFragment_to_tarotFragment"
+            app:destination="@id/tarotFragment" />
     </fragment>
 </navigation>
