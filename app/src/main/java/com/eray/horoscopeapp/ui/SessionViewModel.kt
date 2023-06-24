@@ -31,11 +31,6 @@ class SessionViewModel @Inject constructor(private val prefs: Prefs) : ViewModel
         }
     }
 
-    fun setConnectionError(isHasError: Boolean) {
-        _viewState.update {
-            it.copy(isThereConnectionError = isHasError)
-        }
-    }
 
     fun setUserDetails() {
         viewModelScope.launch {
@@ -72,7 +67,6 @@ class SessionViewModel @Inject constructor(private val prefs: Prefs) : ViewModel
 data class SessionViewState(
     val isLoggedIn: Boolean? = null,
     val personalDetail: PersonalDetail? = null,
-    val isThereConnectionError: Boolean = false,
     val isEnglish: Boolean? = null,
     val isAppRecreated: Boolean? = null
 )

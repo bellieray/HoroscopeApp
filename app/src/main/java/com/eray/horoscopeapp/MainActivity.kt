@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.eray.horoscopeapp.ui.SessionViewModel
-import com.eray.horoscopeapp.util.ConnectionUtils
 import com.eray.horoscopeapp.util.DialogUtils
 import com.eray.horoscopeapp.util.setStatusBarColor
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,37 +24,44 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
     private val sessionViewModel by viewModels<SessionViewModel>()
+    private val connectivityViewModel by viewModels<ConnectivityViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setStatusBarColor(R.color.app_color)
         setupNavigation()
+        connectivityViewModel.checkInternetConnection()
         sessionViewModel.setLoginState()
         sessionViewModel.setUserDetails()
         sessionViewModel.setLanguage()
         sessionViewModel.setAppRecreatedFlag()
-        if (ConnectionUtils.checkInternetConnection(this).not()) {
-            sessionViewModel.setConnectionError(true)
-        }
         initObservers()
     }
 
     private fun initObservers() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                sessionViewModel.viewState.collect {
-                    if (it.isThereConnectionError) {
-                        DialogUtils.showCustomAlert(
-                            this@MainActivity,
-                            textRes = R.string.please_check_internet_connection
-                        )
-                    }
-                    if (it.isEnglish == true) {
-                        updateResources(this@MainActivity, "en")
-                    } else {
-                        if(it.isEnglish == false) updateResources(this@MainActivity, "tr")
-                    }
+                launch {
+                    sessionViewModel.viewState.collect {
+                        if (it.isEnglish == true) {
+                            updateResources(this@MainActivity, "en")
+                        } else {
+                            if (it.isEnglish == false) updateResources(this@MainActivity, "tr")
+                        }
 
+                    }
+                }
+
+                launch {
+                    connectivityViewModel.viewState.collect {
+                        it.isConnection?.let {connect ->
+                            if (connect.not())
+                                DialogUtils.showCustomAlert(
+                                    this@MainActivity,
+                                    textRes = R.string.please_check_internet_connection
+                                )
+                        }
+                    }
                 }
             }
         }

@@ -51,7 +51,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         binding.btnCheckCompability.setOnClickListener {
             if (binding.tvHoroscopePlayer.text.isNullOrEmpty()
                     .not() && binding.tvYourHoroscope.text.isNullOrEmpty()
-                    .not() && ConnectionUtils.checkInternetConnection(requireContext())
+                    .not()
             ) {
                 val firstId =
                     matchViewModel.viewState.value.horoscopeFromId?.horoscope?.id?.toInt() ?: 0
