@@ -11,6 +11,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.appodeal.ads.Appodeal
+import com.eray.horoscopeapp.BuildConfig
+import com.appodeal.ads.initializing.ApdInitializationCallback
+import com.appodeal.ads.initializing.ApdInitializationError
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.util.DialogUtils
 import com.eray.horoscopeapp.util.setStatusBarColor
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         sessionViewModel.setLanguage()
         sessionViewModel.setAppRecreatedFlag()
         initObservers()
+        initAppodeal()
     }
 
     private fun initObservers() {
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
                 launch {
                     connectivityViewModel.viewState.collect {
-                        it.isConnection?.let {connect ->
+                        it.isConnection?.let { connect ->
                             if (connect.not())
                                 DialogUtils.showCustomAlert(
                                     this@MainActivity,
@@ -65,6 +70,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+
+    private fun initAppodeal() {
+        Appodeal.initialize(
+            this,
+            BuildConfig.APP_KEY,
+            adTypes = Appodeal.INTERSTITIAL or Appodeal.REWARDED_VIDEO or Appodeal.MREC or Appodeal.NATIVE or Appodeal.INTERSTITIAL or Appodeal.BANNER,
+            object : ApdInitializationCallback { override fun onInitializationFinished(errors: List<ApdInitializationError>?) {}
+            })
     }
 
     private fun updateResources(context: Context, language: String) {

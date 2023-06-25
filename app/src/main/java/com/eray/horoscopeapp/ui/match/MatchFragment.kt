@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.appodeal.ads.Appodeal
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentMatchBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
@@ -66,6 +67,15 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
             } else {
                 handleError(IOException(), requireActivity())
             }
+        }
+        showMrec()
+    }
+
+    private fun showMrec() {
+        Appodeal.setTesting(true)
+        Appodeal.setMrecViewId(R.id.appodealMrecView)
+        if (Appodeal.canShow(Appodeal.MREC, "default")) {
+            Appodeal.show(requireActivity(), Appodeal.MREC, "default")
         }
     }
 
