@@ -1,5 +1,6 @@
 package com.eray.horoscopeapp.ui.home
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -48,7 +49,7 @@ class HomeItemAdapter(private val listener: HomeListener) :
 
 data class HomeItem(
     val id: Int? = null,
-    val backgroundImage: String? = null,
+    val backgroundImage: Drawable? = null,
     val title: String? = null
 )
 

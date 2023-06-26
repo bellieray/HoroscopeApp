@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHomeBinding
@@ -20,23 +21,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val homeItemList = mutableListOf(
-            //HomeItem(HomeItemTitle.TAROT.ordinal, BG_TAROT, getString(R.string.tarot)),
-            HomeItem(
-                HomeItemTitle.RISING_SIGN.ordinal,
-                BG_RISING_SIGN,
-                getString(R.string.rising_sign)
-            ),
-            HomeItem(HomeItemTitle.MOON_SIGN.ordinal, BG_MOON_SIGN, getString(R.string.moon_sing)),
-            HomeItem(HomeItemTitle.SUN_SIGN.ordinal, BG_SUN_SIGN, getString(R.string.sun_sign)),
-            HomeItem(
-                HomeItemTitle.NAME_FORTUNE.ordinal,
-                BG_NAME_FORTUNE,
-                getString(R.string.name_fortune)
-            ),
             HomeItem(
                 HomeItemTitle.TAROT.ordinal,
-                BG_NAME_FORTUNE,
+                ContextCompat.getDrawable(requireContext(), R.drawable.tarot),
                 getString(R.string.tarot)
+            ),
+            HomeItem(
+                HomeItemTitle.RISING_SIGN.ordinal,
+                ContextCompat.getDrawable(requireContext(), R.drawable.rising_sign),
+                getString(R.string.rising_sign)
+            ),
+            HomeItem(
+                HomeItemTitle.MOON_SIGN.ordinal,
+                ContextCompat.getDrawable(requireContext(), R.drawable.moon_sign),
+                getString(R.string.moon_sing)
+            ),
+            HomeItem(
+                HomeItemTitle.SUN_SIGN.ordinal,
+                ContextCompat.getDrawable(requireContext(), R.drawable.sun_sign),
+                getString(R.string.sun_sign)
+            ),
+            HomeItem(
+                HomeItemTitle.NAME_FORTUNE.ordinal,
+                ContextCompat.getDrawable(requireContext(), R.drawable.name_fortune),
+                getString(R.string.name_fortune)
             )
         )
         binding.rvHome.addItemDecoration(

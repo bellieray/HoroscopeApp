@@ -33,7 +33,7 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:alpha="0.5"
-                app:imageUrl="@{homeItem.backgroundImage}"
+                app:imageDrawable="@{homeItem.backgroundImage}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_home_item"
                 app:layout_constraintStart_toStartOf="parent"
