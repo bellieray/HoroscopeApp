@@ -43,7 +43,7 @@ class SessionViewModel @Inject constructor(private val prefs: Prefs) : ViewModel
 
     }
 
-    fun setLanguage() {
+    fun getLanguage() {
         viewModelScope.launch {
             prefs.getSharedBoolean(IS_LANGUAGE_ENGLISH).collect { isEnglish ->
                 _viewState.update {
@@ -52,6 +52,14 @@ class SessionViewModel @Inject constructor(private val prefs: Prefs) : ViewModel
             }
         }
     }
+
+    fun setLanguage(isEnglish: Boolean) {
+        viewModelScope.launch {
+            prefs.setSharedBoolean(IS_LANGUAGE_ENGLISH, isEnglish)
+        }
+    }
+
+
 
     fun setAppRecreatedFlag() {
         viewModelScope.launch {

@@ -23,7 +23,6 @@ class MatchDetailViewModel @Inject constructor(
     val viewState = _viewState.asStateFlow()
 
     init {
-        getMatchingHoroscopeItem()
         getIds()
     }
 
@@ -35,11 +34,11 @@ class MatchDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getMatchingHoroscopeItem() {
+     fun getMatchingHoroscopeItem(isEnglish: Boolean) {
         _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             when (val response =
-                repository.getMatchHoroscopeById(_viewState.value.firstId + _viewState.value.secondId)) {
+                repository.getMatchHoroscopeById(_viewState.value.firstId + _viewState.value.secondId, isEnglish)) {
                 is Result.Success -> {
                     if (response.data?.isEmpty() == true) {
                         _viewState.update {
@@ -49,7 +48,7 @@ class MatchDetailViewModel @Inject constructor(
                                 isLoading = false,
                             )
                         }
-                        getMatchingHoroscopeItem()
+                        getMatchingHoroscopeItem(isEnglish)
                     } else {
                         _viewState.update {
                             it.copy(

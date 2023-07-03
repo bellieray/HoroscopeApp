@@ -8,10 +8,6 @@ import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHomeBinding
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.decorations.BaseVerticalDividerItemDecoration
-import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_MOON_SIGN
-import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_NAME_FORTUNE
-import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_RISING_SIGN
-import com.eray.horoscopeapp.util.BackgroundImageConstants.BG_SUN_SIGN
 import com.eray.horoscopeapp.util.navigateWithPushAnimation
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeListener {

@@ -8,12 +8,14 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.TimePicker
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.databinding.FragmentCalculateRisingSignBinding
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.calculatesign.CalculateSignViewModel
 import com.eray.horoscopeapp.util.*
 import com.google.android.material.R
@@ -24,6 +26,7 @@ abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingS
     TimePickerDialog.OnTimeSetListener {
 
     protected val calculateSignViewModel by viewModels<CalculateSignViewModel>()
+    val sessionViewModel: SessionViewModel by activityViewModels()
 
     private var datePickerDialog: DatePickerDialog? = null
     private var timePickerDialog: TimePickerDialog? = null
@@ -33,6 +36,7 @@ abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingS
         super.onViewCreated(view, savedInstanceState)
         observe()
         initViews()
+        calculateSignViewModel.fetchHoroscopes(sessionViewModel.viewState.value.isEnglish == true)
     }
 
     private fun observe() {
@@ -79,7 +83,7 @@ abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingS
                     )
                 }
             }
-            ivArrowBack.setOnClickListener{
+            ivArrowBack.setOnClickListener {
                 findNavController().popBackStack()
             }
         }

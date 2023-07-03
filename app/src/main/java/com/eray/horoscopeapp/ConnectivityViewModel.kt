@@ -10,14 +10,13 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ConnectivityViewModel @Inject constructor(@ApplicationContext private val mContext: Context) :
+class ConnectivityViewModel @Inject constructor(val application: App) :
     ViewModel() {
     private val _viewState = MutableStateFlow(ConnectivityViewState())
     val viewState = _viewState.asStateFlow()
@@ -26,14 +25,13 @@ class ConnectivityViewModel @Inject constructor(@ApplicationContext private val 
             updateConnectivityState()
         }
     }
-
     init {
         val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        mContext.registerReceiver(connectivityBroadcastReceiver, intentFilter)
+        application.registerReceiver(connectivityBroadcastReceiver, intentFilter)
     }
 
     private val connectivityManager by lazy {
-        mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
 
@@ -71,7 +69,7 @@ class ConnectivityViewModel @Inject constructor(@ApplicationContext private val 
     override fun onCleared() {
         super.onCleared()
         connectivityManager.unregisterNetworkCallback(networkCallback)
-        mContext.unregisterReceiver(connectivityBroadcastReceiver)
+        application.unregisterReceiver(connectivityBroadcastReceiver)
     }
 
 }

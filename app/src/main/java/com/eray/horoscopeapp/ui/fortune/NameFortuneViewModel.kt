@@ -20,9 +20,9 @@ class NameFortuneViewModel @Inject constructor(private val fortuneRepository: Fo
     private val _viewState = MutableStateFlow(NameFortuneViewState())
     val viewState get() = _viewState.asStateFlow()
 
-    fun getNameFortuneResult(id: String) {
+    fun getNameFortuneResult(id: String, isEnglish: Boolean) {
         viewModelScope.launch {
-            when (val response = fortuneRepository.getNameFortuneById(id)) {
+            when (val response = fortuneRepository.getNameFortuneById(id, isEnglish)) {
                 is Result.Success -> {
                     _viewState.update {
                         it.copy(nameFortuneResult = response.data?.firstOrNull())

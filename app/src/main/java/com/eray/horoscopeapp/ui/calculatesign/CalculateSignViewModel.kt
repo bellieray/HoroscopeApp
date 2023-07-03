@@ -20,14 +20,10 @@ class CalculateSignViewModel @Inject constructor(private val horoscopeRepository
     private var _viewState = MutableStateFlow(CalculateSignViewState())
     val viewState: StateFlow<CalculateSignViewState> = _viewState
 
-    init {
-        fetchHoroscopes()
-    }
-
-    private fun fetchHoroscopes() {
+    fun fetchHoroscopes(isEnglish: Boolean) {
         if (_viewState.value.horoscopeList != null) return
         viewModelScope.launch {
-            when (val response = horoscopeRepository.getHoroscopes()) {
+            when (val response = horoscopeRepository.getHoroscopes(isEnglish)) {
                 is Result.Success -> {
                     _viewState.update { state ->
                         state.copy(horoscopeList = response.data)

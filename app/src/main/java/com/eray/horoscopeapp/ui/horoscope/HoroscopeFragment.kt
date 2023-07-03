@@ -2,10 +2,12 @@ package com.eray.horoscopeapp.ui.horoscope
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeBinding
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.util.BackgroundImageConstants.HOROSCOPE_FIRST_BG
 import com.eray.horoscopeapp.util.BackgroundImageConstants.HOROSCOPE_SECOND_BG
@@ -16,10 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HoroscopeFragment : BaseFragment<FragmentHoroscopeBinding>() {
     private val horoscopeViewModel by viewModels<HoroscopeViewModel>()
+    private val sessionViewModel: SessionViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        horoscopeViewModel.fetchHoroscopes()
+        horoscopeViewModel.fetchHoroscopes(sessionViewModel.viewState.value.isEnglish == true)
     }
 
     private fun initViews() {

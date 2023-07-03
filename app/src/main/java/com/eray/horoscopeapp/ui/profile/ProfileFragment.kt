@@ -28,6 +28,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         //profileViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
         initViews()
         initObservers()
+        profileViewModel.fetchHoroscopes(sessionViewModel.viewState.value.isEnglish == true)
     }
 
     private fun initViews() {

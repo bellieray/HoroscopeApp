@@ -70,6 +70,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
 
     private fun updateResources(language: String) {
         val locale = Locale(language)
+        Locale.setDefault(locale)
         resources.configuration.setLocale(locale)
         resources.updateConfiguration(
             resources.configuration,

@@ -25,14 +25,10 @@ class ProfileViewModel @Inject constructor(private val horoscopeRepository: Horo
     @Inject
     lateinit var prefs: Prefs
 
-    init {
-        fetchHoroscopes()
-    }
-
-    fun fetchHoroscopes() {
+    fun fetchHoroscopes(isEnglish: Boolean) {
         if (_viewState.value.horoscopeList != null) return
         viewModelScope.launch {
-            when (val response = horoscopeRepository.getHoroscopes()) {
+            when (val response = horoscopeRepository.getHoroscopes(isEnglish)) {
                 is Result.Success -> {
                     _viewState.update { state ->
                         state.copy(horoscopeList = response.data?.map {

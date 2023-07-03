@@ -13,7 +13,6 @@ import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.match.adapter.OtherHoroscope
 import com.eray.horoscopeapp.ui.match.dialog.OtherHoroscopeDialog
-import com.eray.horoscopeapp.util.ConnectionUtils
 import com.eray.horoscopeapp.util.navigateWithPushAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,7 +26,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        matchViewModel.fetchHoroscopes()
+        matchViewModel.fetchHoroscopes(sessionViewModel.viewState.value.isEnglish == true)
         initObservers()
         initViews()
     }

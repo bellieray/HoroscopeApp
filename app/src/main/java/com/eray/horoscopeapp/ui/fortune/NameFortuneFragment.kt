@@ -7,14 +7,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentNameFortuneBinding
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
-import com.eray.horoscopeapp.util.*
+import com.eray.horoscopeapp.util.DeviceUtils
+import com.eray.horoscopeapp.util.DialogUtils
+import com.eray.horoscopeapp.util.StringUtils
 import com.eray.horoscopeapp.util.StringUtils.calculateNameMatch
 import com.eray.horoscopeapp.util.StringUtils.calculateNameNumber
 import com.google.android.material.tabs.TabLayout
@@ -27,6 +31,7 @@ import kotlinx.coroutines.launch
 class NameFortuneFragment : BaseFragment<FragmentNameFortuneBinding>(), AnimatorUpdateListener {
 
     private val nameFortuneViewModel: NameFortuneViewModel by viewModels()
+    private val sessionViewModel: SessionViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,7 +84,8 @@ class NameFortuneFragment : BaseFragment<FragmentNameFortuneBinding>(), Animator
                                 calculateNameNumber(
                                     etNameFortune.text.toString(),
                                     "tr"
-                                )
+                                ),
+                                sessionViewModel.viewState.value.isEnglish == true
                             )
                         }
                         NameFortune.MATCH.ordinal -> {

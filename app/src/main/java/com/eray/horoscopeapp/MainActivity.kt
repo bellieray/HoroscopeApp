@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.appodeal.ads.Appodeal
-import com.eray.horoscopeapp.BuildConfig
 import com.appodeal.ads.initializing.ApdInitializationCallback
 import com.appodeal.ads.initializing.ApdInitializationError
 import com.eray.horoscopeapp.ui.SessionViewModel
@@ -22,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         connectivityViewModel.checkInternetConnection()
         sessionViewModel.setLoginState()
         sessionViewModel.setUserDetails()
-        sessionViewModel.setLanguage()
+        sessionViewModel.getLanguage()
         sessionViewModel.setAppRecreatedFlag()
         initObservers()
         initAppodeal()
@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateResources(context: Context, language: String) {
         val locale = Locale(language)
+        Locale.setDefault(locale)
         resources.configuration.setLocale(locale)
         resources.updateConfiguration(
             resources.configuration,

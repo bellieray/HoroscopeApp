@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentTarotListBinding
 import com.eray.horoscopeapp.model.Tarot
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.util.DialogUtils
 import com.eray.horoscopeapp.util.navigateWithPushAnimation
@@ -24,11 +26,12 @@ import kotlinx.parcelize.Parcelize
 @AndroidEntryPoint
 class TarotListFragment : BaseFragment<FragmentTarotListBinding>() {
     private val tarotsViewModel: TarotListViewModel by viewModels()
+    private val sessionViewModel: SessionViewModel by activityViewModels()
     lateinit var tarotListAdapter: TarotListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tarotsViewModel.fetchTarots()
+        tarotsViewModel.fetchTarots(sessionViewModel.viewState.value.isEnglish == true)
         initViews()
         initObservers()
     }
@@ -70,7 +73,7 @@ class TarotListFragment : BaseFragment<FragmentTarotListBinding>() {
             ) else {
                 findNavController().navigateWithPushAnimation(
                     TarotListFragmentDirections.actionTarotListFragmentToTarotFragment(
-                       tarotListItem =  TarotList(list?.filter { it.isSelected })
+                        tarotListItem = TarotList(list?.filter { it.isSelected })
                     )
                 )
             }

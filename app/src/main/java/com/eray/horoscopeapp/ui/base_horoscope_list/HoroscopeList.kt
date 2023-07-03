@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentHoroscopeListBinding
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.ui.horoscope.HoroscopeAdapter
 import com.eray.horoscopeapp.ui.horoscope.HoroscopeListener
@@ -19,12 +20,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class HoroscopeList : BaseFragment<FragmentHoroscopeListBinding>(), HoroscopeListener {
     val adapter = HoroscopeAdapter(this)
     private val horoscopeViewModel by activityViewModels<HoroscopeViewModel>()
+    private val sessionViewModel by activityViewModels<SessionViewModel>()
     private val horoscopeArgs: HoroscopeListArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
-        if (horoscopeArgs.isChinese) horoscopeViewModel.fetchChineseHoroscopes() else horoscopeViewModel.fetchHoroscopes()
+        if (horoscopeArgs.isChinese) horoscopeViewModel.fetchChineseHoroscopes(sessionViewModel.viewState.value.isEnglish == true) else horoscopeViewModel.fetchHoroscopes(
+            sessionViewModel.viewState.value.isEnglish == true
+        )
     }
 
     private fun initObservers() {

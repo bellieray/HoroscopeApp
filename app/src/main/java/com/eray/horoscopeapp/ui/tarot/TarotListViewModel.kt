@@ -17,10 +17,10 @@ class TarotListViewModel @Inject constructor(private val horoscopeRepository: Ho
     private val _viewState = MutableStateFlow(TarotListViewState())
     val viewState get() = _viewState.asStateFlow()
 
-    fun fetchTarots() {
+    fun fetchTarots(isEnglish: Boolean) {
         _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            when (val response = horoscopeRepository.getTarots()) {
+            when (val response = horoscopeRepository.getTarots(isEnglish)) {
                 is com.eray.horoscopeapp.model.Result.Success -> {
                     _viewState.update {
                         it.copy(tarots = response.data, isLoading = false)
