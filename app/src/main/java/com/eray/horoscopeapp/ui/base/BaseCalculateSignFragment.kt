@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.appodeal.ads.Appodeal
 import com.eray.horoscopeapp.databinding.FragmentCalculateRisingSignBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.calculatesign.CalculateSignViewModel
@@ -75,7 +76,7 @@ abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingS
                         etUserBirthTime.text.toString()
                     )
                 ) {
-                    doOnCalculateClicked()
+                    showInterstitialAd()
                 } else {
                     DialogUtils.showCustomAlert(
                         requireActivity(),
@@ -87,6 +88,10 @@ abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingS
                 findNavController().popBackStack()
             }
         }
+        Appodeal.interstitialCallbacks(
+            onInterstitialFailedToLoad = { doOnCalculateClicked() },
+            onInterstitialShown = { doOnCalculateClicked() })
+        showMrecAd(com.eray.horoscopeapp.R.id.mrec_view_calculate_sign)
     }
 
     @SuppressLint("PrivateResource")

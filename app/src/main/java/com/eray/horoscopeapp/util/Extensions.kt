@@ -17,6 +17,8 @@ import coil.decode.SvgDecoder
 import coil.imageLoader
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.appodeal.ads.Appodeal
+import com.appodeal.ads.InterstitialCallbacks
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.ui.profile.adapter.UserHoroscopeProperties
 import com.eray.horoscopeapp.util.StringUtils.horoscopesWithId
@@ -258,4 +260,44 @@ fun Activity.setStatusBarColor(color:Int){
     val window: Window = this.window
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     window.statusBarColor = ContextCompat.getColor(this, color)
+}
+
+fun Appodeal.interstitialCallbacks(
+    onInterstitialLoaded: (() -> Unit)? = null,
+    onInterstitialFailedToLoad: (() -> Unit)? = null,
+    onInterstitialShown: (() -> Unit)? = null,
+    onInterstitialShowFailed: (() -> Unit)? = null,
+    onInterstitialClicked: (() -> Unit)? = null,
+    onInterstitialClosed: (() -> Unit)? = null,
+    onInterstitialExpired: (() -> Unit)? = null
+) {
+    setInterstitialCallbacks(object : InterstitialCallbacks {
+        override fun onInterstitialLoaded(isPrecache: Boolean) {
+            onInterstitialLoaded?.invoke()
+        }
+
+        override fun onInterstitialFailedToLoad() {
+            onInterstitialFailedToLoad?.invoke()
+        }
+
+        override fun onInterstitialShown() {
+            onInterstitialShown?.invoke()
+        }
+
+        override fun onInterstitialShowFailed() {
+            onInterstitialShowFailed?.invoke()
+        }
+
+        override fun onInterstitialClicked() {
+            onInterstitialClicked?.invoke()
+        }
+
+        override fun onInterstitialClosed() {
+            onInterstitialClosed?.invoke()
+        }
+
+        override fun onInterstitialExpired() {
+            onInterstitialExpired?.invoke()
+        }
+    })
 }

@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.appodeal.ads.Appodeal
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentNameFortuneBinding
 import com.eray.horoscopeapp.ui.SessionViewModel
@@ -21,6 +23,7 @@ import com.eray.horoscopeapp.util.DialogUtils
 import com.eray.horoscopeapp.util.StringUtils
 import com.eray.horoscopeapp.util.StringUtils.calculateNameMatch
 import com.eray.horoscopeapp.util.StringUtils.calculateNameNumber
+import com.eray.horoscopeapp.util.interstitialCallbacks
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.firebase.firestore.QuerySnapshot
@@ -77,42 +80,13 @@ class NameFortuneFragment : BaseFragment<FragmentNameFortuneBinding>(), Animator
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
             })
             btnNameFortuneCalculate.setOnClickListener {
-                if (StringUtils.checkInformation(etNameFortune.text.toString())) {
-                    when (tlNameFortune.selectedTabPosition) {
-                        NameFortune.OWN.ordinal -> {
-                            nameFortuneViewModel.getNameFortuneResult(
-                                calculateNameNumber(
-                                    etNameFortune.text.toString(),
-                                    "tr"
-                                ),
-                                sessionViewModel.viewState.value.isEnglish == true
-                            )
-                        }
-                        NameFortune.MATCH.ordinal -> {
-                            if (StringUtils.checkInformation(etMatchNameFortune.text.toString())) {
-                                fortuneResult = "%" + calculateNameMatch(
-                                    etNameFortune.text.toString(),
-                                    etMatchNameFortune.text.toString()
-                                )
-                                DialogUtils.showResultDialog(
-                                    activity = requireActivity(),
-                                    iconUrl = null,
-                                    title = requireContext().getString(R.string.result),
-                                    message = "%" + calculateNameMatch(
-                                        etNameFortune.text.toString(),
-                                        etMatchNameFortune.text.toString()
-                                    ),
-                                    buttonText = null, buttonClick = null
-                                )
-                            } else {
-                                DialogUtils.showCustomAlert(
-                                    requireActivity(),
-                                    textRes = R.string.please_fill_the_all_blanks
-                                )
-                            }
-                        }
-                    }
+                if (StringUtils.checkInformation(etNameFortune.text.toString()) &&
+                    (if (tlNameFortune.selectedTabPosition == NameFortune.MATCH.ordinal) StringUtils.checkInformation(
+                        etMatchNameFortune.text.toString()
+                    ) else true)
+                ) {
                     DeviceUtils.closeKeyboard(requireActivity(), requireView())
+                    showInterstitialAd()
                 } else {
                     DialogUtils.showCustomAlert(
                         requireActivity(),
@@ -120,9 +94,46 @@ class NameFortuneFragment : BaseFragment<FragmentNameFortuneBinding>(), Animator
                     )
                 }
             }
+            ivArrowBack.setOnClickListener { findNavController().popBackStack() }
+            Appodeal.interstitialCallbacks(
+                onInterstitialFailedToLoad = { doOnCalculateClicked() },
+                onInterstitialShown = { doOnCalculateClicked() })
+            showMrecAd(R.id.mrec_view_name_fortune)
             executePendingBindings()
         }
         observe()
+    }
+
+    private fun doOnCalculateClicked() {
+        with(binding) {
+            when (tlNameFortune.selectedTabPosition) {
+                NameFortune.OWN.ordinal -> {
+                    nameFortuneViewModel.getNameFortuneResult(
+                        calculateNameNumber(
+                            etNameFortune.text.toString(),
+                            "tr"
+                        ),
+                        sessionViewModel.viewState.value.isEnglish == true
+                    )
+                }
+                NameFortune.MATCH.ordinal -> {
+                    fortuneResult = "%" + calculateNameMatch(
+                        etNameFortune.text.toString(),
+                        etMatchNameFortune.text.toString()
+                    )
+                    DialogUtils.showResultDialog(
+                        activity = requireActivity(),
+                        iconUrl = null,
+                        title = requireContext().getString(R.string.result),
+                        message = "%" + calculateNameMatch(
+                            etNameFortune.text.toString(),
+                            etMatchNameFortune.text.toString()
+                        ),
+                        buttonText = null, buttonClick = null
+                    )
+                }
+            }
+        }
     }
 
     private fun observe() {
