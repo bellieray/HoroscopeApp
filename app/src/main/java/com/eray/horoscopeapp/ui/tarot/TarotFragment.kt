@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.ui.tarot
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.eray.horoscopeapp.R
@@ -24,10 +25,9 @@ class TarotFragment : BaseFragment<FragmentTarotBinding>() {
     }
 
     private fun initViews() {
-        binding.vpTarot.offscreenPageLimit =
-            3 // Number of offscreen pages to retain on each side of the current page
-
-// Set a custom PageTransformer
+        // Number of offscreen pages to retain on each side of the current page
+        binding.vpTarot.offscreenPageLimit = 3
+        // Set a custom PageTransformer
         binding.vpTarot.offscreenPageLimit = 1
         val deviceWidth = binding.root.context.resources.displayMetrics.widthPixels
         val nextItemVisiblePx = deviceWidth * NEXT_ITEM_VISIBLE_RATIO
@@ -52,6 +52,9 @@ class TarotFragment : BaseFragment<FragmentTarotBinding>() {
                 binding.tvDescription.text = tarotArgs.tarotListItem?.list?.get(position)?.description
             }
         })
+
+        binding.ivArrowBackTarot.setOnClickListener { findNavController().popBackStack() }
+        showBannerAd(R.id.banner_view_tarot)
     }
 
     override fun getFragmentView(): Int = R.layout.fragment_tarot

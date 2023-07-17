@@ -12,12 +12,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.appodeal.ads.Appodeal
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentTarotListBinding
 import com.eray.horoscopeapp.model.Tarot
 import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.util.DialogUtils
+import com.eray.horoscopeapp.util.interstitialCallbacks
 import com.eray.horoscopeapp.util.navigateWithPushAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -41,7 +43,7 @@ class TarotListFragment : BaseFragment<FragmentTarotListBinding>() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 tarotsViewModel.viewState.collect {
                     it.tarots?.let { tarots ->
-                        tarotListAdapter.setList(tarots)
+                        tarotListAdapter.setList(tarots.shuffled())
                     }
                     binding.isLoading = it.isLoading
                 }
@@ -63,20 +65,27 @@ class TarotListFragment : BaseFragment<FragmentTarotListBinding>() {
                 verticalPadding = resources.getDimensionPixelSize(R.dimen.margin_10)
             )
         )
-
+        ivArrowBackTarotList.setOnClickListener { findNavController().popBackStack() }
         btnChoose.setOnClickListener {
-            val list = tarotsViewModel.viewState.value.tarots
-            val selectedCount = list?.count { it.isSelected } ?: 0
-            if (selectedCount < 3) DialogUtils.showCustomAlert(
-                requireActivity(),
-                errorText = "Please select three item"
-            ) else {
-                findNavController().navigateWithPushAnimation(
-                    TarotListFragmentDirections.actionTarotListFragmentToTarotFragment(
-                        tarotListItem = TarotList(list?.filter { it.isSelected })
-                    )
+            showInterstitialAd()
+        }
+        Appodeal.interstitialCallbacks(
+            onInterstitialShown = { chooseClicked() },
+            onInterstitialFailedToLoad = { chooseClicked() })
+    }
+
+    private fun chooseClicked(){
+        val list = tarotsViewModel.viewState.value.tarots
+        val selectedCount = list?.count { it.isSelected } ?: 0
+        if (selectedCount < 3) DialogUtils.showCustomAlert(
+            requireActivity(),
+            errorText = "Please select three item"
+        ) else {
+            findNavController().navigateWithPushAnimation(
+                TarotListFragmentDirections.actionTarotListFragmentToTarotFragment(
+                    tarotListItem = TarotList(list?.filter { it.isSelected })
                 )
-            }
+            )
         }
     }
 

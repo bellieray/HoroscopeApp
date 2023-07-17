@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import coil.network.HttpException
 import com.appodeal.ads.Appodeal
+import com.eray.horoscopeapp.App
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.util.DialogUtils
 import java.io.IOException
@@ -64,6 +65,12 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
         if (Appodeal.canShow(Appodeal.MREC, "default")) {
             Appodeal.show(requireActivity(), Appodeal.MREC, "default")
         }
+    }
+
+    protected fun showBannerAd(id: Int) {
+        Appodeal.setTesting(true)
+        Appodeal.setBannerViewId(id)
+        Appodeal.show(requireActivity(), Appodeal.BANNER_VIEW)
     }
 
     override fun onDestroy() {

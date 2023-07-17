@@ -18,6 +18,7 @@ import coil.imageLoader
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.appodeal.ads.Appodeal
+import com.appodeal.ads.BannerCallbacks
 import com.appodeal.ads.InterstitialCallbacks
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.ui.profile.adapter.UserHoroscopeProperties
@@ -298,6 +299,41 @@ fun Appodeal.interstitialCallbacks(
 
         override fun onInterstitialExpired() {
             onInterstitialExpired?.invoke()
+        }
+    })
+}
+
+fun Appodeal.bannerCallback(
+    onBannerLoaded: (() -> Unit)? = null,
+    onBannerFailedToLoad: (() -> Unit)? = null,
+    onBannerShown: (() -> Unit)? = null,
+    onBannerShowFailed: (() -> Unit)? = null,
+    onBannerClicked: (() -> Unit)? = null,
+    onBannerExpired: (() -> Unit)? = null
+) {
+    setBannerCallbacks(object : BannerCallbacks {
+        override fun onBannerLoaded(height: Int, isPrecache: Boolean) {
+            onBannerLoaded?.invoke()
+        }
+
+        override fun onBannerFailedToLoad() {
+            onBannerFailedToLoad?.invoke()
+        }
+
+        override fun onBannerShown() {
+            onBannerShown?.invoke()
+        }
+
+        override fun onBannerShowFailed() {
+            onBannerShowFailed?.invoke()
+        }
+
+        override fun onBannerClicked() {
+            onBannerClicked?.invoke()
+        }
+
+        override fun onBannerExpired() {
+            onBannerExpired?.invoke()
         }
     })
 }
