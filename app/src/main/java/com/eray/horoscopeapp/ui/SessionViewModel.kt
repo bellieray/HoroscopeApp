@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.model.PersonalDetail
 import com.eray.horoscopeapp.util.Constants.IS_LANGUAGE_ENGLISH
+import com.eray.horoscopeapp.util.Constants.IS_LANGUAGE_SELECTED
 import com.eray.horoscopeapp.util.Constants.LOGIN_STATE_PREF
 import com.eray.horoscopeapp.util.Constants.USER_INFOS
 import com.google.gson.Gson
@@ -59,14 +60,19 @@ class SessionViewModel @Inject constructor(private val prefs: Prefs) : ViewModel
         }
     }
 
-
-
-    fun setAppRecreatedFlag() {
+    fun setIsLanguageSelected() {
         viewModelScope.launch {
-            prefs.getSharedBoolean("isAppRecreated").collect { response ->
-                _viewState.update {
-                    it.copy(isAppRecreated = response)
-                }
+            prefs.setSharedBoolean(IS_LANGUAGE_SELECTED, true)
+            _viewState.update {
+                it.copy(isLanguageSelected = true)
+            }
+        }
+    }
+
+    fun getIsLanguageSelected() {
+        viewModelScope.launch {
+            prefs.getSharedBoolean(IS_LANGUAGE_SELECTED).collect { isLanguageSelected ->
+                _viewState.update { it.copy(isLanguageSelected = isLanguageSelected) }
             }
         }
     }
@@ -76,5 +82,5 @@ data class SessionViewState(
     val isLoggedIn: Boolean? = null,
     val personalDetail: PersonalDetail? = null,
     val isEnglish: Boolean? = null,
-    val isAppRecreated: Boolean? = null
+    val isLanguageSelected: Boolean? = null
 )

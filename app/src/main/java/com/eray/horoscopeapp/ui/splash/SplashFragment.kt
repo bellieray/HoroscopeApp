@@ -35,19 +35,18 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                             isInclusive = true
                         )
                         else {
-                            if (it.isAppRecreated == false) {
+                            if (it.isLanguageSelected == true) {
+                                findNavController().navigateWithPushAnimation(
+                                    SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+                                )
+                            } else {
                                 findNavController().navigateWithPushAnimationAndPop(
                                     SplashFragmentDirections.actionSplashFragmentToLanguageFragment(),
                                     R.id.splashFragment,
                                     isInclusive = true
                                 )
                             }
-
                         }
-
-                        if (it.isAppRecreated == true && it.isLoggedIn == false) findNavController().navigateWithPushAnimation(
-                            SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-                        )
                     }
                 }
             }

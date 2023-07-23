@@ -14,6 +14,7 @@ object Constants {
     const val TAROT_EN = "TarotCardEn"
     const val USER_INFOS = "user_info"
     const val IS_LANGUAGE_ENGLISH = "language_type"
+    const val IS_LANGUAGE_SELECTED = "isLanguageSelected"
 }
 
 object BackgroundImageConstants {

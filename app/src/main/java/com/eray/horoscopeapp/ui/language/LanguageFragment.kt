@@ -3,23 +3,27 @@ package com.eray.horoscopeapp.ui.language
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.eray.horoscopeapp.MainActivity
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.databinding.FragmentLanguageBinding
+import com.eray.horoscopeapp.ui.SessionViewModel
 import com.eray.horoscopeapp.ui.base.BaseFragment
 import com.eray.horoscopeapp.util.Constants.IS_LANGUAGE_ENGLISH
 import com.eray.horoscopeapp.util.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     @Inject
     lateinit var prefs: Prefs
+    private val sessionViewModel by activityViewModels<SessionViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.clTurkishFlag.setOnClickListener {
@@ -53,6 +57,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
                             false
                         )
                         updateResources("tr")
+                        sessionViewModel.setIsLanguageSelected()
                     }
 
                     else -> {
@@ -61,6 +66,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
                             true
                         )
                         updateResources("en")
+                        sessionViewModel.setIsLanguageSelected()
                     }
                 }
             }
@@ -69,22 +75,12 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     }
 
     private fun updateResources(language: String) {
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        resources.configuration.setLocale(locale)
-        resources.updateConfiguration(
-            resources.configuration,
-            resources.displayMetrics
-        )
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
+        AppCompatDelegate.setApplicationLocales(appLocale)
         recreateActivity()
     }
 
     private fun recreateActivity() {
-        lifecycleScope.launch {
-            prefs.setSharedBoolean(
-                "isAppRecreated", true
-            )
-        }
         val intent = Intent(requireActivity(), MainActivity::class.java)
         requireActivity().finish()
         requireActivity().startActivity(intent)

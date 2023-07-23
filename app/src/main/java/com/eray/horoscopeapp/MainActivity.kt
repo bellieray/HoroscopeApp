@@ -1,6 +1,5 @@
 package com.eray.horoscopeapp
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +19,6 @@ import com.eray.horoscopeapp.util.setStatusBarColor
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.*
-
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -37,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         connectivityViewModel.checkInternetConnection()
         sessionViewModel.setLoginState()
         sessionViewModel.setUserDetails()
+        sessionViewModel.getIsLanguageSelected()
         sessionViewModel.getLanguage()
-        sessionViewModel.setAppRecreatedFlag()
         initObservers()
         initAppodeal()
     }
@@ -46,17 +43,6 @@ class MainActivity : AppCompatActivity() {
     private fun initObservers() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    sessionViewModel.viewState.collect {
-                        if (it.isEnglish == true) {
-                            updateResources(this@MainActivity, "en")
-                        } else {
-                            if (it.isEnglish == false) updateResources(this@MainActivity, "tr")
-                        }
-
-                    }
-                }
-
                 launch {
                     connectivityViewModel.viewState.collect {
                         it.isConnection?.let { connect ->
@@ -72,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initAppodeal() {
         Appodeal.initialize(
             this,
@@ -81,17 +66,6 @@ class MainActivity : AppCompatActivity() {
             object : ApdInitializationCallback { override fun onInitializationFinished(errors: List<ApdInitializationError>?) {}
             })
     }
-
-    private fun updateResources(context: Context, language: String) {
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        resources.configuration.setLocale(locale)
-        resources.updateConfiguration(
-            resources.configuration,
-            resources.displayMetrics
-        )
-    }
-
 
     private fun setupNavigation() {
         navHostFragment =
