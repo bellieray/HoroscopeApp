@@ -71,7 +71,8 @@ class TarotListFragment : BaseFragment<FragmentTarotListBinding>() {
         }
         Appodeal.interstitialCallbacks(
             onInterstitialShown = { chooseClicked() },
-            onInterstitialFailedToLoad = { chooseClicked() })
+            onInterstitialFailedToLoad = { chooseClicked() },
+            onInterstitialLoaded = { chooseClicked() })
     }
 
     private fun chooseClicked(){
@@ -79,7 +80,7 @@ class TarotListFragment : BaseFragment<FragmentTarotListBinding>() {
         val selectedCount = list?.count { it.isSelected } ?: 0
         if (selectedCount < 3) DialogUtils.showCustomAlert(
             requireActivity(),
-            errorText = "Please select three item"
+            errorText = getString(R.string.tarot_item_count_error)
         ) else {
             findNavController().navigateWithPushAnimation(
                 TarotListFragmentDirections.actionTarotListFragmentToTarotFragment(

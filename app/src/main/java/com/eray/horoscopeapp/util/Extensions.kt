@@ -40,6 +40,7 @@ fun NavController.navigateWithPushAnimationAndPop(
     directions: NavDirections,
     destinationId: Int,
     isInclusive: Boolean = false,
+    isLaunchSingleTop: Boolean = false
 ) {
     val navOptions = NavOptions
         .Builder()
@@ -48,6 +49,7 @@ fun NavController.navigateWithPushAnimationAndPop(
         .setPopEnterAnim(com.eray.horoscopeapp.R.anim.slide_in_left)
         .setPopExitAnim(com.eray.horoscopeapp.R.anim.slide_out_right)
         .setPopUpTo(destinationId, isInclusive)
+        .setLaunchSingleTop(isLaunchSingleTop)
         .build()
     navigate(directions, navOptions)
 }

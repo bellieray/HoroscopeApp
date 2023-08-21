@@ -38,7 +38,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             profileViewModel.clearAllValues()
             findNavController().navigateWithPushAnimationAndPop(
                 ProfileFragmentDirections.actionProfileFragmentToLanguageFragment(),
-                R.id.languageFragment,
+                R.id.profileFragment,
                 isInclusive = true
             )
         }

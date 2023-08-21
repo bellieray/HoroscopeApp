@@ -35,8 +35,8 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
     private val viewModel by viewModels<UserPersonalDetailViewModel>()
     private val navArgs: UserPersonalDetailFragmentArgs by navArgs()
 
-    @Inject
-    lateinit var prefs: Prefs
+    /*@Inject
+    lateinit var prefs: Prefs*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,23 +79,20 @@ class UserPersonalDetailFragment : BaseFragment<FragmentUserPersonalDetailBindin
                     )
                 ) {
                     lifecycleScope.launch {
-                        prefs.setSharedString(
-                            USER_INFOS, Gson().toJson(
-                                PersonalDetail(
-                                    binding.etNameUserBirthday.text.toString(),
-                                    binding.etGenderUserBirthday.text.toString(),
-                                    binding.etBirthdateUserBirthday.text.toString(),
-                                )
-                            )
+                        viewModel.setUserInfo(
+                            binding.etNameUserBirthday.text.toString(),
+                            binding.etGenderUserBirthday.text.toString(),
+                            binding.etBirthdateUserBirthday.text.toString(),
                         )
-                        prefs.setSharedBoolean(LOGIN_STATE_PREF, true)
                     }
 
-                    findNavController().navigateWithPushAnimationAndPop(
-                        UserPersonalDetailFragmentDirections.toHomeFragment(),
-                        R.id.userPersonalDetailFragment,
-                        isInclusive = true
-                    )
+                    if (navArgs.personalDetail == null) {
+                        findNavController().navigateWithPushAnimationAndPop(
+                            UserPersonalDetailFragmentDirections.toHomeFragment(),
+                            R.id.userPersonalDetailFragment,
+                            isInclusive = true,
+                        )
+                    } else findNavController().popBackStack()
                     DeviceUtils.closeKeyboard(requireActivity(), binding.root)
                 } else {
                     DialogUtils.showCustomAlert(

@@ -32,18 +32,23 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                         if (it.isLoggedIn == true) findNavController().navigateWithPushAnimationAndPop(
                             SplashFragmentDirections.actionSplashFragmentToHomeFragment(),
                             R.id.splashFragment,
-                            isInclusive = true
+                            isInclusive = true,
+                            isLaunchSingleTop = true
                         )
                         else {
                             if (it.isLanguageSelected == true) {
-                                findNavController().navigateWithPushAnimation(
-                                    SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+                                findNavController().navigateWithPushAnimationAndPop(
+                                    SplashFragmentDirections.actionSplashFragmentToLoginFragment(),
+                                    R.id.splashFragment,
+                                    isInclusive = true,
+                                    isLaunchSingleTop = true
                                 )
                             } else {
                                 findNavController().navigateWithPushAnimationAndPop(
                                     SplashFragmentDirections.actionSplashFragmentToLanguageFragment(),
                                     R.id.splashFragment,
-                                    isInclusive = true
+                                    isInclusive = true,
+                                    isLaunchSingleTop = true
                                 )
                             }
                         }

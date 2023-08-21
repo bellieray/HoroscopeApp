@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.databinding.FragmentLoginBinding
 import com.eray.horoscopeapp.ui.base.BaseFragment
+import com.eray.horoscopeapp.util.navigateWithPushAnimationAndPop
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
@@ -27,7 +28,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun goToHome() {
         binding.goToHome.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.toUserPersonalDetailFragment(personalDetail = null))
+            findNavController().navigateWithPushAnimationAndPop(
+                LoginFragmentDirections.toUserPersonalDetailFragment(personalDetail = null),
+                R.id.loginFragment,
+                isInclusive = true,
+                isLaunchSingleTop = true
+            )
         }
     }
 

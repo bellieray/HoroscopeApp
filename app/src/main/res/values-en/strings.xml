@@ -43,8 +43,11 @@
     <string name="name">Name</string>
     <string name="gender">gender</string>
     <string name="personal_details">Personal Details</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="home">Home</string>
     <string name="horoscope">Horoscope</string>
     <string name="profile">Profile</string>
     <string name="partner_sign">Partner Sign</string>
     <string name="language">Language</string>
+    <string name="tarot_item_count_error">Please select 3 item!</string>
 </resources>
