@@ -34,7 +34,11 @@ data class Horoscope(
                     businessOverall = it.get("businessOverall") as? String,
                     description = it.get("description") as? String,
                     loveOverall = it.get("loveOverall") as? String,
-                    luckyNumbers = it.get("luckyNumbers") as? String,
+                    luckyNumbers = when (val numbers = it.get("luckyNumbers")) {
+                        is ArrayList<*> -> numbers.joinToString()
+                        is String -> numbers
+                        else -> null
+                    },
                     compatibleHoroscopes = (it.get("compatibleHoroscopes") as? ArrayList<*>)?.joinToString(),
                     element = it.get("element") as? String,
                     foreignCelebrities = (it.get("foreignCelebrities") as? ArrayList<*>)?.joinToString(),

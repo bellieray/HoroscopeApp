@@ -25,7 +25,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //profileViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
+        profileViewModel.setUserInfoModel(sessionViewModel.viewState.value.personalDetail)
         initViews()
         initObservers()
         profileViewModel.fetchHoroscopes(sessionViewModel.viewState.value.isEnglish == true)

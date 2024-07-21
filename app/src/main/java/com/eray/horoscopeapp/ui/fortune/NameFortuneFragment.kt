@@ -162,7 +162,7 @@ class NameFortuneFragment : BaseFragment<FragmentNameFortuneBinding>(), Animator
     }
 
     override fun getFragmentView(): Int = R.layout.fragment_name_fortune
-    override fun onAnimationUpdate(p0: ValueAnimator?) {
+    override fun onAnimationUpdate(animation: ValueAnimator) {
         binding.llNameFortuneContainer.requestLayout()
     }
 }
