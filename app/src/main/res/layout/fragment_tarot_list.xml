@@ -24,7 +24,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3 tane kart seç"
+            android:text="@string/choose_three_card"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="28sp"

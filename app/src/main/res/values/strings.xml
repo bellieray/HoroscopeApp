@@ -53,6 +53,7 @@
     <string name="partner_sign">Partner Sign</string>
     <string name="language">Language</string>
     <string name="tarot_item_count_error">Please select 3 item!</string>
+    <string name="choose_three_card">Choose 3 cards</string>
 
     <string-array name="feelings">
         <item>@string/man</item>
