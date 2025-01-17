@@ -60,10 +60,11 @@ dependencies {
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:31.0.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics'
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "com.google.dagger:hilt-android:2.48"
+    kapt "com.google.dagger:hilt-compiler:2.48"
 
     //Lottie
     def lottieVersion = "3.4.0"
