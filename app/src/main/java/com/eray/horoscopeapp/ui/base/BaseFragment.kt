@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import coil.network.HttpException
 import com.appodeal.ads.Appodeal
 import com.eray.horoscopeapp.App
+import com.eray.horoscopeapp.BuildConfig
 import com.eray.horoscopeapp.R
 import com.eray.horoscopeapp.util.DialogUtils
 import java.io.IOException
@@ -53,14 +54,14 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     }
 
     protected fun showInterstitialAd() {
-        Appodeal.setTesting(true)
+        if(BuildConfig.DEBUG){ Appodeal.setTesting(true) }
         if (Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
             Appodeal.show(requireActivity(), Appodeal.INTERSTITIAL)
         }
     }
 
     protected fun showMrecAd(id: Int) {
-        Appodeal.setTesting(true)
+        if(BuildConfig.DEBUG){ Appodeal.setTesting(true) }
         Appodeal.setMrecViewId(id)
         if (Appodeal.canShow(Appodeal.MREC, "default")) {
             Appodeal.show(requireActivity(), Appodeal.MREC, "default")
@@ -68,7 +69,7 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     }
 
     protected fun showBannerAd(id: Int) {
-        Appodeal.setTesting(true)
+        if(BuildConfig.DEBUG){ Appodeal.setTesting(true) }
         Appodeal.setBannerViewId(id)
         Appodeal.show(requireActivity(), Appodeal.BANNER_VIEW)
     }
