@@ -19,6 +19,7 @@ import com.eray.horoscopeapp.util.Constants.NAME_FORTUNE_EN
 import com.eray.horoscopeapp.util.Constants.NAME_FORTUNE_TR
 import com.eray.horoscopeapp.util.Constants.TAROT_EN
 import com.eray.horoscopeapp.util.Constants.TAROT_TR
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -146,4 +147,9 @@ object AppModule {
     fun provideApplication(@ApplicationContext context: Context): App {
         return context as App
     }
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAnalytics(@ApplicationContext context: Context): FirebaseAnalytics =
+        FirebaseAnalytics.getInstance(context)
 }

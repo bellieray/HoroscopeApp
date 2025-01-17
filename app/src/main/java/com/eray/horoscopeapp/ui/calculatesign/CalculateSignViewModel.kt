@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.ui.calculatesign
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eray.horoscopeapp.EventTracker
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.model.Horoscope
 import com.eray.horoscopeapp.model.Result
@@ -15,7 +16,10 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class CalculateSignViewModel @Inject constructor(private val horoscopeRepository: HoroscopeRepository) :
+class CalculateSignViewModel @Inject constructor(
+    private val horoscopeRepository: HoroscopeRepository,
+    private val eventTracker: EventTracker,
+    ) :
     ViewModel() {
     private var _viewState = MutableStateFlow(CalculateSignViewState())
     val viewState: StateFlow<CalculateSignViewState> = _viewState
@@ -64,6 +68,10 @@ class CalculateSignViewModel @Inject constructor(private val horoscopeRepository
             }
             _viewState.value.userHoroscopeId?.let { filterHoroscopeListById(it) }
         }
+    }
+
+    fun sendEvent(eventName: String) {
+        eventTracker.logEvent(eventName)
     }
 }
 

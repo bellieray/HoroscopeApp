@@ -37,8 +37,11 @@ abstract class BaseCalculateSignFragment : BaseFragment<FragmentCalculateRisingS
         super.onViewCreated(view, savedInstanceState)
         observe()
         initViews()
+        onPageOpened()
         calculateSignViewModel.fetchHoroscopes(sessionViewModel.viewState.value.isEnglish == true)
     }
+
+    abstract fun onPageOpened()
 
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {

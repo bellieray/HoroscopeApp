@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.ui.match
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eray.horoscopeapp.EventTracker
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.model.PersonalDetail
 import com.eray.horoscopeapp.model.Result
@@ -14,12 +15,19 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+private const val MATCH_PAGE_OPENED = "match_page_opened"
 @HiltViewModel
-class MatchViewModel @Inject constructor(private val horoscopeRepository: HoroscopeRepository) :
+class MatchViewModel @Inject constructor(
+    private val horoscopeRepository: HoroscopeRepository,
+    private val eventTracker: EventTracker,
+    ) :
     ViewModel() {
     private val _viewState = MutableStateFlow(MatchViewState())
     val viewState = _viewState.asStateFlow()
+
+    init {
+        sendEvent(MATCH_PAGE_OPENED)
+    }
 
     fun fetchHoroscopes(isEnglish: Boolean) {
         if (_viewState.value.horoscopeList != null) return
@@ -74,6 +82,10 @@ class MatchViewModel @Inject constructor(private val horoscopeRepository: Horosc
                 }
             }
         }
+    }
+
+    private fun sendEvent(event: String) {
+        eventTracker.logEvent(event)
     }
 
 }

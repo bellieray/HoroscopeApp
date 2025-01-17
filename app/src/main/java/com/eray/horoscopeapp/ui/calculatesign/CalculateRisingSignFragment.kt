@@ -6,8 +6,12 @@ import com.eray.horoscopeapp.ui.base.BaseCalculateSignFragment
 import com.eray.horoscopeapp.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val RISING_SIGN_PAGE_OPENED = "rising_sign_page_opened"
 @AndroidEntryPoint
 class CalculateRisingSignFragment : BaseCalculateSignFragment() {
+    override fun onPageOpened() {
+        calculateSignViewModel.sendEvent(RISING_SIGN_PAGE_OPENED)
+    }
 
     override fun doOnCalculateClicked() {
         val birthTime = binding.etUserBirthTime.text.toString()

@@ -6,8 +6,13 @@ import com.eray.horoscopeapp.ui.base.BaseCalculateSignFragment
 import com.eray.horoscopeapp.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val MOON_SIGN_PAGE_OPENED = "moon_sign_page_opened"
+
 @AndroidEntryPoint
 class CalculateMoonSignFragment : BaseCalculateSignFragment() {
+    override fun onPageOpened() {
+        calculateSignViewModel.sendEvent(MOON_SIGN_PAGE_OPENED)
+    }
 
     override fun doOnCalculateClicked() {
         val moonSignId = StringUtils.calculateMoonSign(

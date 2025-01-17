@@ -2,6 +2,7 @@ package com.eray.horoscopeapp.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eray.horoscopeapp.EventTracker
 import com.eray.horoscopeapp.data.pref.Prefs
 import com.eray.horoscopeapp.data.repository.HoroscopeRepository
 import com.eray.horoscopeapp.model.PersonalDetail
@@ -15,8 +16,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val PROFILE_PAGE_OPENED = "profile_page_opened"
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val horoscopeRepository: HoroscopeRepository) :
+class ProfileViewModel @Inject constructor(
+    private val horoscopeRepository: HoroscopeRepository,
+    private val eventTracker: EventTracker,
+    ) :
     ViewModel() {
 
     private val _viewState = MutableStateFlow(ProfileViewState())
@@ -24,6 +29,10 @@ class ProfileViewModel @Inject constructor(private val horoscopeRepository: Horo
 
     @Inject
     lateinit var prefs: Prefs
+
+    init {
+        sendEvent(PROFILE_PAGE_OPENED)
+    }
 
     fun fetchHoroscopes(isEnglish: Boolean) {
         if (_viewState.value.horoscopeList != null) return
@@ -84,6 +93,10 @@ class ProfileViewModel @Inject constructor(private val horoscopeRepository: Horo
                 pagerItems = pagerItems
             )
         }
+    }
+
+    private fun sendEvent(event: String) {
+        eventTracker.logEvent(event)
     }
 }
 

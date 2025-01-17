@@ -6,8 +6,12 @@ import com.eray.horoscopeapp.ui.base.BaseCalculateSignFragment
 import com.eray.horoscopeapp.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val SUN_SIGN_PAGE_OPENED = "sun_sign_page_opened"
 @AndroidEntryPoint
 class CalculateSunSignFragment : BaseCalculateSignFragment() {
+    override fun onPageOpened() {
+       calculateSignViewModel.sendEvent(SUN_SIGN_PAGE_OPENED)
+    }
 
     override fun doOnCalculateClicked() {
         val sunSignId = StringUtils.calculateSunSign(
